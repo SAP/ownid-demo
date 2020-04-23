@@ -1,0 +1,43 @@
+
+apiVersion: 'v1'
+kind: 'Namespace'
+metadata:
+  name: 'staging'
+  labels:
+    name: 'staging'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ownid-client-app-deployment
+  namespace: staging
+  labels:
+    app: ownid-client-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ownid-client-app
+  template:
+    metadata:
+      labels:
+        app: ownid-client-app
+    spec:
+      containers:
+        - name: ownid-client-app
+          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging:latest
+          ports:
+            - containerPort: 5101
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ownid-client-app-service
+  namespace: staging
+spec:
+  type: LoadBalancer
+  selector:
+    app: ownid-client-app
+  ports:
+    - port: 80
+      targetPort: 5101
