@@ -25,7 +25,6 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
             services.AddCors(x =>
             {
                 x.AddPolicy(CorsPolicyName , builder =>
@@ -37,25 +36,26 @@ namespace WebApp
                 });
             });
 
-            using (var publicKeyReader = File.OpenText(@"./keys/jwtRS256.key.pub"))
-            using (var privateKeyReader = File.OpenText(@"./keys/jwtRS256.key"))   
+            var ownIdSection = Configuration.GetSection("ownid");
+            using (var publicKeyReader = File.OpenText(ownIdSection["pub_key"]))
+            using (var privateKeyReader = File.OpenText(ownIdSection["private_key"]))   
             {
                 services.AddOwnId<ClientAppChallengeHandler, InMemoryCacheStore>(new ProviderConfiguration(
                     RsaHelper.ReadKeyFromPem(publicKeyReader),
                     RsaHelper.ReadKeyFromPem(privateKeyReader),
-                    "http://sign.dev.ownid.com/sign",
+                    ownIdSection["web_app_url"],
                     new List<ProfileField>
                     {
                         ProfileField.Email,
                         ProfileField.FirstName,
                         ProfileField.LastName
                     }, 
-                    "http://localhost:5000/",
+                    ownIdSection["callback_url"],
                     new Requester
                     {
-                        DID = "ownid:did:123123123",
-                        Name = "mozambiquehe.re",
-                        Description = "My description"
+                        DID = ownIdSection["did"],
+                        Name = ownIdSection["name"],
+                        Description = ownIdSection["description"]
                     }
                 ));
             }

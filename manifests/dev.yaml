@@ -27,6 +27,22 @@ spec:
           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
           ports:
             - containerPort: 80
+          env:
+            - name: OWNID__WEB_APP_URL
+              value: http://sign.dev.ownid.com/sign
+            - name: OWNID__CALLBACK_URL
+              value: http://client.dev.ownid.com
+            - name: OWNID__DID
+              value: did:ownid:dev_151850889514
+            - name: OWNID__NAME
+              value: dev-mozambiquehe.re
+            - name: OWNID__DESCRIPTION
+              value: DEV environment
+            - name: GIGYA__SECRET
+              value: g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA=
+            - name: GIGYA__API_KEY
+              value: 3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
+            
 ---
 apiVersion: v1
 kind: Service
