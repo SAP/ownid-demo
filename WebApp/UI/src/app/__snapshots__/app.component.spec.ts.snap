@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppComponent Snapshot check snapshot 1`] = `
+<app-root>
+  <mat-toolbar
+    class="toolbar"
+  >
+    <header
+      class="header"
+    >
+      <span
+        class="headline"
+      >
+        Sample app
+      </span>
+      <span>
+        <button
+          mat-button=""
+        >
+          About
+        </button>
+        <button
+          mat-button=""
+        >
+          Services
+        </button>
+        <button
+          mat-button=""
+        >
+          Portfolio
+        </button>
+        <button
+          mat-button=""
+        >
+          Contact
+        </button>
+      </span>
+    </header>
+  </mat-toolbar><router-outlet /><mat-toolbar
+    class="footer"
+  >
+    <span>
+      Copyright © 2020 - Sample app
+    </span>
+  </mat-toolbar>
+</app-root>
+`;

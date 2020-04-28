@@ -1,0 +1,82 @@
+.call-2-action {
+  color: #ffffff;
+  font-weight: 700;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.headline {
+  padding: 16px;
+}
+
+.sign-body {
+  background: linear-gradient(
+      to bottom,
+      rgba(92, 77, 66, 0.8) 0%,
+      rgba(92, 77, 66, 0.8) 100%
+    ),
+    url('/assets/main-bg.jpg') no-repeat scroll center;
+  background-size: cover;
+
+  height: calc(100vh - 150px);
+}
+
+@media (max-width: 599px) {
+  .sign-section {
+    margin: 16px;
+  }
+
+  .sub-title {
+    display: none;
+  }
+}
+
+@media (min-width: 599px) {
+  .sign-body {
+    padding: 50px 24px;
+
+    height: calc(100vh - 230px);
+  }
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+  }
+
+  .call-2-action {
+    padding: 0 100px;
+  }
+
+  .headline {
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+
+    margin-top: -280px;
+  }
+
+  .sub-title {
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  .sign-section {
+    width: 500px;
+  }
+}
+
+::ng-deep {
+  ownid {
+    display: flex;
+    justify-content: center;
+    margin: 30px 15px 0;
+
+    a {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    }
+  }
+}

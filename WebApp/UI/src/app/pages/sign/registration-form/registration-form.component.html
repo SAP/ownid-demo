@@ -1,0 +1,62 @@
+<p>
+  <mat-form-field class="form-field">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="Joe" [formControl]="firstName" required />
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="form-field">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="Speen" [formControl]="lastName" required />
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="form-field">
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      placeholder="pat@example.com"
+      [formControl]="email"
+      required
+    />
+    <mat-error *ngIf="email.hasError('required')"
+      >You must enter a value</mat-error
+    >
+    <mat-error *ngIf="email.hasError('email')">Not a valid email</mat-error>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="form-field">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" required />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="form-field">
+    <mat-label>Confirm password</mat-label>
+    <input matInput [type]="hideConfirm ? 'password' : 'text'" required />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hideConfirm = !hideConfirm"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hideConfirm"
+    >
+      <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  </mat-form-field>
+</p>
+<p>
+  <button mat-flat-button color="primary" class="form-field">
+    Create Account
+  </button>
+</p>

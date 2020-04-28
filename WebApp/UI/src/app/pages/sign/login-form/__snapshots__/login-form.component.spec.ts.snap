@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginFormComponent Snapshot check snapshot 1`] = `
+<login-form
+  email={[Function FormControl]}
+  hide={[Function Boolean]}
+>
+  <p>
+    <mat-form-field
+      class="form-field"
+    >
+      <mat-label>
+        Enter your email
+      </mat-label>
+      <input
+        matinput=""
+        placeholder="pat@example.com"
+        required=""
+      />
+      
+      
+    </mat-form-field>
+  </p><p>
+    <mat-form-field
+      class="form-field"
+    >
+      <mat-label>
+        Enter your password
+      </mat-label>
+      <input
+        matinput=""
+        required=""
+      />
+      <button
+        mat-icon-button=""
+        matsuffix=""
+      >
+        <mat-icon>
+          
+        </mat-icon>
+      </button>
+    </mat-form-field>
+  </p><p>
+    <button
+      class="form-field"
+      color="primary"
+      mat-flat-button=""
+    >
+      Login
+    </button>
+  </p><p>
+    <a
+      class="forgot-link"
+      href="#"
+    >
+      Forgot Password?
+    </a>
+  </p>
+</login-form>
+`;

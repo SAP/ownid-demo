@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OwnidComponent Snapshot check snapshot 1`] = `
+<ownid
+  elRef={[Function ElementRef]}
+  onLogin={[Function EventEmitter]}
+  onRegister={[Function EventEmitter]}
+  type="null"
+>
+  
+</ownid>
+`;
