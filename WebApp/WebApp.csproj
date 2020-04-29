@@ -5,25 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Privacy.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
-      <_ContentIncludedByDefault Remove="wwwroot\js\ownid-web-ui-sdk.umd.js" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="keys" />
       <Folder Include="UI\src\app\services" />
       <Folder Include="UI\src\app\shared" />
-      <Folder Include="wwwroot\css" />
+      <Folder Include="wwwroot" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,6 +23,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
