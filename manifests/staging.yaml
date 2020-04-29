@@ -40,9 +40,9 @@ spec:
             - name: OWNID__DESCRIPTION
               value: STAGING environment
             - name: GIGYA__SECRET
-              value: g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA=
+              value: 0Hg/R8a/riSbbPiACeQZNFvg3c7s0f9uMx+BKaliaU8=
             - name: GIGYA__API_KEY
-              value: 3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
+              value: 3_DS2fdSlSzClFXUfkKHaxJq9-Zknssg2UHamCntjp2jRcL74a_x5HbhDxvHZ6a4q2
 ---
 apiVersion: v1
 kind: Service
