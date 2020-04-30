@@ -27,10 +27,7 @@ spec:
         - name: ownid-client-app
           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging:latest
           ports:
-            - containerPort: 5000
-              name: http
-            - containerPort: 5001
-              name: https
+            - containerPort: 5002
           env:
             - name: OWNID__WEB_APP_URL
               value: https://sign.staging.ownid.com/sign
@@ -58,8 +55,8 @@ spec:
     app: ownid-client-app
   ports:
     - port: 80
-      targetPort: 5000
+      targetPort: 5002
       name: http
     - port: 443
-      targetPort: 5001
+      targetPort: 5002
       name: https

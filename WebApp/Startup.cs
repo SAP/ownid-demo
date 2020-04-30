@@ -68,8 +68,8 @@ namespace WebApp
                 configuration.RootPath = "wwwroot";
             });
 
-            services.Configure<KestrelServerOptions>(
-            Configuration.GetSection("Kestrel"));
+            // services.Configure<KestrelServerOptions>(
+            // Configuration.GetSection("Kestrel"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,7 +94,7 @@ namespace WebApp
             //     FileProvider = new PhysicalFileProvider(
             //         Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot"))
             // });
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             

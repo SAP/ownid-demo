@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 
-EXPOSE 5000
-EXPOSE 5001
+EXPOSE 5002
 
 ENV OWNID__WEB_APP_URL="http://sign.dev.ownid.com/sign"
 ENV OWNID__CALLBACK_URL="http://localhost:5000"
@@ -21,7 +20,6 @@ RUN dotnet restore
 # Copy everything else and build
 COPY ./WebApp ./
 RUN dotnet publish -c Release -o out
-COPY ./WebApp/aspnetapp.pfx /app/out/aspnetapp.pfx
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
@@ -30,4 +28,4 @@ COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "WebApp.dll"]
 
 # docker build -t ownid-client-app:latest .
-# docker run -it -p 5000:5000 -p 5001:5001 ownid-client-app:latest
+# docker run -it -p 5002:5002 ownid-client-app:latest
