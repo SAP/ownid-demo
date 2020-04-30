@@ -39,9 +39,6 @@ namespace WebApp
                 });
             });
 
-            // services.Configure<KestrelServerOptions>(
-            // Configuration.GetSection("Kestrel"));
-
             var ownIdSection = Configuration.GetSection("ownid");
             using (var publicKeyReader = File.OpenText(ownIdSection["pub_key"]))
             using (var privateKeyReader = File.OpenText(ownIdSection["private_key"]))   
@@ -70,6 +67,9 @@ namespace WebApp
             {
                 configuration.RootPath = "wwwroot";
             });
+
+            services.Configure<KestrelServerOptions>(
+            Configuration.GetSection("Kestrel"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
