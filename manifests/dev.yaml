@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: ownid-client-app
-          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
+          image: ownid-client-app:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 5000
               name: http

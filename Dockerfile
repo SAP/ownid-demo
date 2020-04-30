@@ -10,6 +10,8 @@ ENV OWNID__NAME="mozambiquehe.re"
 ENV OWNID__DESCRIPTION="Description here"
 ENV GIGYA__SECRET="g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA="
 ENV GIGYA__API_KEY="3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W"
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password="ownid321"
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=aspnetapp.pfx
 
 # Copy csproj and restore as distinct layers
 COPY ./WebApp/*.csproj ./
@@ -27,4 +29,4 @@ COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "WebApp.dll"]
 
 # docker build -t ownid-client-app:latest .
-# docker run --rm -it -p 443:5001 ownid-client-app:latest
+# docker run --rm -it -p 80:5000 -p 443:5001 ownid-client-app:latest

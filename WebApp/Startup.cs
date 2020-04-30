@@ -39,8 +39,8 @@ namespace WebApp
                 });
             });
 
-            services.Configure<KestrelServerOptions>(
-            Configuration.GetSection("Kestrel"));
+            // services.Configure<KestrelServerOptions>(
+            // Configuration.GetSection("Kestrel"));
 
             var ownIdSection = Configuration.GetSection("ownid");
             using (var publicKeyReader = File.OpenText(ownIdSection["pub_key"]))

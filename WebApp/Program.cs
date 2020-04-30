@@ -18,6 +18,14 @@ namespace WebApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    // webBuilder.ConfigureKestrel(serverOptions =>
+                    // {
+                    //     // Set properties and call methods on options
+                    // });
+                    
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
