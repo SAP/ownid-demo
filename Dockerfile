@@ -18,6 +18,7 @@ RUN dotnet restore
 # Copy everything else and build
 COPY ./WebApp ./
 RUN dotnet publish -c Release -o out
+COPY ./WebApp/aspnetapp.pfx /app/out/aspnetapp.pfx
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
@@ -26,4 +27,4 @@ COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "WebApp.dll"]
 
 # docker build -t ownid-client-app:latest .
-# docker run --rm -it -p 8080:80 ownid-client-app:latest
+# docker run --rm -it -p 443:5001 ownid-client-app:latest
