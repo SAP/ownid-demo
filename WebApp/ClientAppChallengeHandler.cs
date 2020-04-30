@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using OwnIdSdk.NetCore3.Contracts;
 using OwnIdSdk.NetCore3.Cryptography;
 using OwnIdSdk.NetCore3.Web.Abstractions;
 using WebApp.Gigya;
@@ -36,7 +37,7 @@ namespace WebApp
             _authSecret = configuration["auth_secret"];
         }
 
-        public async Task OnSuccessLoginAsync(string did, HttpResponse response)
+        public async Task<LoginResult<object>> OnSuccessLoginAsync(string did, HttpResponse response)
         {
             var responseMessage = await _httpClient.PostAsync(
                 new Uri("https://accounts.us1.gigya.com/accounts.notifyLogin"), new FormUrlEncodedContent(
@@ -52,12 +53,15 @@ namespace WebApp
 
             if (loginResponse.SessionInfo == null || loginResponse.ErrorCode != 0)
             {
-                await WriteJsonResponse(response, HttpStatusCode.Unauthorized, new
+                return new LoginResult<object>
                 {
-                    status = false,
-                    errorMessage = $"Gigya: {loginResponse.ErrorCode}:{loginResponse.ErrorMessage}"
-                });
-                return;
+                    HttpCode = (int)HttpStatusCode.Unauthorized,
+                    Data = new
+                    {
+                        status = false,
+                        errorMessage = $"Gigya: {loginResponse.ErrorCode}:{loginResponse.ErrorMessage}"
+                    }
+                };
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -66,7 +70,7 @@ namespace WebApp
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim("did", loginResponse.Identities["providerUID"])
+                    new Claim("did", loginResponse.Identities.FirstOrDefault()?.ProviderUID)
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
@@ -74,12 +78,16 @@ namespace WebApp
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            await WriteJsonResponse(response, HttpStatusCode.OK, new
+            return new LoginResult<object>
             {
-                status = true, jwt = token,
-                sessionInfo = loginResponse.SessionInfo,
-                identities = loginResponse.Identities
-            });
+                HttpCode = (int)HttpStatusCode.OK,
+                Data = new
+                {
+                    status = true, jwt = token,
+                    sessionInfo = loginResponse.SessionInfo,
+                    identities = loginResponse.Identities.FirstOrDefault()
+                }
+            };
         }
 
         public async Task UpdateProfileAsync(string did, Dictionary<string, string> profileFields, string publicKey)
@@ -99,9 +107,10 @@ namespace WebApp
 
             if (content.ErrorCode == 0)
             {
-                await using var ms = new MemoryStream(Encoding.UTF8.GetBytes(content.Data["pubKey"]));
-                using var sr = new StreamReader(ms);
-                var key = RsaHelper.ReadKeyFromPem(sr);
+                if(content.Data == null || !content.Data.ContainsKey("pubKey"))
+                    throw new Exception("Found gigya user without pubKey");
+
+                var key = content.Data["pubKey"];
 
                 if (key != publicKey)
                     throw new Exception("Public key doesn't match gigya user key");
@@ -110,9 +119,9 @@ namespace WebApp
                 {
                     new KeyValuePair<string, string>("apiKey", _apiKey),
                     new KeyValuePair<string, string>("secret", _secretKey),
-                    new KeyValuePair<string, string>("UID", did)
-                }.Concat(profileFields.Select(x =>
-                    new KeyValuePair<string, string>("profile." + x.Key, x.Value))));
+                    new KeyValuePair<string, string>("UID", did),
+                    new KeyValuePair<string, string>("profile", JsonSerializer.Serialize(profileFields))
+                });
 
                 if (setAccountResponse.ErrorCode > 0)
                     throw new Exception(
@@ -146,7 +155,7 @@ namespace WebApp
                 new KeyValuePair<string, string>("apiKey", _apiKey),
                 new KeyValuePair<string, string>("secret", _secretKey),
                 new KeyValuePair<string, string>("UID", did),
-                new KeyValuePair<string, string>("data.pubKey", publicKey)
+                new KeyValuePair<string, string>("data", JsonSerializer.Serialize(new {pubKey = publicKey}))
             });
 
             await Console.Out.WriteLineAsync(JsonSerializer.Serialize(setAccountPublicKeyMessage));
@@ -159,9 +168,9 @@ namespace WebApp
             {
                 new KeyValuePair<string, string>("apiKey", _apiKey),
                 new KeyValuePair<string, string>("secret", _secretKey),
-                new KeyValuePair<string, string>("UID", did)
-            }.Concat(profileFields.Select(x =>
-                new KeyValuePair<string, string>("profile." + x.Key, x.Value))));
+                new KeyValuePair<string, string>("UID", did),
+                new KeyValuePair<string, string>("profile", JsonSerializer.Serialize(profileFields))
+            });
 
             if (setAccountMessage.ErrorCode > 0)
                 throw new Exception(

@@ -9,6 +9,6 @@ namespace WebApp.Gigya.Login
         public Dictionary<string, string> SessionInfo { get; set; }
         
         [JsonPropertyName("identities")]
-        public Dictionary<string, string> Identities { get; set; }
+        public IList<Identity> Identities { get; set; }
     }
 }
