@@ -90,7 +90,7 @@ namespace WebApp
             //     FileProvider = new PhysicalFileProvider(
             //         Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot"))
             // });
-            
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             
