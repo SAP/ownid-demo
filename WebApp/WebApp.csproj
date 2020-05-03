@@ -7,6 +7,7 @@
     <ItemGroup>
       <Folder Include="keys" />
       <Folder Include="UI\src\app\services" />
+      <Folder Include="UI\src\app\pages\sign\commands" />
       <Folder Include="UI\src\app\shared" />
       <Folder Include="wwwroot" />
     </ItemGroup>

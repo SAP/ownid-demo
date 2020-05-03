@@ -1,4 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { IProfile } from '../../app.store';
+import { SetProfileCommand } from './commands/set-profile.command';
+
+export interface IOwnidRs {
+  status: boolean;
+  identities: IProfile;
+}
 
 @Component({
   selector: 'sign-page',
@@ -7,15 +14,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignPageComponent {
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  onLogin(data: any) {
-    // eslint-disable-next-line no-console
-    console.log('onLogin:', data);
+  constructor(private setProfileCommand: SetProfileCommand) {}
+
+  onLogin(data: IOwnidRs) {
+    this.setProfileCommand.execute(data.identities);
   }
 
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  onRegister(data: any) {
-    // eslint-disable-next-line no-console
-    console.log('onRegister:', data);
+  onRegister(data: IOwnidRs) {
+    this.setProfileCommand.execute(data.identities);
   }
 }

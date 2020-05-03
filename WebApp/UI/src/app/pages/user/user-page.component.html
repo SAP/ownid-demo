@@ -1,0 +1,14 @@
+<section class="sign-body">
+  <div class="container">
+    <div class="call-2-action" *ngIf="profile$ | async as profile">
+      <h1 class="headline">Welcome {{ profile.firstName }}!</h1>
+      <h2 class="sub-title">
+        Your data is:
+        <mat-card>
+          <pre>{{ profile | json }}</pre>
+        </mat-card>
+      </h2>
+    </div>
+    <div></div>
+  </div>
+</section>

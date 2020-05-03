@@ -35,7 +35,7 @@ spec:
               value: g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA=
             - name: GIGYA__API_KEY
               value: 3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
-            
+
 ---
 apiVersion: v1
 kind: Service

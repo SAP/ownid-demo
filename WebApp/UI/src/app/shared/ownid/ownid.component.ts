@@ -30,6 +30,7 @@ export class OwnidComponent implements OnInit {
       type: this.type,
       onLogin: this.onLogin.emit.bind(this.onLogin),
       onRegister: this.onRegister.emit.bind(this.onRegister),
+      statusInterval: 3000,
     });
   }
 }

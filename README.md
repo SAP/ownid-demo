@@ -1,7 +1,9 @@
 # client-app
+
 Demo app
 
 ## Environment variables
+
 - *OWNID__WEB_APP_URL* - web application url (with relative path if needed)
 - *OWNID__CALLBACK_URL* - this(client-app) appliction url to call after user accepts login/register
 - *OWNID__PUB_KEY* - path to public rsa key

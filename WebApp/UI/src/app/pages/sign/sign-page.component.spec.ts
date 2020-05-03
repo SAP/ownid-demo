@@ -1,11 +1,25 @@
 import { async, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { SignPageComponent } from './sign-page.component';
+import { IOwnidRs, SignPageComponent } from './sign-page.component';
+import { SetProfileCommand } from './commands/set-profile.command';
 
 describe('SignPageComponent', () => {
+  let setProfileCommand: SetProfileCommand;
+
+  beforeEach(() => {
+    setProfileCommand = {} as SetProfileCommand;
+    setProfileCommand.execute = jest.fn();
+  });
+
   describe('Snapshot', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
+        providers: [
+          {
+            provide: SetProfileCommand,
+            useValue: setProfileCommand,
+          },
+        ],
         declarations: [SignPageComponent],
         schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
@@ -19,30 +33,22 @@ describe('SignPageComponent', () => {
   });
 
   describe('onLogin', () => {
-    it('should call console.log()', () => {
-      // eslint-disable-next-line no-console
-      console.log = jest.fn();
+    it('should call set profile command', () => {
+      const sut = new SignPageComponent(setProfileCommand);
 
-      const sut = new SignPageComponent();
+      sut.onLogin({ identities: {} } as IOwnidRs);
 
-      sut.onLogin({});
-
-      // eslint-disable-next-line no-console
-      expect(console.log).toBeCalled();
+      expect(setProfileCommand.execute).toBeCalledWith({});
     });
   });
 
   describe('onRegister', () => {
-    it('should call console.log()', () => {
-      // eslint-disable-next-line no-console
-      console.log = jest.fn();
+    it('should call set profile command', () => {
+      const sut = new SignPageComponent(setProfileCommand);
 
-      const sut = new SignPageComponent();
+      sut.onRegister({ identities: {} } as IOwnidRs);
 
-      sut.onRegister({});
-
-      // eslint-disable-next-line no-console
-      expect(console.log).toBeCalled();
+      expect(setProfileCommand.execute).toBeCalledWith({});
     });
   });
 });

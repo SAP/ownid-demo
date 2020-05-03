@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SignPageComponent Snapshot check snapshot 1`] = `
-<sign-page>
+<sign-page
+  setProfileCommand={[Function Object]}
+>
   <section
     class="sign-body"
   >
