@@ -12,6 +12,7 @@ import { SignRoutingModule } from './sign-routing.module';
 import { SignPageComponent } from './sign-page.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
+import { SetProfileCommand } from './commands/set-profile.command';
 
 @NgModule({
   declarations: [
@@ -31,5 +32,6 @@ import { OwnidModule } from '../../shared/ownid/ownid.module';
     MatListModule,
     OwnidModule,
   ],
+  providers: [SetProfileCommand],
 })
 export class SignPageModule {}
