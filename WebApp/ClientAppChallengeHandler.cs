@@ -115,18 +115,24 @@ namespace WebApp
                 if (key != publicKey)
                     throw new Exception("Public key doesn't match gigya user key");
 
+                var exProfileSerializedFields = JsonSerializer.Serialize(profileFields);
                 var setAccountResponse = await SetAccountInfo(new[]
                 {
                     new KeyValuePair<string, string>("apiKey", _apiKey),
                     new KeyValuePair<string, string>("secret", _secretKey),
                     new KeyValuePair<string, string>("UID", did),
-                    new KeyValuePair<string, string>("profile", JsonSerializer.Serialize(profileFields))
+                    new KeyValuePair<string, string>("profile", exProfileSerializedFields)
                 });
 
                 if (setAccountResponse.ErrorCode > 0)
+                {
+                    await Console.Out.WriteLineAsync($"error did: {did}");
+                    await Console.Out.WriteLineAsync($"error profile: {exProfileSerializedFields}");
+                    
                     throw new Exception(
                         $"Gigya.setAccountInfo for EXISTING user failed with code {setAccountResponse.ErrorCode} : {setAccountResponse.ErrorMessage}");
-
+                }
+                
                 return;
             }
 
@@ -164,18 +170,23 @@ namespace WebApp
             //     throw new Exception(
             //         $"Gigya.setAccountInfo (public key) for NEW user failed with code {setAccountPublicKeyMessage.ErrorCode} : {setAccountPublicKeyMessage.ErrorMessage}");
 
+            var profileSerializedFields = JsonSerializer.Serialize(profileFields);
             var setAccountMessage = await SetAccountInfo(new[]
             {
                 new KeyValuePair<string, string>("apiKey", _apiKey),
                 new KeyValuePair<string, string>("secret", _secretKey),
                 new KeyValuePair<string, string>("UID", did),
-                new KeyValuePair<string, string>("profile", JsonSerializer.Serialize(profileFields))
+                new KeyValuePair<string, string>("profile", profileSerializedFields)
             });
-
+            
             if (setAccountMessage.ErrorCode > 0)
+            {
+                await Console.Out.WriteLineAsync($"error did: {did}");
+                await Console.Out.WriteLineAsync($"error profile: {profileSerializedFields}");
+                
                 throw new Exception(
-                    $"Gigya.setAccountInfo (profile) for NEW user failed with code {setAccountPublicKeyMessage.ErrorCode} : {setAccountPublicKeyMessage.ErrorMessage}");
-
+                    $"Gigya.setAccountInfo (profile) for NEW user failed with code {setAccountMessage.ErrorCode} : {setAccountMessage.ErrorMessage}");
+            }
         }
 
         private async Task<BaseGigyaResponse> SetAccountInfo(IEnumerable<KeyValuePair<string, string>> parameters)
