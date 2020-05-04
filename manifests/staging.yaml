@@ -41,7 +41,7 @@ kind: Service
 metadata:
   name: ownid-client-app-service
   namespace: staging
-    annotations:
+  annotations:
     # Note that the backend talks over HTTP.
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     # TODO: Fill in with the ARN of your certificate.
