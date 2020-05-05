@@ -28,7 +28,7 @@ spec:
             - name: OWNID__DID
               value: did:ownid:dev_151850889514
             - name: OWNID__NAME
-              value: dev-mozambiquehe.re
+              value: client.dev.ownid.com
             - name: OWNID__DESCRIPTION
               value: DEV environment
             - name: GIGYA__SECRET

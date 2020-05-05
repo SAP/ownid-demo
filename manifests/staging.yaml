@@ -28,7 +28,7 @@ spec:
             - name: OWNID__DID
               value: did:ownid:staging_151850889514
             - name: OWNID__NAME
-              value: staging-mozambiquehe.re
+              value: client.staging.ownid.com
             - name: OWNID__DESCRIPTION
               value: STAGING environment
             - name: GIGYA__SECRET
