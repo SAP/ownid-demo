@@ -11,3 +11,4 @@ docker push $REPOSITORY_URI:$IMAGE_TAG
 echo Updating image in Cluster deployment
 kubectl apply -f manifests/$ENV.yaml
 kubectl -n=$ENV set image deployment/ownid-client-app-deployment ownid-client-app=$REPOSITORY_URI:$IMAGE_TAG --record
+kubectl -n=$ENV set image deployment/ownid-client-app-2-deployment ownid-client-app-2=$REPOSITORY_URI:$IMAGE_TAG --record

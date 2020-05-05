@@ -59,3 +59,65 @@ spec:
     - port: 443
       targetPort: 5002
       name: https
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ownid-client-app-2-deployment
+  namespace: dev
+  labels:
+    app: ownid-client-app-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ownid-client-app-2
+  template:
+    metadata:
+      labels:
+        app: ownid-client-app-2
+    spec:
+      containers:
+        - name: ownid-client-app-2
+          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
+          ports:
+            - containerPort: 5002
+          env:
+            - name: OWNID__WEB_APP_URL
+              value: https://sign.dev.ownid.com/sign
+            - name: OWNID__CALLBACK_URL
+              value: https://client2.dev.ownid.com
+            - name: OWNID__DID
+              value: did:ownid:dev2_151850889514
+            - name: OWNID__NAME
+              value: client2.dev.ownid.com
+            - name: OWNID__DESCRIPTION
+              value: DEV2 environment
+            - name: GIGYA__SECRET
+              value: g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA=
+            - name: GIGYA__API_KEY
+              value: 3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ownid-client-app-2-service
+  namespace: dev
+  annotations:
+    # Note that the backend talks over HTTP.
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    # TODO: Fill in with the ARN of your certificate.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-2:571861302935:certificate/c484a4ec-4e6a-408d-b0eb-3c8f1fc1ab68
+    # Only run SSL on the port named "https" below.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  type: LoadBalancer
+  selector:
+    app: ownid-client-app-2
+  ports:
+    - port: 80
+      targetPort: 5002
+      name: http
+    - port: 443
+      targetPort: 5002
+      name: https

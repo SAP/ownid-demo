@@ -59,3 +59,65 @@ spec:
     - port: 443
       targetPort: 5002
       name: https
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ownid-client-app-2-deployment
+  namespace: staging
+  labels:
+    app: ownid-client-app-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ownid-client-app-2
+  template:
+    metadata:
+      labels:
+        app: ownid-client-app-2
+    spec:
+      containers:
+        - name: ownid-client-app-2
+          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging:latest
+          ports:
+            - containerPort: 5002
+          env:
+            - name: OWNID__WEB_APP_URL
+              value: https://sign.staging.ownid.com/sign
+            - name: OWNID__CALLBACK_URL
+              value: https://client2.staging.ownid.com
+            - name: OWNID__DID
+              value: did:ownid:staging2_151850889514
+            - name: OWNID__NAME
+              value: client2.staging.ownid.com
+            - name: OWNID__DESCRIPTION
+              value: STAGING2 environment
+            - name: GIGYA__SECRET
+              value: 0Hg/R8a/riSbbPiACeQZNFvg3c7s0f9uMx+BKaliaU8=
+            - name: GIGYA__API_KEY
+              value: 3_dEHMimJM2kxcz8gaoI1Sss9kohyJ6LP17qDYd2UIlUfNowsPglEUANJX7R812-uh
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ownid-client-app-2-service
+  namespace: staging
+  annotations:
+    # Note that the backend talks over HTTP.
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    # TODO: Fill in with the ARN of your certificate.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-2:571861302935:certificate/5ba8e568-3cfa-4de6-861a-939a73533696
+    # Only run SSL on the port named "https" below.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  type: LoadBalancer
+  selector:
+    app: ownid-client-app-2
+  ports:
+    - port: 80
+      targetPort: 5002
+      name: http
+    - port: 443
+      targetPort: 5002
+      name: https
