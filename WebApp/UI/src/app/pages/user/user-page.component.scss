@@ -21,6 +21,7 @@
   background-size: cover;
 
   height: calc(100vh - 150px);
+  min-height: 750px;
 }
 
 @media (max-width: 599px) {
