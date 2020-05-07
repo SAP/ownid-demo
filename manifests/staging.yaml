@@ -21,8 +21,8 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: NETCORE3_PREFIX
-              value: ownid-server-netcore3-gigya-2-service
+            - name: NETCORE3_SERVICE
+              value: ownid-server-netcore3-gigya-2-service:5002
 ---
 apiVersion: v1
 kind: Service
@@ -71,8 +71,8 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: NETCORE3_PREFIX
-              value: ownid-server-netcore3-gigya-2-service
+            - name: NETCORE3_SERVICE
+              value: ownid-server-netcore3-gigya-2-service:5003
 ---
 apiVersion: v1
 kind: Service
