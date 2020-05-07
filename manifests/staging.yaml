@@ -19,22 +19,10 @@ spec:
         - name: ownid-client-app
           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging:latest
           ports:
-            - containerPort: 5002
+            - containerPort: 80
           env:
-            - name: OWNID__WEB_APP_URL
-              value: https://sign.staging.ownid.com/sign
-            - name: OWNID__CALLBACK_URL
-              value: https://client.staging.ownid.com
-            - name: OWNID__DID
-              value: did:ownid:staging_151850889514
-            - name: OWNID__NAME
-              value: client.staging.ownid.com
-            - name: OWNID__DESCRIPTION
-              value: STAGING environment
-            - name: GIGYA__SECRET
-              value: 0Hg/R8a/riSbbPiACeQZNFvg3c7s0f9uMx+BKaliaU8=
-            - name: GIGYA__API_KEY
-              value: 3_DS2fdSlSzClFXUfkKHaxJq9-Zknssg2UHamCntjp2jRcL74a_x5HbhDxvHZ6a4q2
+            - name: NETCORE3_PREFIX
+              value: ownid-server-netcore3-gigya-2-service
 ---
 apiVersion: v1
 kind: Service
@@ -54,10 +42,10 @@ spec:
     app: ownid-client-app
   ports:
     - port: 80
-      targetPort: 5002
+      targetPort: 80
       name: http
     - port: 443
-      targetPort: 5002
+      targetPort: 80
       name: https
 ---
 apiVersion: apps/v1
@@ -81,22 +69,10 @@ spec:
         - name: ownid-client-app-2
           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging:latest
           ports:
-            - containerPort: 5002
+            - containerPort: 80
           env:
-            - name: OWNID__WEB_APP_URL
-              value: https://sign.staging.ownid.com/sign
-            - name: OWNID__CALLBACK_URL
-              value: https://client2.staging.ownid.com
-            - name: OWNID__DID
-              value: did:ownid:staging2_151850889514
-            - name: OWNID__NAME
-              value: client2.staging.ownid.com
-            - name: OWNID__DESCRIPTION
-              value: STAGING2 environment
-            - name: GIGYA__SECRET
-              value: 0Hg/R8a/riSbbPiACeQZNFvg3c7s0f9uMx+BKaliaU8=
-            - name: GIGYA__API_KEY
-              value: 3_dEHMimJM2kxcz8gaoI1Sss9kohyJ6LP17qDYd2UIlUfNowsPglEUANJX7R812-uh
+            - name: NETCORE3_PREFIX
+              value: ownid-server-netcore3-gigya-2-service
 ---
 apiVersion: v1
 kind: Service
@@ -116,8 +92,8 @@ spec:
     app: ownid-client-app-2
   ports:
     - port: 80
-      targetPort: 5002
+      targetPort: 80
       name: http
     - port: 443
-      targetPort: 5002
+      targetPort: 80
       name: https

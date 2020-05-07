@@ -6,7 +6,7 @@
     "changeOrigin": true
   },
   "/ownid": {
-    "target": "http://localhost:5000",
+    "target": "http://localhost:5002",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
