@@ -1,31 +1,13 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
-WORKDIR /app
+FROM nginx:alpine
 
-EXPOSE 5002
+COPY ./dist /usr/share/nginx/html
 
-ENV OWNID__WEB_APP_URL="http://sign.dev.ownid.com/sign"
-ENV OWNID__CALLBACK_URL="http://localhost:5000"
-ENV OWNID__PUB_KEY="./keys/jwtRS256.key.pub"
-ENV OWNID__PRIVATE_KEY="./keys/jwtRS256.key"
-ENV OWNID__DID="did:ownid:151850889514"
-ENV OWNID__NAME="mozambiquehe.re"
-ENV OWNID__DESCRIPTION="Description here"
-ENV GIGYA__SECRET="g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA="
-ENV GIGYA__API_KEY="3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W"
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy csproj and restore as distinct layers
-COPY ./WebApp/*.csproj ./
-RUN dotnet restore
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Copy everything else and build
-COPY ./WebApp ./
-RUN dotnet publish -c Release -o out
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "WebApp.dll"]
-
-# docker build -t ownid-client-app:latest .
-# docker run -it -p 5002:5002 ownid-client-app:latest
+# docker build -t ownid-webapp:v1 .
+# docker run --rm -it -p 80:80/tcp ownid-webapp:v1

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ownid-webapp": {
+    "ownid-client-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../wwwroot",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,35 +65,35 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ownid-webapp:build",
+            "browserTarget": "ownid-client-app:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ownid-webapp:build:production"
+              "browserTarget": "ownid-client-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ownid-webapp:build"
+            "browserTarget": "ownid-client-app:build"
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ownid-webapp:serve"
+            "devServerTarget": "ownid-client-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ownid-webapp:serve:production"
+              "devServerTarget": "ownid-client-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ownid-webapp"
+  "defaultProject": "ownid-client-app"
 }

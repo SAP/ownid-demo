@@ -1,15 +1,29 @@
-# client-app
+# webapp
 
-Demo app
+## Development server
 
-## Environment variables
+Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-- *OWNID__WEB_APP_URL* - web application url (with relative path if needed)
-- *OWNID__CALLBACK_URL* - this(client-app) appliction url to call after user accepts login/register
-- *OWNID__PUB_KEY* - path to public rsa key
-- *OWNID__PRIVATE_KEY* - path to private rsa key
-- *OWNID__DID* - requester did
-- *OWNID__NAME* - requester name (will be shown in web-app)
-- *OWNID__DESCRIPTION* - requester description (will be shown in web-app)
-- *GIGYA__SECRET* - gigya account secret
-- *GIGYA__API_KEY* - gigya account api key
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. Note: `--prod` flag is used for a production build.
+
+## Running unit tests
+
+Run `yarn test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `yarn run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Docker
+
+Run `yarn run docker:start` to build app in prod mode and run docker. Navigate to `http://localhost/` to see the app.
