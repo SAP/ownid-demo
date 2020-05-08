@@ -74,7 +74,7 @@ spec:
             - containerPort: 80
           env:
             - name: NETCORE3_PREFIX
-              value: oownid-server-netcore3-gigya-2-service:5003
+              value: ownid-server-netcore3-gigya-2-service:5003
 ---
 apiVersion: v1
 kind: Service
