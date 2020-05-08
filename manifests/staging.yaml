@@ -23,7 +23,7 @@ spec:
             - containerPort: 80
           env:
             - name: NETCORE3_SERVICE
-              value: ownid-server-netcore3-gigya-2-service:5002
+              value: ownid-server-netcore3-gigya-service:5002
 ---
 apiVersion: v1
 kind: Service
