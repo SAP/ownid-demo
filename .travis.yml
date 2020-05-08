@@ -1,7 +1,8 @@
 sudo: true
 notifications:
   slack:
-    secure: HmuBbaRMwsLkC305vZCl+I65FBJvFjbATPJOIcwKBb6qp0ZKeol4R05W1WgGw809ARE2FnLZD32IwIO5lS6rEJPGU7eMVTrej9VaPpHEb3z14PxIsTh/pkVg+EZF6tgxpyqJ5+55/KZqz6LsiCdGpehEaAdtqvczFfqaGN46/Gnbjym11IzVqjYdKo6oHNCg5Wpr4Flnx9cLU4kLdPunuKfbmHRyxx1WblXJ4YLKMT1NaUixyOnYqlDRGm/VU3pY5wOA+f+XrqcGuR/TDjAFRe613IcpjRPn5AsNypIoA60CP+DjokSMufRr27FObjo3JhQW6ykKxOurjf8NhV+lvwbVWd+kzuajCsQoTilQYyQXEcj2aaidZIZRSnYK9l07996qcfcQ8/+s6SIX7U3udncousdj81qIcfL9TnyaZnpiqjIYNEsTN3wmfEfVSEXf746tbDD2PBwxQACa7nXzA96uDxO24ou2wdPbo8c2sfsBBlKkhTK98tchqQjdHs1uA+c4+T0XHxUGzQLVRo/ynDXwnb7TVCbuG0OSFRTJvez8ZzMilddZs6dush0/JRclQEQa4l7/50dRLooHcsL7QYCMS2AzU25aEkqGl64uD3djVbHnAATyKVOswDddCwGEvEWG4JzR15gYXFQGvlzopfp7r5nVI9vAMtu2Tc6qf1k=
+    rooms:
+      secure: HmuBbaRMwsLkC305vZCl+I65FBJvFjbATPJOIcwKBb6qp0ZKeol4R05W1WgGw809ARE2FnLZD32IwIO5lS6rEJPGU7eMVTrej9VaPpHEb3z14PxIsTh/pkVg+EZF6tgxpyqJ5+55/KZqz6LsiCdGpehEaAdtqvczFfqaGN46/Gnbjym11IzVqjYdKo6oHNCg5Wpr4Flnx9cLU4kLdPunuKfbmHRyxx1WblXJ4YLKMT1NaUixyOnYqlDRGm/VU3pY5wOA+f+XrqcGuR/TDjAFRe613IcpjRPn5AsNypIoA60CP+DjokSMufRr27FObjo3JhQW6ykKxOurjf8NhV+lvwbVWd+kzuajCsQoTilQYyQXEcj2aaidZIZRSnYK9l07996qcfcQ8/+s6SIX7U3udncousdj81qIcfL9TnyaZnpiqjIYNEsTN3wmfEfVSEXf746tbDD2PBwxQACa7nXzA96uDxO24ou2wdPbo8c2sfsBBlKkhTK98tchqQjdHs1uA+c4+T0XHxUGzQLVRo/ynDXwnb7TVCbuG0OSFRTJvez8ZzMilddZs6dush0/JRclQEQa4l7/50dRLooHcsL7QYCMS2AzU25aEkqGl64uD3djVbHnAATyKVOswDddCwGEvEWG4JzR15gYXFQGvlzopfp7r5nVI9vAMtu2Tc6qf1k=
     on_success: never
     on_failure: always
 
@@ -25,8 +26,7 @@ services:
 - docker
 
 cache:
-  directories:
-  - "./node_modules"
+  yarn: true
 
 before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.4
@@ -35,27 +35,29 @@ install:
 - yarn
 
 before_script:
-- pyenv global 3.7.1
-- pip install -U pip
-- pip install awscli
-- echo Logging in to Amazon...
-- aws --version
-- "$(aws ecr get-login --region us-east-2 --no-include-email)"
-- if [ "$TRAVIS_BRANCH" = "develop" ]; then sh scripts/load-dependencies.sh dev; fi
-- if [ "$TRAVIS_BRANCH" = "master" ]; then sh scripts/load-dependencies.sh staging;
-  fi
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
+  - echo Logging in to Amazon...
+  - aws --version
+  - "$(aws ecr get-login --region us-east-2 --no-include-email)"
+  - if [ "$TRAVIS_BRANCH" = "develop" ]; then sh scripts/load-dependencies.sh dev; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then sh scripts/load-dependencies.sh staging; fi
+
 script:
-- yarn lint
-- yarn test:ci
-- yarn build
-- docker --version
-- docker build -t ownid-client-app:latest .
+  - yarn lint
+  - yarn test:ci
+  - yarn build
+  - docker --version
+  - docker build -t ownid-client-app:latest .
+
 before_deploy:
-- curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
-- chmod +x ./kubectl
-- sudo mv kubectl /usr/local/bin
-- kubectl version --short --client
-- aws eks --region us-east-2 update-kubeconfig --name ownid-eks
+  - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - sudo mv kubectl /usr/local/bin
+  - kubectl version --short --client
+  - aws eks --region us-east-2 update-kubeconfig --name ownid-eks
+
 deploy:
 - provider: script
   script: sh scripts/deploy.sh $REPOSITORY_URI_DEVELOP $IMAGE_TAG dev
