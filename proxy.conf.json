@@ -1,12 +1,6 @@
 {
-  "/api": {
-    "target": "http://localhost:5000",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true
-  },
-  "/ownid": {
-    "target": "http://localhost:5002",
+  "/netcore3/ownid": {
+    "target": "http://client.dev.ownid.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
