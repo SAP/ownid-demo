@@ -33,6 +33,12 @@ install:
   - yarn
 
 before_script:
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
+  - echo Logging in to Amazon...
+  - aws --version
+  - $(aws ecr get-login --region us-east-2 --no-include-email)
   - if [ "$TRAVIS_BRANCH" = "develop" ]; then sh scripts/load-dependencies.sh dev; fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then sh scripts/load-dependencies.sh staging; fi
 
@@ -45,12 +51,6 @@ script:
   - docker build -t ownid-client-app:latest .
 
 before_deploy:
-  - pyenv global 3.7.1
-  - pip install -U pip
-  - pip install awscli
-  - echo Logging in to Amazon...
-  - aws --version
-  - $(aws ecr get-login --region us-east-2 --no-include-email)
   - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv kubectl /usr/local/bin
