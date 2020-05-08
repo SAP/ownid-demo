@@ -6,6 +6,7 @@ metadata:
   labels:
     app: ownid-client-app
 spec:
+  revisionHistoryLimit: 2
   replicas: 1
   selector:
     matchLabels:
@@ -19,22 +20,10 @@ spec:
         - name: ownid-client-app
           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
           ports:
-            - containerPort: 5002
+            - containerPort: 80
           env:
-            - name: OWNID__WEB_APP_URL
-              value: https://sign.dev.ownid.com/sign
-            - name: OWNID__CALLBACK_URL
-              value: https://client.dev.ownid.com
-            - name: OWNID__DID
-              value: did:ownid:dev_151850889514
-            - name: OWNID__NAME
-              value: client.dev.ownid.com
-            - name: OWNID__DESCRIPTION
-              value: DEV environment
-            - name: GIGYA__SECRET
-              value: g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA=
-            - name: GIGYA__API_KEY
-              value: 3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W 
+            - name: NETCORE3_SERVICE
+              value: ownid-server-netcore3-gigya-service:5002
 ---
 apiVersion: v1
 kind: Service
@@ -54,10 +43,10 @@ spec:
     app: ownid-client-app
   ports:
     - port: 80
-      targetPort: 5002
+      targetPort: 80
       name: http
     - port: 443
-      targetPort: 5002
+      targetPort: 80
       name: https
 ---
 apiVersion: apps/v1
@@ -68,6 +57,7 @@ metadata:
   labels:
     app: ownid-client-app-2
 spec:
+  revisionHistoryLimit: 2
   replicas: 1
   selector:
     matchLabels:
@@ -81,22 +71,10 @@ spec:
         - name: ownid-client-app-2
           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
           ports:
-            - containerPort: 5002
+            - containerPort: 80
           env:
-            - name: OWNID__WEB_APP_URL
-              value: https://sign.dev.ownid.com/sign
-            - name: OWNID__CALLBACK_URL
-              value: https://client2.dev.ownid.com
-            - name: OWNID__DID
-              value: did:ownid:dev2_151850889514
-            - name: OWNID__NAME
-              value: client2.dev.ownid.com
-            - name: OWNID__DESCRIPTION
-              value: DEV2 environment
-            - name: GIGYA__SECRET
-              value: g157+kUR3kxvgIX4MneEWnVgBVzhQe4dXfoNe9ceSNA=
-            - name: GIGYA__API_KEY
-              value: 3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
+            - name: NETCORE3_PREFIX
+              value: oownid-server-netcore3-gigya-2-service:5003
 ---
 apiVersion: v1
 kind: Service
@@ -116,8 +94,8 @@ spec:
     app: ownid-client-app-2
   ports:
     - port: 80
-      targetPort: 5002
+      targetPort: 80
       name: http
     - port: 443
-      targetPort: 5002
+      targetPort: 80
       name: https
