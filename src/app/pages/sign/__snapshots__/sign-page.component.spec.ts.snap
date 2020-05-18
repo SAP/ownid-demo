@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignPageComponent Snapshot check snapshot 1`] = `
+<sign-page
+  setProfileCommand={[Function Object]}
+>
+  <section
+    class="sign-body"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="call-2-action"
+      >
+        <h1
+          class="headline"
+        >
+           For the best experience use Own Id for login 
+        </h1>
+        <h2
+          class="sub-title"
+        >
+           Scan QR code with your phone and proceed with out any logins and passwords 
+        </h2>
+      </div>
+      <div>
+        <mat-card
+          class="sign-section"
+        >
+          <mat-tab-group
+            animationduration="0ms"
+            mat-stretch-tabs=""
+          >
+            <mat-tab
+              label="Login"
+            >
+              <ownid
+                type="login"
+              />
+              <login-form />
+            </mat-tab>
+            <mat-tab
+              label="Register"
+            >
+              <ownid
+                type="register"
+              />
+              <registration-form />
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+</sign-page>
+`;
