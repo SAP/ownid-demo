@@ -2444,8 +2444,8 @@
     var ConfigurationService = /** @class */ (function () {
         function ConfigurationService() {
         }
-        ConfigurationService.contextUrl = '/ownid/';
-        ConfigurationService.statusUrl = '/ownId/:context/status';
+        ConfigurationService.URLPrefix = '/ownid';
+        ConfigurationService.statusUrl = "/:context/status";
         ConfigurationService.statusTimeout = 2000;
         ConfigurationService.defaultTexts = (_a = {},
             _a[WidgetType.Login] = {
@@ -2469,12 +2469,12 @@
             _this.config = config;
             _this.requestService = requestService;
             _this.statusTimeout = null;
-            _this.widgetReady = _this.getContext(config.getContextURL || ConfigurationService.contextUrl);
+            _this.widgetReady = _this.getContext(config.URLPrefix || ConfigurationService.URLPrefix);
             return _this;
         }
         WidgetComponent.prototype.getContext = function (contextUrl) {
             return __awaiter(this, void 0, void 0, function () {
-                var contextData, data, statusUrl;
+                var contextData, data, prefix, statusUrl;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -2489,7 +2489,9 @@
                             }
                             this.context = data.context;
                             this.nonce = data.nonce;
-                            statusUrl = (this.config.getStatusURL || ConfigurationService.statusUrl).replace(':context', this.context);
+                            prefix = (this.config.URLPrefix || ConfigurationService.URLPrefix).replace(/\/+$/, '');
+                            statusUrl = ("" + prefix + ConfigurationService.statusUrl)
+                                .replace(':context', this.context);
                             this.setCallStatus(statusUrl);
                             this.render(data.url);
                             return [2 /*return*/];

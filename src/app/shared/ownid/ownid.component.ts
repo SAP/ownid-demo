@@ -31,8 +31,7 @@ export class OwnidComponent implements OnInit {
       onLogin: this.onLogin.emit.bind(this.onLogin),
       onRegister: this.onRegister.emit.bind(this.onRegister),
       statusInterval: 3000,
-      getContextURL: "/netcore3/ownid",
-      getStatusURL: "/netcore3/ownid/:context/status"
+      URLPrefix: "/netcore3/ownid"
     });
   }
 }
