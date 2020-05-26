@@ -25,6 +25,7 @@ describe('OwnidComponent', () => {
       // @ts-ignore-next-line
       window.ownid = {
         init: jest.fn(),
+        render: jest.fn(),
       };
 
       const sut = new OwnidComponent(el);

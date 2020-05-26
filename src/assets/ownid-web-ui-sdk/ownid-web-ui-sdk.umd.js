@@ -33,6 +33,17 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
 
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
     function __awaiter(thisArg, _arguments, P, generator) {
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -2439,27 +2450,57 @@
         WidgetType["Register"] = "register";
         WidgetType["Login"] = "login";
     })(WidgetType || (WidgetType = {}));
+    var Languages;
+    (function (Languages) {
+        Languages["en"] = "en";
+        Languages["enGB"] = "en-GB";
+        Languages["enUS"] = "en-US";
+        Languages["ru"] = "ru";
+        Languages["es"] = "es";
+    })(Languages || (Languages = {}));
 
-    var _a;
+    // todo: implement in correct way
     var ConfigurationService = /** @class */ (function () {
         function ConfigurationService() {
         }
         ConfigurationService.URLPrefix = '/ownid';
         ConfigurationService.statusUrl = "/:context/status";
         ConfigurationService.statusTimeout = 2000;
-        ConfigurationService.defaultTexts = (_a = {},
-            _a[WidgetType.Login] = {
-                mobileTitle: 'Instant Sign In',
-                desktopTitle: 'Instant Sign In',
-                desktopSubtitle: 'Use your phone to scan for passwordless sign in.',
-            },
-            _a[WidgetType.Register] = {
-                mobileTitle: 'Register without a password',
-                desktopTitle: 'Skip the password with OwnID',
-                desktopSubtitle: 'Use your phone to scan and complete a passwordless registration.',
-            },
-            _a);
+        ConfigurationService.defaultLanguage = Languages.en;
         return ConfigurationService;
+    }());
+
+    var _a, _b, _c;
+    var TranslationService = /** @class */ (function () {
+        function TranslationService() {
+        }
+        TranslationService.texts = (_a = {},
+            _a[Languages.en] = (_b = {},
+                _b[WidgetType.Login] = {
+                    mobileTitle: 'Instant Sign In',
+                    desktopTitle: 'Instant Sign In',
+                    desktopSubtitle: 'Use your phone to scan for passwordless sign in.',
+                },
+                _b[WidgetType.Register] = {
+                    mobileTitle: 'Register without a password',
+                    desktopTitle: 'Skip the password with OwnID',
+                    desktopSubtitle: 'Use your phone to scan and complete a passwordless registration.',
+                },
+                _b),
+            _a[Languages.ru] = (_c = {},
+                _c[WidgetType.Login] = {
+                    mobileTitle: 'Мгновенный вход',
+                    desktopTitle: 'Мгновенный вход',
+                    desktopSubtitle: 'Используйте свой телефон для сканирования и входа без пароля.',
+                },
+                _c[WidgetType.Register] = {
+                    mobileTitle: 'Зарегистрироваться без пароля',
+                    desktopTitle: 'Пропустить пароль с OwnID',
+                    desktopSubtitle: 'Используйте свой телефон для сканирования и завершения регистрации без пароля.',
+                },
+                _c),
+            _a);
+        return TranslationService;
     }());
 
     var WidgetComponent = /** @class */ (function (_super) {
@@ -2469,45 +2510,48 @@
             _this.config = config;
             _this.requestService = requestService;
             _this.statusTimeout = null;
+            _this.data = null;
             _this.widgetReady = _this.getContext(config.URLPrefix || ConfigurationService.URLPrefix);
             return _this;
         }
         WidgetComponent.prototype.getContext = function (contextUrl) {
             return __awaiter(this, void 0, void 0, function () {
-                var contextData, data, prefix, statusUrl;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
+                var contextData, _a, prefix, statusUrl;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
                             contextData = { type: this.config.type || WidgetType.Register };
+                            _a = this;
                             return [4 /*yield*/, this.requestService.post(contextUrl, contextData)];
                         case 1:
-                            data = _a.sent();
-                            if (!data) {
+                            _a.data = _b.sent();
+                            if (!this.data) {
                                 // eslint-disable-next-line no-console
                                 console.error('No context data received');
                                 return [2 /*return*/];
                             }
-                            this.context = data.context;
-                            this.nonce = data.nonce;
+                            this.context = this.data.context;
+                            this.nonce = this.data.nonce;
                             prefix = (this.config.URLPrefix || ConfigurationService.URLPrefix).replace(/\/+$/, '');
                             statusUrl = ("" + prefix + ConfigurationService.statusUrl)
                                 .replace(':context', this.context);
                             this.setCallStatus(statusUrl);
-                            this.render(data.url);
+                            this.render();
                             return [2 /*return*/];
                     }
                 });
             });
         };
-        WidgetComponent.prototype.render = function (href) {
+        WidgetComponent.prototype.render = function () {
+            var lang = this.config.language || ConfigurationService.defaultLanguage;
             if (this.isMobile()) {
-                var mobileTitle = this.config.mobileTitle || ConfigurationService.defaultTexts[this.config.type].mobileTitle;
-                this.addChild(new LinkButton({ href: href, title: mobileTitle }));
+                var mobileTitle = this.config.mobileTitle || TranslationService.texts[lang][this.config.type].mobileTitle;
+                this.addChild(new LinkButton({ href: this.data.url, title: mobileTitle }));
             }
             else {
-                var desktopTitle = this.config.desktopTitle || ConfigurationService.defaultTexts[this.config.type].desktopTitle;
-                var desktopSubtitle = this.config.desktopTitle || ConfigurationService.defaultTexts[this.config.type].desktopSubtitle;
-                this.addChild(new Qr({ href: href, title: desktopTitle, subtitle: desktopSubtitle }));
+                var desktopTitle = this.config.desktopTitle || TranslationService.texts[lang][this.config.type].desktopTitle;
+                var desktopSubtitle = this.config.desktopTitle || TranslationService.texts[lang][this.config.type].desktopSubtitle;
+                this.addChild(new Qr({ href: this.data.url, title: desktopTitle, subtitle: desktopSubtitle }));
             }
         };
         WidgetComponent.prototype.setCallStatus = function (statusUrl) {
@@ -2532,6 +2576,15 @@
                     }
                 });
             });
+        };
+        WidgetComponent.prototype.destroy = function () {
+            clearTimeout(this.statusTimeout);
+            this.elements.forEach(function (element) { return element.destroy(); });
+        };
+        WidgetComponent.prototype.update = function (config) {
+            this.elements.forEach(function (element) { return element.destroy(); });
+            this.config = __assign(__assign({}, this.config), config);
+            this.render();
         };
         return WidgetComponent;
     }(BaseComponent));
@@ -2571,14 +2624,19 @@
 
     var OwnIDUiSdk = /** @class */ (function () {
         function OwnIDUiSdk() {
+            this.config = {};
         }
         OwnIDUiSdk.prototype.init = function (config) {
+            if (config === void 0) { config = {}; }
+            this.config = config;
+        };
+        OwnIDUiSdk.prototype.render = function (config) {
             if (!config.element) {
                 // eslint-disable-next-line no-console
                 console.error("Parent element wasn't found on the page");
                 return null;
             }
-            return new WidgetComponent(config, new RequestService());
+            return new WidgetComponent(__assign(__assign({}, this.config), config), new RequestService());
         };
         return OwnIDUiSdk;
     }());
