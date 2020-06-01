@@ -1,5 +1,7 @@
 import WidgetComponent from "./components/widget.component";
-import { IWidgetConfig } from "./interfaces/i-widget.interfeces";
+import { IInitConfig, IWidgetConfig } from "./interfaces/i-widget.interfeces";
 export default class OwnIDUiSdk {
-    init(config: IWidgetConfig): WidgetComponent | null;
+    config: IInitConfig;
+    init(config?: IInitConfig): void;
+    render(config: IWidgetConfig): WidgetComponent | null;
 }

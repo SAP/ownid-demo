@@ -26,13 +26,17 @@ export class OwnidComponent implements OnInit {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore-next-line
     window.ownid!.init({
+      statusInterval: 3000,
+      URLPrefix: "/netcore3/ownid",
+    });
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore-next-line
+    window.ownid!.render({
       element: this.elRef.nativeElement,
       type: this.type,
       onLogin: this.onLogin.emit.bind(this.onLogin),
       onRegister: this.onRegister.emit.bind(this.onRegister),
-      statusInterval: 3000,
-      getContextURL: "/netcore3/ownid",
-      getStatusURL: "/netcore3/ownid/:context/status"
     });
   }
 }
