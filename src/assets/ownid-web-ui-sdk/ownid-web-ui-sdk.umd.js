@@ -2641,7 +2641,13 @@
         return OwnIDUiSdk;
     }());
 
-    window.ownid = window.ownid || new OwnIDUiSdk();
+    window.ownid = window.ownid instanceof OwnIDUiSdk ? window.ownid : new OwnIDUiSdk();
+    if (window.ownidAsyncInit) {
+        window.ownidAsyncInit();
+    }
+    else {
+        console.log('ownid sdk is not initialized, ownidAsyncInit fucntion was not found');
+    }
 
 })));
 //# sourceMappingURL=ownid-web-ui-sdk.umd.js.map

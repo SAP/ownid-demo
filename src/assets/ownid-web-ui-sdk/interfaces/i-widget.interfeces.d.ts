@@ -12,6 +12,7 @@ export declare enum Languages {
 export interface IInitConfig {
     URLPrefix?: string;
     language?: Languages;
+    statusInterval?: number;
 }
 export interface IWidgetConfig {
     element: HTMLElement;
