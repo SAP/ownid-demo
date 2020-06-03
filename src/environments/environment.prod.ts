@@ -1,6 +1,6 @@
-import { IEnvironment } from './i-environment';
+import { IEnvironment } from "./i-environment";
 
 export const environment: IEnvironment = {
   production: true,
-  baseURL: '/api/v1/',
+  baseURL: "/api/v1/"
 };

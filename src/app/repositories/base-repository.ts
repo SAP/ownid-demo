@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 export abstract class BaseRepository {
   constructor(private httpClient: HttpClient) {}

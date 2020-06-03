@@ -1,9 +1,9 @@
-import { async, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { IOwnidRs, SignPageComponent } from './sign-page.component';
-import { SetProfileCommand } from './commands/set-profile.command';
+import { async, TestBed } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { IOwnidRs, SignPageComponent } from "./sign-page.component";
+import { SetProfileCommand } from "./commands/set-profile.command";
 
-describe('SignPageComponent', () => {
+describe("SignPageComponent", () => {
   let setProfileCommand: SetProfileCommand;
 
   beforeEach(() => {
@@ -11,29 +11,29 @@ describe('SignPageComponent', () => {
     setProfileCommand.execute = jest.fn();
   });
 
-  describe('Snapshot', () => {
+  describe("Snapshot", () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         providers: [
           {
             provide: SetProfileCommand,
-            useValue: setProfileCommand,
-          },
+            useValue: setProfileCommand
+          }
         ],
         declarations: [SignPageComponent],
-        schemas: [NO_ERRORS_SCHEMA],
+        schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     }));
 
-    test('check snapshot', () => {
+    test("check snapshot", () => {
       const fixture = TestBed.createComponent(SignPageComponent);
 
       expect(fixture).toMatchSnapshot();
     });
   });
 
-  describe('onLogin', () => {
-    it('should call set profile command', () => {
+  describe("onLogin", () => {
+    it("should call set profile command", () => {
       const sut = new SignPageComponent(setProfileCommand);
 
       sut.onLogin({ identities: {} } as IOwnidRs);
@@ -42,8 +42,8 @@ describe('SignPageComponent', () => {
     });
   });
 
-  describe('onRegister', () => {
-    it('should call set profile command', () => {
+  describe("onRegister", () => {
+    it("should call set profile command", () => {
       const sut = new SignPageComponent(setProfileCommand);
 
       sut.onRegister({ identities: {} } as IOwnidRs);

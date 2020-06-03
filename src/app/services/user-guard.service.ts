@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
-import { AppStore } from '../app.store';
+import { Injectable } from "@angular/core";
+import { Router, CanActivate } from "@angular/router";
+import { AppStore } from "../app.store";
 
 @Injectable()
 export class UserGuardService implements CanActivate {
@@ -8,7 +8,7 @@ export class UserGuardService implements CanActivate {
 
   canActivate(): boolean {
     if (Object.keys(this.store.profile$.getValue()).length === 0) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl("/login");
       return false;
     }
     return true;
