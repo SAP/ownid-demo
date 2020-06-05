@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve --port 4201",
     "build": "ng build --prod",
+    "start:demo": "ng serve demo-app --port 4202 ",
+    "build:demo": "ng build demo-app --prod",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
@@ -14,7 +16,7 @@
     "docker:run": "docker run --rm -it -p 80:80/tcp ownid-client-app:latest",
     "e2e": "ng e2e",
     "format": "prettier-eslint --write $PWD/'src/**/*.{[jt]s, html}' && eslint . --ext .ts --fix",
-    "verify": "yarn test && yarn lint && yarn build && yarn start"
+    "verify": "yarn test && yarn lint && yarn build && yarn build:demo && yarn start"
   },
   "private": true,
   "dependencies": {

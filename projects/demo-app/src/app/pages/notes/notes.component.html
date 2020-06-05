@@ -1,0 +1,72 @@
+<ng-container *ngIf="{ note: note$ | async } as context">
+  <div class="sidebar"
+       [ngClass]="{closed: sidebarClosed}">
+    <header class="header">
+      <div class="profile"
+           *ngIf="profile$ | async as profile"
+           clickOutside
+           (clickOutside)="showProfileTooltip = false"
+           (click)="showProfileTooltip = !showProfileTooltip">
+        {{profile.name}} <div class="profile-arrow-icon"></div>
+        <div class="profile-tooltip"
+             *ngIf="showProfileTooltip">
+          <div class="tooltip-link"><div class="profile-icon"></div>Account</div>
+          <div class="tooltip-link"><div class="help-icon"></div>Help</div>
+          <div class="tooltip-link"><div class="logout-icon"></div>Log out</div>
+        </div>
+      </div>
+
+      <div class="note-add-icon icon"
+           (click)="addNote()">
+        Add
+      </div>
+    </header>
+
+    <div class="sidebar-content"
+         *ngIf="notes$ | async as notes">
+      <a class="notes-list-item"
+         *ngFor="let note of notes"
+         [ngClass]="{ active : context.note?.id === note.id, empty: !note.body }"
+         [routerLink]="['/notes/' + note.id]"
+         [innerHTML]="note.body || '<div>New Note...</div><div>No additional text</div>'">
+      </a>
+    </div>
+  </div>
+
+  <div class="main">
+    <header class="header">
+      <div class="close-sidebar-icon icon"
+           [ngClass]="{ open: sidebarClosed }"
+           (click)="sidebarClosed = !sidebarClosed">
+        Close
+      </div>
+      <div class="actions">
+        <div class="note-delete-icon icon"
+             [ngClass]="{ disabled: !context.note }"
+             (click)="deleteNote(context.note.id)">
+          Delete
+        </div>
+        <div class="info-icon icon"
+             [ngClass]="{ disabled: !context.note }"
+             clickOutside
+             (clickOutside)="showTooltip = false"
+             (click)="showTooltip = !showTooltip">
+          Info
+        </div>
+      </div>
+
+      <div class="info-tooltip"
+           *ngIf="showTooltip">
+        <div class="tooltip-text">Modified</div>
+        <div class="tooltip-text date">{{context.note.updated | date: 'short'}}</div>
+        <div class="tooltip-text">{{context.note.words}} words</div>
+        <div class="tooltip-text">{{context.note.characters}} characters</div>
+      </div>
+
+    </header>
+
+    <div class="note">
+      <note-edit [note]="context.note"></note-edit>
+    </div>
+  </div>
+</ng-container>
