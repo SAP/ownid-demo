@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="container">
+  <a class="logo" routerLink="/"></a>
+
+  <div class="content">
+    <nav class="own-nav-tabs">
+      <a class="own-nav-link active" routerLink="/login">Log in</a>
+      <a class="own-nav-link" routerLink="/register">Create Account</a>
+    </nav>
+
+    <ownid type="login" (onLogin)="onLogin($event)"></ownid>
+
+    <div class="or">OR</div>
+
+    <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <input class="own-input" type="email" placeholder="Email" formControlName="email">
+
+      <input class="own-input" type="password" placeholder="Password" formControlName="password">
+
+      <input type="checkbox" class="own-check" id="remember-me">
+      <label class="own-label" for="remember-me">
+        Remember Me
+      </label>
+
+      <button class="own-button" type="submit">Log In</button>
+    </form>
+  </div>
+</div>
+
+

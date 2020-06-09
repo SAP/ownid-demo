@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login.component';
-import { LoginRoutingModule } from './login-routing.module';
+import { RegistrationComponent } from './registration.component';
+import { RegistrationRoutingModule } from './registration-routing.module';
 import { OwnidModule } from '../../../../../../src/app/shared/ownid/ownid.module';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [RegistrationComponent],
   imports: [
     CommonModule,
-    LoginRoutingModule,
+    RegistrationRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
   ]
 })
-export class LoginModule { }
+export class RegistrationModule { }

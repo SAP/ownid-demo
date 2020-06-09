@@ -5,20 +5,23 @@ import {
   Input,
   ElementRef,
   Output,
-  EventEmitter
+  EventEmitter, OnDestroy
 } from "@angular/core";
+import WidgetComponent from '../../../assets/ownid-web-ui-sdk/components/widget.component';
 
 @Component({
   selector: "ownid",
   template: "",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OwnidComponent implements OnInit {
+export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
 
   @Output() onLogin = new EventEmitter();
 
   @Output() onRegister = new EventEmitter();
+
+  private ownidWidget: WidgetComponent | undefined;
 
   constructor(private elRef: ElementRef) {}
 
@@ -30,11 +33,15 @@ export class OwnidComponent implements OnInit {
     });
 
     // @ts-ignore-next-line
-    window.ownid!.render({
+    this.ownidWidget =  window.ownid!.render({
       element: this.elRef.nativeElement,
       type: this.type,
       onLogin: this.onLogin.emit.bind(this.onLogin),
       onRegister: this.onRegister.emit.bind(this.onRegister)
     });
+  }
+
+  ngOnDestroy() {
+    this.ownidWidget?.destroy();
   }
 }
