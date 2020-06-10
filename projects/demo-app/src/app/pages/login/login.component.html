@@ -13,6 +13,8 @@
 
     <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
+      <div class="errors" *ngIf="errors">{{errors}}</div>
+
       <input class="own-input" type="email" placeholder="Email" formControlName="email">
 
       <input class="own-input" type="password" placeholder="Password" formControlName="password">

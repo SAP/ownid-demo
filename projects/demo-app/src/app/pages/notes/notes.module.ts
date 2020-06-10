@@ -8,6 +8,7 @@ import { SaveNoteCommand } from './commands/save-note.command';
 import { DeleteNoteCommand } from './commands/delete-note.command';
 import { NoteEditComponent } from './note-edit/note-edit.component';
 import { ClickOutsideModule } from '../../shared/click-outside/click-outside.module';
+import { GetNotesCommand } from './commands/get-notes.command';
 
 @NgModule({
   declarations: [NotesComponent, NoteEditComponent],
@@ -21,6 +22,7 @@ import { ClickOutsideModule } from '../../shared/click-outside/click-outside.mod
     AddNoteCommand,
     SaveNoteCommand,
     DeleteNoteCommand,
+    GetNotesCommand,
   ]
 })
 export class NotesModule {}

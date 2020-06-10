@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AppStore, INote } from '../../../app.store';
-import { IDataCommand } from '../../i-data-command';
+import { AppStore } from '../../../app.store';
+import { ICommand } from '../../i-command';
 
 @Injectable()
-export class SaveNoteCommand implements IDataCommand<INote> {
+export class SaveNoteCommand implements ICommand {
   constructor(
     private store: AppStore,
   ) {}
 
-  execute(note: INote) {
+  execute() {
     const notes = this.store.notes$.getValue();
-    console.log(notes, note);
 
-    // call gigya save notes
+    this.store.notes$.next(notes);
   }
 }

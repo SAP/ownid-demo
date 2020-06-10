@@ -39,12 +39,13 @@ export class NoteEditComponent implements OnChanges {
     if (this.note) {
       this.note.body = element.innerHTML;
 
+      this.note.updated = Date.now().toString();
 
       this.note.characters = element.innerHTML.replace(/<\/div>|<div>|<br>|&nbsp;/g, '').length;
       this.note.words = element.innerHTML.replace(/<\/div>|<div>|<br>|&nbsp;/g, ' ').trim().split(/\s+/).length;
 
       clearTimeout(this.timeoutId as NodeJS.Timeout);
-      this.timeoutId = setTimeout(() => this.saveNoteCommand.execute(this.note as INote), 2000);
+      this.timeoutId = setTimeout(() => this.saveNoteCommand.execute(), 2000);
     }
   }
 }

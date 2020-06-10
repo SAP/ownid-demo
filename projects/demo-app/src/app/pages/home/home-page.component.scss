@@ -21,7 +21,6 @@ h1 {
 }
 
 .top-nav-item {
-  margin-right: 20px;
   font-size: 16px;
   line-height: 20px;
   font-weight: bold;
@@ -31,6 +30,10 @@ h1 {
   border-radius: 10px;
   text-decoration: none;
   color: #111D29;
+
+  & + & {
+    margin-left: 20px;
+  }
 }
 
 .top-nav-item:hover {
@@ -127,4 +130,87 @@ h1 {
 
 .footer-nav-item:last-child {
   margin-right: 160px;
+}
+
+@media (max-width: 599px) {
+  .top-nav {
+    display: block;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+
+  .top-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .top-nav-item {
+    padding: 12px 8px;
+
+    & + & {
+      margin-left: 8px;
+    }
+  }
+
+  .header {
+    margin: 12px 12px 0;
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 35px;
+    line-height: 45px;
+  }
+
+  .slogan {
+    font-size: 18px;
+    line-height: 20px;
+    padding: 0 25px 0 50px;
+  }
+
+  .image {
+    width: 300px;
+    height: 168px;
+    margin-top: -20px;
+  }
+
+  .items {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .item {
+    width: 80%;
+    margin: 24px 0 0;
+  }
+
+  .item-title {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .item-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .copy {
+    margin: 16px auto 0;
+    order: 2;
+  }
+
+  .footer-nav-item:last-child {
+    margin: 0;
+  }
 }

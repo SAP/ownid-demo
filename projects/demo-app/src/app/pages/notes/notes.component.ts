@@ -5,6 +5,8 @@ import { filter, map } from 'rxjs/operators';
 import { AppStore, INote, IProfile } from '../../app.store';
 import { AddNoteCommand } from './commands/add-note.command';
 import { DeleteNoteCommand } from './commands/delete-note.command';
+import { GigyaService } from '../../services/gigya.service';
+import { GetNotesCommand } from './commands/get-notes.command';
 
 @Component({
   selector: 'notes',
@@ -13,6 +15,8 @@ import { DeleteNoteCommand } from './commands/delete-note.command';
 })
 export class NotesComponent implements OnInit {
   sidebarClosed = false;
+
+  mobSidebarClosed = false;
 
   notes$: Observable<INote[]>;
 
@@ -29,6 +33,8 @@ export class NotesComponent implements OnInit {
     private appStore: AppStore,
     private addNoteCommand: AddNoteCommand,
     private deleteNoteCommand: DeleteNoteCommand,
+    private gigyaService: GigyaService,
+    getNotesCommand: GetNotesCommand,
   ) {
     const noteId$ = this.actRoute.paramMap.pipe(
       filter((params) => !!params.get('id')),
@@ -40,6 +46,8 @@ export class NotesComponent implements OnInit {
     this.note$ = combineLatest(this.notes$, noteId$).pipe(
       map(([notes, noteId]) => notes.find(({id}) => id === noteId)),
     )
+
+    getNotesCommand.execute();
   }
 
   ngOnInit(): void {
@@ -55,5 +63,9 @@ export class NotesComponent implements OnInit {
 
   openTooltip() {
     this.showTooltip = true;
+  }
+
+  onLogout() {
+    this.gigyaService.logout()
   }
 }

@@ -2,15 +2,19 @@
   background: #E5E5E5;
 }
 
+.logo {
+  margin: 0 auto;
+}
+
 .container {
-  width: 480px;
+  max-width: 480px;
+  width: calc(100% - 32px);
   margin: 48px auto 0;
 }
 
 .content {
   margin-top: 40px;
   padding: 24px 24px 32px;
-  width: 480px;
 
   background: #FFFFFF;
   box-shadow: 0 8px 16px rgba(4, 172, 167, 0.16), 0 0 2px rgba(4, 172, 167, 0.16);

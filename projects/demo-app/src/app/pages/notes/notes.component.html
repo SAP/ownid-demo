@@ -1,6 +1,6 @@
 <ng-container *ngIf="{ note: note$ | async } as context">
   <div class="sidebar"
-       [ngClass]="{closed: sidebarClosed}">
+       [ngClass]="{closed: sidebarClosed, 'mob-closed': mobSidebarClosed}">
     <header class="header">
       <div class="profile"
            *ngIf="profile$ | async as profile"
@@ -12,7 +12,7 @@
              *ngIf="showProfileTooltip">
           <div class="tooltip-link"><div class="profile-icon"></div>Account</div>
           <div class="tooltip-link"><div class="help-icon"></div>Help</div>
-          <div class="tooltip-link"><div class="logout-icon"></div>Log out</div>
+          <div class="tooltip-link" (click)="onLogout()"><div class="logout-icon"></div>Log out</div>
         </div>
       </div>
 
@@ -27,6 +27,7 @@
       <a class="notes-list-item"
          *ngFor="let note of notes"
          [ngClass]="{ active : context.note?.id === note.id, empty: !note.body }"
+         (click)="mobSidebarClosed = true"
          [routerLink]="['/notes/' + note.id]"
          [innerHTML]="note.body || '<div>New Note...</div><div>No additional text</div>'">
       </a>
@@ -36,8 +37,8 @@
   <div class="main">
     <header class="header">
       <div class="close-sidebar-icon icon"
-           [ngClass]="{ open: sidebarClosed }"
-           (click)="sidebarClosed = !sidebarClosed">
+           [ngClass]="{ open: sidebarClosed, 'mob-open': mobSidebarClosed }"
+           (click)="sidebarClosed = !sidebarClosed; mobSidebarClosed = !mobSidebarClosed">
         Close
       </div>
       <div class="actions">
@@ -58,7 +59,7 @@
       <div class="info-tooltip"
            *ngIf="showTooltip">
         <div class="tooltip-text">Modified</div>
-        <div class="tooltip-text date">{{context.note.updated | date: 'short'}}</div>
+        <div class="tooltip-text date">{{context.note.updated | date: 'medium'}}</div>
         <div class="tooltip-text">{{context.note.words}} words</div>
         <div class="tooltip-text">{{context.note.characters}} characters</div>
       </div>

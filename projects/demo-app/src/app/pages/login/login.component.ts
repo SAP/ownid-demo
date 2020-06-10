@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GigyaService } from '../../services/gigya.service';
 
 @Component({
   selector: 'login',
@@ -9,24 +11,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
-   this.form = formBuilder.group({
-     email: ['', [Validators.email, Validators.required]],
-     password: ['', [Validators.required]],
-   });
+  errors: string | null = null;
+
+  constructor(
+    formBuilder: FormBuilder,
+    private gigyaService: GigyaService,
+    private router: Router,
+  ) {
+    this.form = formBuilder.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]],
+    });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      console.log('valid');
-      // call gigya login
+      this.errors = null;
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.gigyaService.login(this.form.value, (data: any) => {
+        if (data.status === 'FAIL') {
+          this.errors = data.errorDetails;
+        }
+      });
     }
-    console.log(this.form.value);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onLogin($event: any) {
-    console.log($event);
-    // call gigya login
+  onLogin(statusRS: any) {
+    document.cookie = `${statusRS.sessionInfo.cookieName}=${statusRS.sessionInfo.cookieValue}; path=/`;
+    this.router.navigateByUrl('/notes');
   }
 }

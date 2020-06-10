@@ -16,8 +16,6 @@ export class DeleteNoteCommand implements IDataCommand<string> {
 
     this.store.notes$.next(newNotes);
 
-    // call gigya save notes
-
     this.router.navigateByUrl(`/notes${  newNotes[0] ? `/${newNotes[0].id}` : ''}`);
   }
 }
