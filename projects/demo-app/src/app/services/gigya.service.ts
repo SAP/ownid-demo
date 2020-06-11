@@ -82,4 +82,16 @@ export class GigyaService {
     // @ts-ignore
     window.gigya!.accounts.setAccountInfo({ data: { notes } })
   }
+
+  deleteAccount() {
+    // @ts-ignore
+    window.gigya!.accounts.getAccountInfo({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callback: (data: any) => {
+        console.log(data);
+        // @ts-ignore
+        window.gigya!.accounts.deleteAccount({UID: data.UID});
+      }
+    });
+  }
 }

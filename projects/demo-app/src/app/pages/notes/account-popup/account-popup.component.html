@@ -1,0 +1,27 @@
+<div class="account-popup">
+  <div class="overlay"></div>
+  <div class="popup-content">
+    <div class="popup-title">Account</div>
+
+    <form class="own-form" [formGroup]="form">
+      <input class="own-input" type="text" placeholder="Full Name" formControlName="name" readonly>
+
+      <input class="own-input" type="email" placeholder="Email" formControlName="email" readonly>
+
+      <ng-container *ngIf="!profile.isOwnidUser">
+        <input class="own-input" type="password" placeholder="Password" formControlName="password" readonly>
+        <div class="use-ownid">Never use a password again. <a href="#">Scan QR code with your phone.</a></div>
+      </ng-container>
+
+      <a *ngIf="profile.isOwnidUser" class="pass-for-ownid" href="#">
+        Managed By OwnID
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#0070f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 14l7-7m-4-1h5v5"/>
+          <path d="M9.273 6H6v12h12v-3"/>
+        </svg>
+      </a>
+    </form>
+
+    <div class="own-stroked-button close-button" (click)="onClick.emit()">Close</div>
+  </div>
+</div>

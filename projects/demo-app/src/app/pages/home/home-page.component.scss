@@ -18,6 +18,7 @@ h1 {
 .top-navigation {
   display: flex;
   align-items: center;
+  margin-right: 40px;
 }
 
 .top-nav-item {
@@ -26,19 +27,17 @@ h1 {
   font-weight: bold;
   padding: 12px 20px;
   cursor: pointer;
-  transition: background-color .3s ease;
+  transition: background-color .3s ease, color .3s ease-in-out;
   border-radius: 10px;
   text-decoration: none;
-  color: #111D29;
+
+  &:not(.own-button) {
+    color: #111D29;
+  }
 
   & + & {
     margin-left: 20px;
   }
-}
-
-.top-nav-item:hover {
-  background-color: #0070f2;
-  color: #fff;
 }
 
 .header {
@@ -158,17 +157,23 @@ h1 {
   .header {
     margin: 12px 12px 0;
     padding: 24px;
+    display: block;
   }
 
   .title {
     font-size: 35px;
     line-height: 45px;
+
+    br {
+      display: none;
+    }
   }
 
   .slogan {
     font-size: 18px;
     line-height: 20px;
-    padding: 0 25px 0 50px;
+    padding: 0;
+    margin-top: 16px;
   }
 
   .image {

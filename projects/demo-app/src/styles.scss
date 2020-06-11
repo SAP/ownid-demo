@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
+  color: #111D29;
 }
 
 .icon {
@@ -78,6 +79,43 @@ body {
   border-radius: 6px;
 
   margin: 16px 0;
+}
+
+.own-flat-button {
+  display: flex;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5B738B;
+  padding: 4px;
+  cursor: pointer;
+
+  margin: 16px 0;
+
+  svg {
+    margin-right: 4px;
+  }
+
+  path {
+    fill: #5B738B;
+  }
+}
+
+.own-stroked-button {
+  min-width: 100px;
+  height: 40px;
+  padding: 0 16px;
+
+  background: #FFFFFF;
+
+  border: 2px solid #EBF8FF;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 40px;
+
+  color: #0070F2;
+  cursor: pointer;
 }
 
 .own-nav-tabs {
@@ -171,6 +209,7 @@ ownid {
     display: block;
     height: 40px;
 
-    border: 1px solid #cccccc;
+    border: 2px solid #cccccc;
+    border-radius: 40px;
   }
 }

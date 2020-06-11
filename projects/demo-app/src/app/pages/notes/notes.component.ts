@@ -28,6 +28,8 @@ export class NotesComponent implements OnInit {
 
   showProfileTooltip = false;
 
+  showAccount = false;
+
   constructor(
     private actRoute: ActivatedRoute,
     private appStore: AppStore,
@@ -58,6 +60,7 @@ export class NotesComponent implements OnInit {
   }
 
   deleteNote(noteId: string) {
+    this.mobSidebarClosed = false;
     this.deleteNoteCommand.execute(noteId);
   }
 

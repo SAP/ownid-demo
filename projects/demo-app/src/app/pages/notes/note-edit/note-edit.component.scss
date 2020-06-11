@@ -10,11 +10,13 @@
   ::ng-deep {
     & > div {
       margin: 1em 0;
+      color: #111D29;
 
       &:first-child {
         font-size: 26px;
         line-height: 32px;
         font-weight: bold;
+        color: #223548;
       }
     }
   }

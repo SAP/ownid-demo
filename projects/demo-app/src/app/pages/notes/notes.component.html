@@ -7,12 +7,22 @@
            clickOutside
            (clickOutside)="showProfileTooltip = false"
            (click)="showProfileTooltip = !showProfileTooltip">
-        {{profile.name}} <div class="profile-arrow-icon"></div>
+        {{profile.name}}
+        <div class="profile-arrow-icon"></div>
         <div class="profile-tooltip"
              *ngIf="showProfileTooltip">
-          <div class="tooltip-link"><div class="profile-icon"></div>Account</div>
-          <div class="tooltip-link"><div class="help-icon"></div>Help</div>
-          <div class="tooltip-link" (click)="onLogout()"><div class="logout-icon"></div>Log out</div>
+          <div class="tooltip-link" (click)="openTooltip()">
+            <div class="profile-icon"></div>
+            Account
+          </div>
+          <div class="tooltip-link">
+            <div class="help-icon"></div>
+            Help
+          </div>
+          <div class="tooltip-link" (click)="onLogout()">
+            <div class="logout-icon"></div>
+            Log out
+          </div>
         </div>
       </div>
 
@@ -70,4 +80,8 @@
       <note-edit [note]="context.note"></note-edit>
     </div>
   </div>
+</ng-container>
+
+<ng-container *ngIf="profile$ | async as profile">
+  <account-popup [profile]="profile" (onClick)="showAccount = false" *ngIf="showAccount"></account-popup>
 </ng-container>
