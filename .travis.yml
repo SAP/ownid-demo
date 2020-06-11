@@ -50,7 +50,7 @@ script:
   - docker build -t ownid-client-app:latest .
 
   - yarn build:demo
-  - cd projects/demo-app && docker build -t ownid-demo-app:latest .
+  - cd projects/demo-app && docker build -t ownid-demo-app:latest . && cd ../..
 
 before_deploy:
   - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
