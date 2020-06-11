@@ -12,6 +12,8 @@ env:
   - secure: iBo7KW99OofackgKUVAVSMdTEz7jaxue/Gkjyofm7yVbJNDECCUsndLYQFn5lUvgL6eXY02EFLEDk/QyMbDPigXKf5z0rPlk6wbiomYst22PbOj+cbM2gi+cag8kyrMuNbJfpfjC1PG3JjgkmRxarnu7ru7+zbZbeGWaWmV2y/JungZSaMWTwbaiyEP0UQQ/Mf4QtS2SBgBdfqvnR4QdauIK+cA27CD8muNUx0jKV/4N3UgVWxAV0XCdQo5oyttNgbsJwaaDduWhuZ/iFRtSNhszaPMvYmXAGBbzjD5pE0KZwUlauUO0pYKZsDDscb+cRnscDbckwJVpSyVWd0iz9uTrPtrmUzY/Eqv7dbyp+9GqWODWi9721DmF5BHTVf+GqUYN3y6MLWffKPgtaoBdV0Fbp/4OK47CyzODmF/0DKnLl/cTQH6K9/cCgqWk0f5HgPSLi65byeWH59IAKsLpgXGwOLSNega9qu4oIu6uTFJ3McMmFaPCv6z9Jlvx8TmAdYfKPej+D+843On2JGQnqdUhtYpzS4BlB8p22C8BBA+cjemWtnkGsDUEDbqyTG9RU00VE0xCSnF7jc90KstiQ7sRQBh9j9U/+CoAY4rkw8f8pjsgH15KdFdeyw9Cp7Xl8r/Q80hwTa7Z3BGfv+TMbD2PhQ3FGBbBazOKOrndJo0=
   - REPOSITORY_URI_DEVELOP=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop
   - REPOSITORY_URI_STAGING=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging
+  - REPOSITORY_DEMO_URI_DEVELOP=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop
+  - REPOSITORY_DEMO_URI_STAGING=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging
   - IMAGE_TAG=$TRAVIS_COMMIT
 
 branches:
@@ -45,8 +47,10 @@ script:
   - yarn lint
   - yarn test:ci
   - yarn build
-  - docker --version
   - docker build -t ownid-client-app:latest .
+
+  - yarn build:demo
+  - cd projects/demo-app && docker build -t ownid-demo-app:latest .
 
 before_deploy:
   - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
@@ -57,10 +61,10 @@ before_deploy:
 
 deploy:
 - provider: script
-  script: sh scripts/deploy.sh $REPOSITORY_URI_DEVELOP $IMAGE_TAG dev
+  script: sh scripts/deploy.sh $REPOSITORY_URI_DEVELOP $REPOSITORY_DEMO_URI_DEVELOP $IMAGE_TAG dev
   on:
     branch: develop
 - provider: script
-  script: sh scripts/deploy.sh $REPOSITORY_URI_STAGING $IMAGE_TAG staging
+  script: sh scripts/deploy.sh $REPOSITORY_URI_STAGING $REPOSITORY_DEMO_URI_STAGING $IMAGE_TAG staging
   on:
     branch: master

@@ -108,7 +108,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist-demo-app",
+            "outputPath": "projects/demo-app/dist",
             "index": "projects/demo-app/src/index.html",
             "main": "projects/demo-app/src/main.ts",
             "polyfills": "projects/demo-app/src/polyfills.ts",
