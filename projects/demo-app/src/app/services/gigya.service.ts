@@ -13,7 +13,7 @@ export class GigyaService {
     // @ts-ignore
     window.gigya!.accounts.addEventHandlers({
       onLogin: () => this.ngZone.run(() => this.router.navigateByUrl('/notes'))
-    })
+    });
   }
 
   isLoggedIn() {
