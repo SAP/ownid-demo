@@ -6,7 +6,7 @@ import { IEnvironment } from '../../../../src/environments/i-environment';
 
 export const environment: IEnvironment = {
   production: false,
-  gigyaApiKey: '3_4dA7nagT-27tI2ZgZ080PZr_ahnMWgoX5Iv2I-PjM7AkT1aEac8zvz2zpj2V2tmX',
+  gigyaApiKey: '3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_',
 };
 
 /*
