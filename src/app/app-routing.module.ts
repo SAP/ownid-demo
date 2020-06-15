@@ -17,11 +17,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "login"
+    redirectTo: "account"
   },
   {
     path: "**",
-    redirectTo: "login"
+    redirectTo: "account"
   }
 ];
 

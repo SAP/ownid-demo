@@ -10,6 +10,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { GlobalErrorHandler } from "./infrastructure/global-error-handler";
 import { AppStore } from "./app.store";
+import {GigyaService} from "@services/gigya.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { AppStore } from "./app.store";
     MatIconModule
   ],
   providers: [
+    GigyaService,
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler
