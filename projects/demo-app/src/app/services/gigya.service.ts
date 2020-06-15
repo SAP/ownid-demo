@@ -83,6 +83,12 @@ export class GigyaService {
     window.gigya!.accounts.setAccountInfo({ data: { notes } })
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setData(data: any) {
+    // @ts-ignore
+    window.gigya!.accounts.setAccountInfo({ data })
+  }
+
   deleteAccount() {
     // @ts-ignore
     window.gigya!.accounts.getAccountInfo({

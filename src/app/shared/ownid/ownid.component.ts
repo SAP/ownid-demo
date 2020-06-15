@@ -21,6 +21,8 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   @Output() onRegister = new EventEmitter();
 
+  @Output() onLink = new EventEmitter();
+
   private ownidWidget: WidgetComponent | undefined;
 
   constructor(private elRef: ElementRef) {}
@@ -32,13 +34,26 @@ export class OwnidComponent implements OnInit, OnDestroy {
       URLPrefix: "/netcore3/ownid"
     });
 
-    // @ts-ignore-next-line
-    this.ownidWidget =  window.ownid!.render({
-      element: this.elRef.nativeElement,
-      type: this.type,
-      onLogin: this.onLogin.emit.bind(this.onLogin),
-      onRegister: this.onRegister.emit.bind(this.onRegister)
-    });
+    if (this.type === 'link') {
+      // @ts-ignore-next-line
+      this.ownidWidget = window.ownid!.renderLinkGigya({
+        element: this.elRef.nativeElement,
+        type: this.type,
+        onLogin: this.onLogin.emit.bind(this.onLogin),
+        onRegister: this.onRegister.emit.bind(this.onRegister),
+        onLink: this.onLink.emit.bind(this.onLink),
+      }, '3_4dA7nagT-27tI2ZgZ080PZr_ahnMWgoX5Iv2I-PjM7AkT1aEac8zvz2zpj2V2tmX');
+    }
+    else {
+      // @ts-ignore-next-line
+      this.ownidWidget = window.ownid!.render({
+        element: this.elRef.nativeElement,
+        type: this.type,
+        onLogin: this.onLogin.emit.bind(this.onLogin),
+        onRegister: this.onRegister.emit.bind(this.onRegister),
+        onLink: this.onLink.emit.bind(this.onLink),
+      });
+    }
   }
 
   ngOnDestroy() {

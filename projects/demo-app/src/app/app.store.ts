@@ -12,11 +12,12 @@ export interface INote {
 export interface IProfile {
   email: string;
   name: string;
-  isOwnidUser: boolean;
 }
 
 export class AppStore {
   readonly profile$ = new BehaviorSubject<IProfile>({} as IProfile);
 
   readonly notes$ = new BehaviorSubject<INote[]>([]);
+
+  readonly isOwnidUser$ = new BehaviorSubject<boolean>(false);
 }

@@ -20,7 +20,7 @@ describe("OwnidComponent", () => {
   });
 
   describe("ngOnInit", () => {
-    it("should call getChallengeCommand.execute", () => {
+    it("should call window.ownid.init", () => {
       const el = { nativeElement: { el: true } } as ElementRef;
       // @ts-ignore-next-line
       window.ownid = {
@@ -34,7 +34,27 @@ describe("OwnidComponent", () => {
 
       sut.ngOnInit();
       // @ts-ignore-next-line
-      expect(window.ownid!.init).toBeCalled();
+      expect(window.ownid.init).toBeCalled();
+      // @ts-ignore-next-line
+      expect(window.ownid.render).toBeCalled();
+    });
+
+    it("should call window.ownid!.init", () => {
+      const el = { nativeElement: { el: true } } as ElementRef;
+      // @ts-ignore-next-line
+      window.ownid = {
+        init: jest.fn(),
+        render: jest.fn(),
+        renderLinkGigya: jest.fn()
+      };
+
+      const sut = new OwnidComponent(el);
+
+      sut.type = "link";
+
+      sut.ngOnInit();
+      // @ts-ignore-next-line
+      expect(window.ownid!.renderLinkGigya).toBeCalled();
     });
   });
 

@@ -36,7 +36,7 @@ export class NotesComponent implements OnInit {
     private addNoteCommand: AddNoteCommand,
     private deleteNoteCommand: DeleteNoteCommand,
     private gigyaService: GigyaService,
-    getNotesCommand: GetNotesCommand,
+    private getNotesCommand: GetNotesCommand,
   ) {
     const noteId$ = this.actRoute.paramMap.pipe(
       filter((params) => !!params.get('id')),
@@ -48,11 +48,10 @@ export class NotesComponent implements OnInit {
     this.note$ = combineLatest(this.notes$, noteId$).pipe(
       map(([notes, noteId]) => notes.find(({id}) => id === noteId)),
     )
-
-    getNotesCommand.execute();
   }
 
   ngOnInit(): void {
+    this.getNotesCommand.execute();
   }
 
   addNote() {

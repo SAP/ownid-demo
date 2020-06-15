@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NotesComponent } from './notes.component';
 import { NotesRoutingModule } from './notes-routing.module';
 import { AppStore } from '../../app.store';
@@ -10,7 +11,7 @@ import { NoteEditComponent } from './note-edit/note-edit.component';
 import { ClickOutsideModule } from '../../shared/click-outside/click-outside.module';
 import { GetNotesCommand } from './commands/get-notes.command';
 import { AccountPopupComponent } from './account-popup/account-popup.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { OwnidModule } from '../../../../../../src/app/shared/ownid/ownid.module';
 
 @NgModule({
   declarations: [NotesComponent, NoteEditComponent, AccountPopupComponent],
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NotesRoutingModule,
     ClickOutsideModule,
     ReactiveFormsModule,
+    OwnidModule,
   ],
   providers: [
     AppStore,

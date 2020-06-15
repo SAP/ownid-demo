@@ -56,9 +56,37 @@
 
   text-decoration: none;
 }
-.use-ownid {
+
+.use-ownid-mob {
+  display: none;
+}
+
+.use-ownid-desktop {
   font-size: 11px;
   line-height: 16px;
 
   color: #223548;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.close-button {
+  margin-top: 16px;
+}
+
+@media (max-width: 599px) {
+  .popup-content {
+    width: calc(100% - 72px);
+  }
+
+  .use-ownid-mob {
+    display: block;
+  }
+
+  .use-ownid-desktop {
+    display: none;
+  }
 }
