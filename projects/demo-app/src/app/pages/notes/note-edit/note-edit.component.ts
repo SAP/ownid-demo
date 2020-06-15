@@ -25,7 +25,6 @@ export class NoteEditComponent implements OnChanges {
 
   saveNote(event: Event) {
     const element = event.target as Element;
-    console.log(element.innerHTML);
 
     element.childNodes.forEach(function (childElement) {
       if (childElement.nodeType === 3) {

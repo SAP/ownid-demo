@@ -206,10 +206,11 @@ ownid {
 
 @media (max-width: 599px) {
   ownid {
-    display: block;
     height: 40px;
 
-    border: 2px solid #cccccc;
-    border-radius: 40px;
+    &:not(:empty) {
+      border: 2px solid #cccccc;
+      border-radius: 40px;
+    }
   }
 }

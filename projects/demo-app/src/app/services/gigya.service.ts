@@ -94,7 +94,6 @@ export class GigyaService {
     window.gigya!.accounts.getAccountInfo({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback: (data: any) => {
-        console.log(data);
         // @ts-ignore
         window.gigya!.accounts.deleteAccount({UID: data.UID});
       }

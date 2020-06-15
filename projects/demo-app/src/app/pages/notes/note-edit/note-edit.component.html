@@ -1,5 +1,8 @@
 <div class="note-body-placeholder"
-     *ngIf="!note?.body">New Note...</div>
+     *ngIf="note?.body === ''">
+  New Note...
+</div>
+
 <div class="note-body"
      contenteditable
      (input)="saveNote($event)"
