@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { INote } from '../../../app.store';
 import { SaveNoteCommand } from '../commands/save-note.command';
 
@@ -12,15 +12,19 @@ export class NoteEditComponent implements OnChanges {
 
   @Input() note: INote | null = null;
 
-  noteBody: string | undefined;
-
   private timeoutId: NodeJS.Timeout | undefined;
 
-  constructor(private saveNoteCommand: SaveNoteCommand) {
+  @ViewChild('editor') editor: ElementRef | undefined;
+
+  constructor(
+    private saveNoteCommand: SaveNoteCommand,
+  ) {
   }
 
   ngOnChanges(): void {
-    this.noteBody = this.note?.body
+    if (this.editor) {
+      this.editor.nativeElement.innerHTML = this.note?.body || ''
+    }
   }
 
   saveNote(event: Event) {

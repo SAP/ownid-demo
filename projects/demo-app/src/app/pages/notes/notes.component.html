@@ -76,7 +76,7 @@
 
     </header>
 
-    <div class="note">
+    <div class="note" *ngIf="context.note">
       <note-edit [note]="context.note"></note-edit>
     </div>
   </div>
