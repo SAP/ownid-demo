@@ -51,7 +51,7 @@ else
     cd projects/demo-app/dist
     sed -i -r -e 's/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=3_O4QE0Kk7QstG4VGDPED5omrr8mgbTuf_Gim8V_Y19YDP75m_msuGtNGQz89X0KWP\"><\/script>/' index.html
     cat index.html
-    ls -las
+    cd ..
     docker build -t ownid-demo-app:latest . && cd ../..
 
 fi
