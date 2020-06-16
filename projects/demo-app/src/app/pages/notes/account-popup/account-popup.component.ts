@@ -43,9 +43,8 @@ export class AccountPopupComponent implements OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLink($event: any) {
     if ($event.status) {
-      this.store.isOwnidUser$.next(true);
-      this.gigyaService.setData({isOwnidUser: true});
-      this.onClick.emit();
+        this.gigyaService.setOwnidUser(true);
+        this.onClick.emit();
     }
   }
 }

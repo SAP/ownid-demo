@@ -57,7 +57,7 @@ export class GigyaService {
   logout() {
     // @ts-ignore
     window.gigya!.accounts.logout({
-      callback: () => this.ngZone.run(() => this.router.navigateByUrl("/"))
+      callback: () => this.ngZone.run(() => this.router.navigateByUrl("/login"))
     });
   }
 

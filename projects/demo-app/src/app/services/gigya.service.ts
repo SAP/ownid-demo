@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { INote } from '../app.store';
+import { AppStore, INote } from '../app.store';
 
 @Injectable()
 export class GigyaService {
@@ -9,6 +9,7 @@ export class GigyaService {
   constructor(
     private router: Router,
     private ngZone: NgZone,
+    private store: AppStore,
   ) {
     // @ts-ignore
     window.gigya!.accounts.addEventHandlers({
@@ -84,9 +85,12 @@ export class GigyaService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setData(data: any) {
+  setData(data: any, callback: () => void = () => {}) {
     // @ts-ignore
-    window.gigya!.accounts.setAccountInfo({ data })
+    window.gigya!.accounts.setAccountInfo({
+      data,
+      callback: () => this.ngZone.run(() => callback())
+    })
   }
 
   deleteAccount() {
@@ -95,8 +99,13 @@ export class GigyaService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback: (data: any) => {
         // @ts-ignore
-        window.gigya!.accounts.deleteAccount({UID: data.UID});
+        window.gigya!.accounts.deleteAccount({ UID: data.UID });
       }
     });
+  }
+
+  setOwnidUser(isOwnidUser: boolean, callback: () => void = () => {}) {
+    this.store.isOwnidUser$.next(isOwnidUser);
+    this.setData({ isOwnidUser }, callback)
   }
 }
