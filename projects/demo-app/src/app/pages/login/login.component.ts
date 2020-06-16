@@ -40,6 +40,6 @@ export class LoginComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLogin(statusRS: any) {
     document.cookie = `${statusRS.sessionInfo.cookieName}=${statusRS.sessionInfo.cookieValue}; path=/`;
-    this.router.navigateByUrl('/notes');
+    this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/notes'));
   }
 }
