@@ -54,6 +54,7 @@ else
     ls -las
     cd ..
     mv -f src/index-staging.html dist/index.html
+    cat dist/index.html
     docker build -t ownid-demo-app:latest . && cd ../..
 
 fi
