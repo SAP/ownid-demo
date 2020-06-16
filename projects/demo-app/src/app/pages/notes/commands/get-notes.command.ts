@@ -12,7 +12,8 @@ export class GetNotesCommand implements ICommand {
 
   execute() {
     this.gigyaService.getProfile((userData) => {
-      this.store.notes$.next(userData.data.notes || []);
+
+      this.store.notes$.next(userData.data?.notes || []);
 
       this.store.profile$.next({
         name: userData.profile.firstName,
