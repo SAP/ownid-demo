@@ -1,10 +1,16 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { IProfile } from "../../app.store";
-import { SetProfileCommand } from "./commands/set-profile.command";
+import {Router} from "@angular/router";
+
+export interface ISessionInfo {
+  cookieName: string;
+  cookieValue: string;
+}
 
 export interface IOwnidRs {
   status: boolean;
   identities: IProfile;
+  sessionInfo: ISessionInfo
 }
 
 @Component({
@@ -14,13 +20,10 @@ export interface IOwnidRs {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignPageComponent {
-  constructor(private setProfileCommand: SetProfileCommand) {}
-
-  onLogin(data: IOwnidRs): void {
-    this.setProfileCommand.execute(data.identities);
-  }
-
-  onRegister(data: IOwnidRs): void {
-    this.setProfileCommand.execute(data.identities);
+  constructor(private router: Router) {}
+  
+  onSuccess(data: IOwnidRs): void {
+    document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
+    this.router.navigateByUrl('/account');
   }
 }

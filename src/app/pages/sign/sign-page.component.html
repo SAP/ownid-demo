@@ -13,11 +13,11 @@
       <mat-card class="sign-section">
         <mat-tab-group mat-stretch-tabs animationDuration="0ms">
           <mat-tab label="Login">
-            <ownid type="login" (onLogin)="onLogin($event)"></ownid>
+            <ownid type="login" (onLogin)="onSuccess($event)"></ownid>
             <login-form></login-form>
           </mat-tab>
           <mat-tab label="Register">
-            <ownid type="register" (onRegister)="onRegister($event)"></ownid>
+            <ownid type="register" (onRegister)="onSuccess($event)"></ownid>
             <registration-form></registration-form>
           </mat-tab>
         </mat-tab-group>
