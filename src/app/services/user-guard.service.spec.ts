@@ -1,8 +1,8 @@
-import { Router } from '@angular/router';
-import { UserGuardService } from '@services/user-guard.service';
-import { AppStore, IProfile } from '../app.store';
+import { Router } from "@angular/router";
+import { UserGuardService } from "@services/user-guard.service";
+import { AppStore, IProfile } from "../app.store";
 
-describe('PersistentStorageService', () => {
+describe("PersistentStorageService", () => {
   let appStore: AppStore;
   let router: Router;
 
@@ -13,11 +13,11 @@ describe('PersistentStorageService', () => {
     router.navigateByUrl = jest.fn();
   });
 
-  describe('canActivate', () => {
-    it('should return true', () => {
+  describe("canActivate", () => {
+    it("should return true", () => {
       const sut = new UserGuardService(appStore, router);
       appStore.profile$.next({
-        email: 'asd@asd.asd',
+        email: "asd@asd.asd"
       } as IProfile);
 
       const res = sut.canActivate();
@@ -25,13 +25,13 @@ describe('PersistentStorageService', () => {
       expect(res).toBeTruthy();
     });
 
-    it('should return false and navigate to login page', () => {
+    it("should return false and navigate to login page", () => {
       const sut = new UserGuardService(appStore, router);
 
       const res = sut.canActivate();
 
       expect(res).toBeFalsy();
-      expect(router.navigateByUrl).toBeCalledWith('/login');
+      expect(router.navigateByUrl).toBeCalledWith("/login");
     });
   });
 });

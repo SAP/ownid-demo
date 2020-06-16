@@ -1,22 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+<p>
+  <span class="errors" *ngIf="errors">{{errors}}</span>
+</p>
 <p>
   <mat-form-field class="form-field">
     <mat-label>Enter your email</mat-label>
     <input
       matInput
       placeholder="pat@example.com"
-      [formControl]="email"
+      formControlName="email"
       required
     />
-    <mat-error *ngIf="email.hasError('required')"
+    <mat-error *ngIf="form.controls.email.hasError('required')"
       >You must enter a value</mat-error
     >
-    <mat-error *ngIf="email.hasError('email')">Not a valid email</mat-error>
+    <mat-error *ngIf="form.controls.email.hasError('email')">Not a valid email</mat-error>
   </mat-form-field>
 </p>
 <p>
   <mat-form-field class="form-field">
     <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" required />
+    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required />
     <button
       mat-icon-button
       matSuffix
@@ -29,8 +33,9 @@
   </mat-form-field>
 </p>
 <p>
-  <button mat-flat-button color="primary" class="form-field">Login</button>
+  <button type="submit" mat-flat-button color="primary" class="form-field">Login</button>
 </p>
 <p>
   <a href="#" class="forgot-link">Forgot Password?</a>
 </p>
+</form>

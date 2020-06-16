@@ -1,0 +1,31 @@
+<div class="container">
+  <a class="logo" routerLink="/"></a>
+
+  <div class="content">
+    <nav class="own-nav-tabs">
+      <a class="own-nav-link" routerLink="/login">Log in</a>
+      <a class="own-nav-link active" routerLink="/register">Create Account</a>
+    </nav>
+
+    <ownid type="register" (onRegister)="onRegister($event)"></ownid>
+
+    <div class="or">OR</div>
+
+    <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="errors" *ngIf="errors">{{errors}}</div>
+
+      <input class="own-input" type="text" placeholder="Full Name" formControlName="name">
+
+      <input class="own-input" type="email" placeholder="Email" formControlName="email">
+
+      <input class="own-input" type="password" placeholder="Password" formControlName="password">
+
+      <button class="own-button" type="submit">Create Account</button>
+    </form>
+
+    <div class="terms">By creating an account you agree to our <a class="own-link" routerLink="/terms">Terms of Service.</a></div>
+  </div>
+</div>
+
+

@@ -3,6 +3,7 @@
 exports[`OwnidComponent Snapshot check snapshot 1`] = `
 <ownid
   elRef={[Function ElementRef]}
+  onLink={[Function EventEmitter]}
   onLogin={[Function EventEmitter]}
   onRegister={[Function EventEmitter]}
   type="null"

@@ -1,0 +1,33 @@
+
+.note-body {
+  outline: none;
+}
+
+.note-body {
+  font-size: 16px;
+  line-height: 26px;
+
+  ::ng-deep {
+    & > div {
+      margin: 1em 0;
+      color: #111D29;
+
+      &:first-child {
+        font-size: 26px;
+        line-height: 32px;
+        font-weight: bold;
+        color: #223548;
+      }
+    }
+  }
+}
+.note-body-placeholder {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: bold;
+
+  color: #A9B4BE;
+
+  position: absolute;
+  z-index: -1;
+}

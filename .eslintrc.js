@@ -33,16 +33,11 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "error",
     "unicorn/prevent-abbreviations": "off",
     "jest/no-standalone-expect": "off",
-    "@typescript-eslint/interface-name-prefix": [
-      "error",
-      {
-        prefixWithI: "always"
-      }
-    ],
     "no-useless-constructor": "off",
     "@typescript-eslint/no-useless-constructor": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "unicorn/no-null":"off",
     "no-param-reassign": "off",
     "no-plusplus": "off"
   },
