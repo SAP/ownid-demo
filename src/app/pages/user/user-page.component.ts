@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component} from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { AppStore, IProfile } from "../../app.store";
+import {ChangeDetectionStrategy, Component, NgZone} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {AppStore, IProfile} from "../../app.store";
 import {SetProfileCommand} from "../sign/commands/set-profile.command";
 import {GigyaService} from "@services/gigya.service";
 
@@ -16,7 +16,8 @@ export class UserPageComponent {
 
   constructor(private store: AppStore, 
               private setProfileCommand: SetProfileCommand,
-              private gigyaService: GigyaService) {
+              private gigyaService: GigyaService,
+              private ngZone: NgZone) {
     this.profile$ = this.store.profile$;
     this.linked$ =  new BehaviorSubject<boolean>(false);
     
@@ -26,6 +27,6 @@ export class UserPageComponent {
   }
   
   onLink() {
-    this.linked$.next(true);
+    this.ngZone.run(() => this.linked$.next(true));
   }
 }

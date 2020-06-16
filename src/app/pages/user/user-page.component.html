@@ -3,7 +3,7 @@
     <div class="call-2-action" *ngIf="profile$ | async as profile">
       <h1 class="headline">Welcome {{ profile.firstName }}!</h1>
       <h2>
-       <ownid [type]="'link'" (onLink)="onLink()" *ngIf="linked$ | async"></ownid>
+       <ownid [type]="'link'" (onLink)="onLink()" *ngIf="!(linked$ | async)"></ownid>
         <mat-card *ngIf="linked$ | async">
           You are linked
         </mat-card>
