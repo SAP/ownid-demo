@@ -44,8 +44,8 @@ before_script:
   - if [ "$TRAVIS_BRANCH" = "master" ]; then sh scripts/load-dependencies.sh staging; fi
 
 script:
-  # - yarn lint
-  # - yarn test:ci
+  - yarn lint
+  - yarn test:ci
   - sh scripts/build.sh $TRAVIS_BRANCH
 
 before_deploy:

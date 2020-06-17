@@ -15,10 +15,11 @@ export class UserPageComponent {
 
   linked$: BehaviorSubject<boolean>;
 
-  constructor(private store: AppStore,
-              private setProfileCommand: SetProfileCommand,
-              private gigyaService: GigyaService,
-              private ngZone: NgZone,
+  constructor(
+    private store: AppStore,
+    private setProfileCommand: SetProfileCommand,
+    private gigyaService: GigyaService,
+    private ngZone: NgZone
   ) {
     this.profile$ = this.store.profile$;
     this.linked$ = new BehaviorSubject<boolean>(false);

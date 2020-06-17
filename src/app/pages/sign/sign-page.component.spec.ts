@@ -1,25 +1,21 @@
 import { async, TestBed } from "@angular/core/testing";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { RouterTestingModule } from "@angular/router/testing";
+import { Router } from "@angular/router";
 import { IOwnidRs, SignPageComponent } from "./sign-page.component";
-import { SetProfileCommand } from "./commands/set-profile.command";
 
 describe("SignPageComponent", () => {
-  let setProfileCommand: SetProfileCommand;
+  let router: Router;
 
   beforeEach(() => {
-    setProfileCommand = {} as SetProfileCommand;
-    setProfileCommand.execute = jest.fn();
+    router = {} as Router;
+    router.navigateByUrl = jest.fn();
   });
 
   describe("Snapshot", () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        providers: [
-          {
-            provide: SetProfileCommand,
-            useValue: setProfileCommand
-          }
-        ],
+        imports: [RouterTestingModule],
         declarations: [SignPageComponent],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -32,23 +28,13 @@ describe("SignPageComponent", () => {
     });
   });
 
-  describe("onLogin", () => {
-    it("should call set profile command", () => {
-      const sut = new SignPageComponent(setProfileCommand);
-
-      sut.onLogin({ identities: {} } as IOwnidRs);
-
-      expect(setProfileCommand.execute).toBeCalledWith({});
-    });
-  });
-
-  describe("onRegister", () => {
-    it("should call set profile command", () => {
-      const sut = new SignPageComponent(setProfileCommand);
-
-      sut.onRegister({ identities: {} } as IOwnidRs);
-
-      expect(setProfileCommand.execute).toBeCalledWith({});
+  describe("onSuccess", () => {
+    it("should redirect to /account and set cookies", () => {
+      const sut = new SignPageComponent(router);
+      const cookieName = "fakeName";
+      const cookieValue = "fakeValue";
+      sut.onSuccess({ sessionInfo: { cookieName, cookieValue } } as IOwnidRs);
+      expect(router.navigateByUrl).toBeCalledWith("/account");
     });
   });
 });

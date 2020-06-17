@@ -9,6 +9,7 @@ module.exports = {
     '!**/*.module.ts',
     '!**/*.store.ts',
     '!src/app/repositories/**',
+    '!src/app/services/gigya.service.ts',
   ],
   resolver: 'jest-resolver-tsconfig-paths',
   collectCoverage: true,
@@ -26,10 +27,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 10,
-      functions: 10,
-      lines: 10,
-      statements: 10,
+      branches: 90,
+      functions: 90,
+      lines: 90,
+      statements: 90,
     },
     // './src/app/services/': {
     //   branches: 100,
@@ -44,10 +45,10 @@ module.exports = {
     //   statements: 100,
     // },
     './src/app/pages/**/*.component.ts': {
-      branches: 10,
-      functions: 10,
-      lines: 10,
-      statements: 10,
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
     },
   },
 };
