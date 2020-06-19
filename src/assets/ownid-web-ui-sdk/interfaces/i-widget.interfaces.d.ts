@@ -1,6 +1,8 @@
+import { ILogger, LogLevel } from './i-logger.interfaces';
 export declare enum WidgetType {
     Register = "register",
-    Login = "login"
+    Login = "login",
+    Link = "link"
 }
 export declare enum Languages {
     en = "en",
@@ -13,6 +15,8 @@ export interface IInitConfig {
     URLPrefix?: string;
     language?: Languages;
     statusInterval?: number;
+    logger?: ILogger;
+    logLevel?: keyof typeof LogLevel;
 }
 export interface IWidgetConfig {
     element: HTMLElement;
@@ -25,6 +29,7 @@ export interface IWidgetConfig {
     statusInterval?: number;
     onLogin?: (response: object) => void;
     onRegister?: (response: object) => void;
+    onLink?: (response: object) => void;
 }
 export interface IPartialConfig {
     language?: Languages;
@@ -34,4 +39,5 @@ export interface IPartialConfig {
     statusInterval?: number;
     onLogin?: (response: object) => void;
     onRegister?: (response: object) => void;
+    onLink?: (response: object) => void;
 }

@@ -1,3 +1,4 @@
+import { ConsoleLogger } from '@services/console-logger.service';
 import {
   Component,
   OnInit,
@@ -33,7 +34,9 @@ export class OwnidComponent implements OnInit, OnDestroy {
     // @ts-ignore-next-line
     window.ownid!.init({
       statusInterval: 3000,
-      URLPrefix: "/netcore3/ownid"
+      URLPrefix: "/netcore3/ownid",
+      logger: new ConsoleLogger(),
+      logLevel: 'info',
     });
 
     if (this.type === "link") {

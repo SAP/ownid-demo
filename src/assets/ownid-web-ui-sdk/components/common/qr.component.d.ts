@@ -1,4 +1,4 @@
-import BaseCommonComponent from "./base-common.component";
+import BaseCommonComponent from './base-common.component';
 declare type QrOptions = {
     title: string;
     subtitle: string;
