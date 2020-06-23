@@ -31,7 +31,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     // @ts-ignore-next-line
     window.ownid!.init({
-      statusInterval: 3000,
+      statusInterval: 1000,
       URLPrefix: "/netcore3/ownid"
     });
 
