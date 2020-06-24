@@ -73,4 +73,14 @@ export class GigyaService {
       callback: (data: any) => this.ngZone.run(() => callback(data))
     });
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resetPassword(params: any, callback: (data: any) => void) {
+    // @ts-ignore
+    window.gigya!.accounts.resetPassword({
+      ...params,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callback: (data: any) => this.ngZone.run(() => callback(data)),
+    });
+  }
 }

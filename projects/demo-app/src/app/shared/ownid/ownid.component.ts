@@ -1,3 +1,4 @@
+import { ConsoleLogger } from '@services/console-logger.service';
 import {
   Component,
   OnInit,
@@ -5,7 +6,8 @@ import {
   Input,
   ElementRef,
   Output,
-  EventEmitter, OnDestroy
+  EventEmitter,
+  OnDestroy
 } from "@angular/core";
 import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/components/widget.component';
 import { environment } from '../../../environments/environment';
@@ -18,11 +20,15 @@ import { environment } from '../../../environments/environment';
 export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
 
+  @Input() data: unknown | null = null;
+
   @Output() onLogin = new EventEmitter();
 
   @Output() onRegister = new EventEmitter();
 
   @Output() onLink = new EventEmitter();
+
+  @Output() onRecover = new EventEmitter();
 
   private ownidWidget: WidgetComponent | undefined;
 
@@ -31,8 +37,10 @@ export class OwnidComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     // @ts-ignore-next-line
     window.ownid!.init({
-      statusInterval: 3000,
-      URLPrefix: "/netcore3/ownid"
+      statusInterval: 1000,
+      URLPrefix: "/netcore3/ownid",
+      logger: new ConsoleLogger(),
+      logLevel: 'info',
     });
 
     if (this.type === 'link') {
@@ -40,8 +48,6 @@ export class OwnidComponent implements OnInit, OnDestroy {
       this.ownidWidget = await window.ownid!.renderLinkGigya({
         element: this.elRef.nativeElement,
         type: this.type,
-        onLogin: this.onLogin.emit.bind(this.onLogin),
-        onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),
       }, environment.gigyaApiKey);
     } else {
@@ -49,9 +55,11 @@ export class OwnidComponent implements OnInit, OnDestroy {
       this.ownidWidget = window.ownid!.render({
         element: this.elRef.nativeElement,
         type: this.type,
+        data: this.data,
         onLogin: this.onLogin.emit.bind(this.onLogin),
         onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),
+        onRecover: this.onRecover.emit.bind(this.onRecover),
       });
     }
   }

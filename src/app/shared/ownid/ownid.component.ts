@@ -20,11 +20,15 @@ import { environment } from "../../../environments/environment";
 export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
 
+  @Input() data: unknown | null = null;
+
   @Output() onLogin = new EventEmitter();
 
   @Output() onRegister = new EventEmitter();
 
   @Output() onLink = new EventEmitter();
+
+  @Output() onRecover = new EventEmitter();
 
   private ownidWidget: WidgetComponent | undefined;
 
@@ -33,32 +37,29 @@ export class OwnidComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     // @ts-ignore-next-line
     window.ownid!.init({
-      statusInterval: 3000,
+      statusInterval: 1000,
       URLPrefix: "/netcore3/ownid",
       logger: new ConsoleLogger(),
       logLevel: 'info',
     });
 
-    if (this.type === "link") {
+    if (this.type === 'link') {
       // @ts-ignore-next-line
-      this.ownidWidget = await window.ownid!.renderLinkGigya(
-        {
-          element: this.elRef.nativeElement,
-          type: this.type,
-          onLogin: this.onLogin.emit.bind(this.onLogin),
-          onRegister: this.onRegister.emit.bind(this.onRegister),
-          onLink: this.onLink.emit.bind(this.onLink)
-        },
-        environment.gigyaApiKey
-      );
+      this.ownidWidget = await window.ownid!.renderLinkGigya({
+        element: this.elRef.nativeElement,
+        type: this.type,
+        onLink: this.onLink.emit.bind(this.onLink),
+      }, environment.gigyaApiKey);
     } else {
       // @ts-ignore-next-line
       this.ownidWidget = window.ownid!.render({
         element: this.elRef.nativeElement,
         type: this.type,
+        data: this.data,
         onLogin: this.onLogin.emit.bind(this.onLogin),
         onRegister: this.onRegister.emit.bind(this.onRegister),
-        onLink: this.onLink.emit.bind(this.onLink)
+        onLink: this.onLink.emit.bind(this.onLink),
+        onRecover: this.onRecover.emit.bind(this.onRecover),
       });
     }
   }

@@ -5,7 +5,6 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginFormComponent } from "./login-form.component";
-import { RegistrationFormComponent } from "../registration-form/registration-form.component";
 
 describe("LoginFormComponent", () => {
   let gigyaService: GigyaService;

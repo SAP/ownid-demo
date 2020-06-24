@@ -64,7 +64,7 @@ exports[`LoginFormComponent Snapshot check snapshot 1`] = `
     <p>
       <a
         class="forgot-link"
-        href="#"
+        routerlink="/forgot-password"
       >
         Forgot Password?
       </a>

@@ -9,6 +9,14 @@ const routes: Routes = [
       import("./pages/sign/sign-page.module").then((m) => m.SignPageModule)
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then((m) => m.ResetPasswordModule),
+  },
+  {
     path: "account",
     loadChildren: () =>
       import("./pages/user/user-page.module").then((m) => m.UserPageModule),
