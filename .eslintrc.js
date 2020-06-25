@@ -39,7 +39,9 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": "off",
     "unicorn/no-null":"off",
     "no-param-reassign": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   settings: {
     "import/parsers": {
