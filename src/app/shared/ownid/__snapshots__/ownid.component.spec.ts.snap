@@ -2,9 +2,11 @@
 
 exports[`OwnidComponent Snapshot check snapshot 1`] = `
 <ownid
+  data="null"
   elRef={[Function ElementRef]}
   onLink={[Function EventEmitter]}
   onLogin={[Function EventEmitter]}
+  onRecover={[Function EventEmitter]}
   onRegister={[Function EventEmitter]}
   type="null"
 >

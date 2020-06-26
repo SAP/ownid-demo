@@ -15,13 +15,12 @@ describe("SignPageComponent", () => {
   });
 
   describe("execute", () => {
-    it("should navigate to account page", () => {
-      const sut = new SetProfileCommand(router, appStore);
+    it("should update profile value", () => {
+      const sut = new SetProfileCommand(appStore);
 
       sut.execute({ email: "asd@asd.asd" } as IProfile);
 
       expect(appStore.profile$.next).toBeCalledWith({ email: "asd@asd.asd" });
-      expect(router.navigateByUrl).toBeCalledWith("/account");
     });
   });
 });

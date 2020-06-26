@@ -1,5 +1,5 @@
-import { ICommonComponent } from "./common/base-common.component";
-import { IWidgetConfig } from "../interfaces/i-widget.interfeces";
+import { ICommonComponent } from './common/base-common.component';
+import { IWidgetConfig } from '../interfaces/i-widget.interfaces';
 export declare abstract class BaseComponent {
     protected constructor(config: IWidgetConfig);
     private readonly parent;

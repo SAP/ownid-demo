@@ -121,6 +121,10 @@
       font-size: 14px;
       font-weight: normal;
 
+      &:after{
+        content: ' ';
+      }
+
       &:first-child {
         display: block;
         font-weight: bold;

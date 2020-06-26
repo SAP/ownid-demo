@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { Router } from "@angular/router";
 import { IProfile } from "../../app.store";
-import {Router} from "@angular/router";
 
 export interface ISessionInfo {
   cookieName: string;
@@ -10,7 +10,7 @@ export interface ISessionInfo {
 export interface IOwnidRs {
   status: boolean;
   identities: IProfile;
-  sessionInfo: ISessionInfo
+  sessionInfo: ISessionInfo;
 }
 
 @Component({
@@ -21,9 +21,9 @@ export interface IOwnidRs {
 })
 export class SignPageComponent {
   constructor(private router: Router) {}
-  
+
   onSuccess(data: IOwnidRs): void {
     document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
-    this.router.navigateByUrl('/account');
+    this.router.navigateByUrl("/account");
   }
 }

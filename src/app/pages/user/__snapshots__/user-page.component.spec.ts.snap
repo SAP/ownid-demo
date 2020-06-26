@@ -2,7 +2,11 @@
 
 exports[`UserPageComponent Snapshot check snapshot 1`] = `
 <app-user-page
+  gigyaService={[Function Object]}
+  linked$={[Function BehaviorSubject]}
+  ngZone={[Function NgZone]}
   profile$={[Function BehaviorSubject]}
+  setProfileCommand={[Function Object]}
   store={[Function AppStore]}
 >
   <section

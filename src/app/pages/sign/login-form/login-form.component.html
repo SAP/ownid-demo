@@ -11,9 +11,7 @@
       formControlName="email"
       required
     />
-    <mat-error *ngIf="form.controls.email.hasError('required')"
-      >You must enter a value</mat-error
-    >
+    <mat-error *ngIf="form.controls.email.hasError('required')">You must enter a value</mat-error>
     <mat-error *ngIf="form.controls.email.hasError('email')">Not a valid email</mat-error>
   </mat-form-field>
 </p>
@@ -36,6 +34,6 @@
   <button type="submit" mat-flat-button color="primary" class="form-field">Login</button>
 </p>
 <p>
-  <a href="#" class="forgot-link">Forgot Password?</a>
+  <a routerLink="/forgot-password" class="forgot-link">Forgot Password?</a>
 </p>
 </form>

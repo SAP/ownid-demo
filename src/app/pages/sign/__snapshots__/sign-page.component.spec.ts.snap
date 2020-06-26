@@ -2,7 +2,7 @@
 
 exports[`SignPageComponent Snapshot check snapshot 1`] = `
 <sign-page
-  setProfileCommand={[Function Object]}
+  router={[Function Router]}
 >
   <section
     class="sign-body"

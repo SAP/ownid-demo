@@ -1,4 +1,4 @@
-import { Languages } from '../interfaces/i-widget.interfeces';
+import { Languages } from '../interfaces/i-widget.interfaces';
 export default class ConfigurationService {
     static readonly URLPrefix = "/ownid";
     static readonly statusUrl = "/:context/status";

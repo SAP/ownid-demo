@@ -1,37 +1,46 @@
 import { Router } from "@angular/router";
 import { UserGuardService } from "@services/user-guard.service";
-import { AppStore, IProfile } from "../app.store";
+import { GigyaService } from "@services/gigya.service";
+import { Observable } from "rxjs";
 
 describe("PersistentStorageService", () => {
-  let appStore: AppStore;
   let router: Router;
+  let gigyaService: GigyaService;
 
   beforeEach(() => {
-    appStore = new AppStore();
-
     router = {} as Router;
     router.navigateByUrl = jest.fn();
+    gigyaService = {} as GigyaService;
   });
 
   describe("canActivate", () => {
     it("should return true", () => {
-      const sut = new UserGuardService(appStore, router);
-      appStore.profile$.next({
-        email: "asd@asd.asd"
-      } as IProfile);
+      return new Promise((resolve) => {
+        const sut = new UserGuardService(gigyaService, router);
+        gigyaService.isLoggedIn = jest.fn().mockReturnValue(
+          new Observable<boolean>((subscriber) => subscriber.next(true))
+        );
 
-      const res = sut.canActivate();
-
-      expect(res).toBeTruthy();
+        sut.canActivate().subscribe((canActivate) => {
+          expect(canActivate).toBeTruthy();
+          resolve();
+        });
+      });
     });
 
     it("should return false and navigate to login page", () => {
-      const sut = new UserGuardService(appStore, router);
+      return new Promise((resolve) => {
+        const sut = new UserGuardService(gigyaService, router);
+        gigyaService.isLoggedIn = jest.fn().mockReturnValue(
+          new Observable<boolean>((subscriber) => subscriber.next(false))
+        );
 
-      const res = sut.canActivate();
-
-      expect(res).toBeFalsy();
-      expect(router.navigateByUrl).toBeCalledWith("/login");
+        sut.canActivate().subscribe((canActivate) => {
+          expect(canActivate).toBeFalsy();
+          expect(router.navigateByUrl).toBeCalledWith("/login");
+          resolve();
+        });
+      });
     });
   });
 });

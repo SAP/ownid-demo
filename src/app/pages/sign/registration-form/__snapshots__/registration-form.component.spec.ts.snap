@@ -2,101 +2,115 @@
 
 exports[`RegistrationFormComponent Snapshot check snapshot 1`] = `
 <registration-form
-  email={[Function FormControl]}
-  firstName={[Function FormControl]}
+  errors="null"
+  form={[Function FormGroup]}
+  gigyaService={[Function Object]}
   hide={[Function Boolean]}
   hideConfirm={[Function Boolean]}
-  lastName={[Function FormControl]}
+  router={[Function Router]}
 >
-  <p>
-    <mat-form-field
-      class="form-field"
-    >
-      <mat-label>
-        First Name
-      </mat-label>
-      <input
-        matinput=""
-        placeholder="Joe"
-        required=""
-      />
-    </mat-form-field>
-  </p><p>
-    <mat-form-field
-      class="form-field"
-    >
-      <mat-label>
-        Last Name
-      </mat-label>
-      <input
-        matinput=""
-        placeholder="Speen"
-        required=""
-      />
-    </mat-form-field>
-  </p><p>
-    <mat-form-field
-      class="form-field"
-    >
-      <mat-label>
-        Enter your email
-      </mat-label>
-      <input
-        matinput=""
-        placeholder="pat@example.com"
-        required=""
-      />
+  <form>
+    <p>
       
-      
-    </mat-form-field>
-  </p><p>
-    <mat-form-field
-      class="form-field"
-    >
-      <mat-label>
-        Enter your password
-      </mat-label>
-      <input
-        matinput=""
-        required=""
-      />
-      <button
-        mat-icon-button=""
-        matsuffix=""
+    </p>
+    <p>
+      <mat-form-field
+        class="form-field"
       >
-        <mat-icon>
-          
-        </mat-icon>
-      </button>
-    </mat-form-field>
-  </p><p>
-    <mat-form-field
-      class="form-field"
-    >
-      <mat-label>
-        Confirm password
-      </mat-label>
-      <input
-        matinput=""
-        required=""
-      />
-      <button
-        mat-icon-button=""
-        matsuffix=""
+        <mat-label>
+          First Name
+        </mat-label>
+        <input
+          formcontrolname="firstName"
+          matinput=""
+          placeholder="Joe"
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field
+        class="form-field"
       >
-        <mat-icon>
-          
-        </mat-icon>
+        <mat-label>
+          Last Name
+        </mat-label>
+        <input
+          formcontrolname="lastName"
+          matinput=""
+          placeholder="Speen"
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field
+        class="form-field"
+      >
+        <mat-label>
+          Enter your email
+        </mat-label>
+        <input
+          formcontrolname="email"
+          matinput=""
+          placeholder="pat@example.com"
+          required=""
+        />
+        
+        
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field
+        class="form-field"
+      >
+        <mat-label>
+          Enter your password
+        </mat-label>
+        <input
+          formcontrolname="password"
+          matinput=""
+          required=""
+        />
+        <button
+          mat-icon-button=""
+          matsuffix=""
+        >
+          <mat-icon>
+            
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field
+        class="form-field"
+      >
+        <mat-label>
+          Confirm password
+        </mat-label>
+        <input
+          matinput=""
+          required=""
+        />
+        <button
+          mat-icon-button=""
+          matsuffix=""
+        >
+          <mat-icon>
+            
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </p>
+    <p>
+      <button
+        class="form-field"
+        color="primary"
+        mat-flat-button=""
+        type="submit"
+      >
+         Create Account 
       </button>
-    </mat-form-field>
-  </p><p>
-    <button
-      class="form-field"
-      color="primary"
-      mat-flat-button=""
-    >
-       Create Account 
-    </button>
-  </p>
+    </p>
+  </form>
 </registration-form>
 `;

@@ -31,8 +31,12 @@ export class GigyaService {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register({ email, password, firstName, lastName }: any, callback: (profile: any) => void) {
+  register(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    { email, password, firstName, lastName }: any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (profile: any) => void
+  ) {
     // @ts-ignore
     window.gigya!.accounts.initRegistration({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,8 +47,8 @@ export class GigyaService {
           email,
           password,
           profile: {
-            firstName: firstName,
-            lastName: lastName
+            firstName,
+            lastName
           },
           finalizeRegistration: true,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,6 +71,16 @@ export class GigyaService {
     window.gigya!.accounts.getAccountInfo({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback: (data: any) => this.ngZone.run(() => callback(data))
+    });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resetPassword(params: any, callback: (data: any) => void) {
+    // @ts-ignore
+    window.gigya!.accounts.resetPassword({
+      ...params,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callback: (data: any) => this.ngZone.run(() => callback(data)),
     });
   }
 }
