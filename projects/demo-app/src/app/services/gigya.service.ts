@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AppStore, INote } from '../app.store';
+import { AppStore, INote, IProfile } from '../app.store';
 
 @Injectable()
 export class GigyaService {
@@ -9,7 +9,7 @@ export class GigyaService {
   constructor(
     private router: Router,
     private ngZone: NgZone,
-    private store: AppStore,
+    private appStore: AppStore,
   ) {
     // @ts-ignore
     window.gigya!.accounts.addEventHandlers({
@@ -66,7 +66,10 @@ export class GigyaService {
   logout() {
     // @ts-ignore
     window.gigya!.accounts.logout({
-      callback: () => this.ngZone.run(() => this.router.navigateByUrl('/')),
+      callback: () => this.ngZone.run(() => {
+        this.appStore.profile$.next({} as IProfile);
+        this.router.navigateByUrl('/')
+      }),
     });
   }
 
@@ -105,7 +108,7 @@ export class GigyaService {
   }
 
   setOwnidUser(isOwnidUser: boolean, callback: () => void = () => {}) {
-    this.store.isOwnidUser$.next(isOwnidUser);
+    this.appStore.isOwnidUser$.next(isOwnidUser);
     this.setData({ isOwnidUser }, callback)
   }
 
