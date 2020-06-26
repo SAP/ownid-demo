@@ -135,7 +135,7 @@ spec:
               servicePort: use-annotation
           - path: /*
             backend:
-              serviceName: ownid-demo-app-2-service
+              serviceName: ownid-client-app-2-service
               servicePort: 80
 ---
 apiVersion: apps/v1
