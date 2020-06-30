@@ -9,7 +9,7 @@ export class NotesGuard implements CanActivate {
   constructor(
     public gigyaService: GigyaService,
     public router: Router,
-    ) {}
+  ) {}
 
   canActivate(): Observable<boolean> {
     return this.gigyaService.isLoggedIn().pipe(

@@ -11,6 +11,12 @@ export class GetNotesCommand implements ICommand {
   ) {}
 
   execute() {
+    const profile = this.store.profile$.getValue()
+
+    if (profile.email) {
+      return;
+    }
+
     this.gigyaService.getProfile((userData) => {
 
       this.store.notes$.next(userData.data?.notes || []);
