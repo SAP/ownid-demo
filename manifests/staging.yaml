@@ -65,7 +65,7 @@ spec:
               servicePort: use-annotation
           - path: /*
             backend:
-              serviceName: ownid-demo-app-service
+              serviceName: ownid-client-app-ingress
               servicePort: 80
 ---
 apiVersion: apps/v1
