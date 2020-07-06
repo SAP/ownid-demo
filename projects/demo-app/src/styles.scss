@@ -69,7 +69,7 @@ body {
 .own-button {
   font-size: 14px;
   line-height: 24px;
-  padding: 4px;
+  padding: 4px 20px;
 
   color: #FFFFFF;
   border: none;
@@ -123,7 +123,7 @@ body {
   border-bottom: 2px solid #F5F6F7;
   width: max-content;
 
-  margin-bottom: 24px;
+  margin: 0 auto 24px;
 }
 
 .own-nav-link {
@@ -209,8 +209,8 @@ ownid {
     height: 40px;
 
     &:not(:empty) {
-      border: 2px solid #cccccc;
-      border-radius: 40px;
+      border: 2px solid #111D29;
+      border-radius: 20px;
     }
   }
 }

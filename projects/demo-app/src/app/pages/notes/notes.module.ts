@@ -12,6 +12,7 @@ import { ClickOutsideModule } from '../../shared/click-outside/click-outside.mod
 import { GetNotesCommand } from './commands/get-notes.command';
 import { AccountPopupComponent } from './account-popup/account-popup.component';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
+import { GigyaService } from '../../services/gigya.service';
 
 @NgModule({
   declarations: [NotesComponent, NoteEditComponent, AccountPopupComponent],
@@ -28,6 +29,7 @@ import { OwnidModule } from '../../shared/ownid/ownid.module';
     SaveNoteCommand,
     DeleteNoteCommand,
     GetNotesCommand,
+    GigyaService,
   ]
 })
 export class NotesModule {}
