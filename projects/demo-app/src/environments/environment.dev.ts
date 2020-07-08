@@ -1,7 +1,8 @@
-import { IEnvironment } from '../../../../src/environments/i-environment';
+import { IEnvironment } from "../../../../src/environments/i-environment";
 
 export const environment: IEnvironment = {
   production: true,
-  gigyaApiKey: '3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_',
-
+  gigyaApiKey:
+    "3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_",
+  ownidURLPrefix: "/netcore3/ownid",
 };
