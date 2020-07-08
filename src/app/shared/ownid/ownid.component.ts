@@ -38,7 +38,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
     // @ts-ignore-next-line
     window.ownid!.init({
       statusInterval: 1000,
-      URLPrefix: "/netcore3/ownid",
+      URLPrefix: environment.ownidURLPrefix,
       logger: new ConsoleLogger(),
       logLevel: "info"
     });
