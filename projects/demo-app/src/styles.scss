@@ -202,11 +202,13 @@ body {
 ownid {
   display: block;
   height: 160px;
+  margin: 0 -20px;
 }
 
 @media (max-width: 599px) {
   ownid {
     height: 40px;
+    margin: 0;
 
     &:not(:empty) {
       border: 2px solid #111D29;

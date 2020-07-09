@@ -9,7 +9,7 @@ export interface ICommonComponent {
 }
 export default abstract class BaseCommonComponent<T> implements ICommonComponent {
     protected constructor(options: T);
-    private readonly ref;
+    protected readonly ref: HTMLElement;
     protected abstract render(options: T): HTMLElement;
     attachHandler(event: string, handler: () => void): void;
     appendToParent(parent: HTMLElement): void;

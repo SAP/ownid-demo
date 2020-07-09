@@ -4,14 +4,14 @@
     <div class="popup-title">Account</div>
 
     <form class="own-form" [formGroup]="form">
+      <ownid *ngIf="!(isOwnidUser$ | async)" type="link" (onLink)="onLink($event)"></ownid>
+
       <input class="own-input" type="text" placeholder="Full Name" formControlName="name" readonly>
 
       <input class="own-input" type="email" placeholder="Email" formControlName="email" readonly>
 
       <ng-container *ngIf="!(isOwnidUser$ | async) else ownidUser">
         <input class="own-input" type="password" placeholder="Password" formControlName="password" readonly>
-        <ownid class="use-ownid-mob" type="link" (onLink)="onLink($event)"></ownid>
-        <div class="use-ownid-desktop">Never use a password again. <a href="#">Scan QR code with your phone.</a></div>
       </ng-container>
 
       <ng-template #ownidUser>
