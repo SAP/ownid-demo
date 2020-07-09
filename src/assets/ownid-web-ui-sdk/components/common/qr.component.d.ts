@@ -5,11 +5,13 @@ declare type QrOptions = {
     href: string;
 };
 export default class Qr extends BaseCommonComponent<QrOptions> {
-    private wrapper;
     private qrCodeWrapper;
+    private securityCheckShown;
     constructor(options: QrOptions);
     protected render(options: QrOptions): HTMLElement;
     update(href: string): void;
+    showSecurityCheck(pin: number, yesCb: () => void, noCb: () => void): void;
+    showPending(): void;
     private generateQRCode;
 }
 export {};

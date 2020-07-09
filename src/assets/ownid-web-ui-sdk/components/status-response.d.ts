@@ -4,7 +4,10 @@ export default interface StatusResponse {
     payload: any;
 }
 export declare enum ContextStatus {
-    Started = 1,
-    Processing = 2,
-    Finished = 3
+    Initiated = 1,
+    Started = 2,
+    WaitingForApproval = 3,
+    Approved = 4,
+    Declined = 5,
+    Finished = 99
 }

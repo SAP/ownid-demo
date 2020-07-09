@@ -19,11 +19,14 @@ export default class WidgetComponent extends BaseComponent {
     private render;
     private getStartUrl;
     private getStatusUrl;
+    private getApproveUrl;
     private setCallStatus;
     private callStatus;
+    private sendApprove;
     private setRefreshLinkOrQR;
     private refreshLinkOrQR;
     destroy(): void;
     update(config: IPartialConfig): void;
     private attachPostMessagesHandler;
+    private reCreateWidget;
 }
