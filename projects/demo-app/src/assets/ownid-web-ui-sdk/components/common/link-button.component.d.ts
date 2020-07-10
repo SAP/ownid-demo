@@ -4,7 +4,7 @@ declare type LinkButtonOptions = {
     href: string;
 };
 export default class LinkButton extends BaseCommonComponent<LinkButtonOptions> {
-    private href;
+    private options;
     constructor(options: LinkButtonOptions);
     protected render(options: LinkButtonOptions): HTMLElement;
     update(href: string): void;
