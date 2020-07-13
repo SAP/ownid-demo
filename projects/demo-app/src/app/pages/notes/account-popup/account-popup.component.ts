@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChanges, Output} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AppStore, IProfile } from '../../../app.store';
@@ -39,14 +39,14 @@ export class AccountPopupComponent implements OnChanges {
   ngOnChanges() {
     this.form.get('name')?.setValue(this.profile?.name);
     this.form.get('email')?.setValue(this.profile?.email);
-   }
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLink($event: any) {
     if ($event.status) {
       this.ngZone.run(() => {
-          this.gigyaService.setOwnidUser(true);
-          this.onClick.emit();
+        this.gigyaService.setOwnidUser(true);
+        this.onClick.emit();
       });
     }
   }

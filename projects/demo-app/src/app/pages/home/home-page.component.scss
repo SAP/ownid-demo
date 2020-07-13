@@ -32,7 +32,7 @@ h1 {
   text-decoration: none;
 
   &:not(.own-button) {
-    color: #111D29;
+    color: #475E75;
   }
 
   & + & {
@@ -69,7 +69,6 @@ h1 {
   width: 986px;
   height: 592px;
   margin: -90px auto 0;
-  border-bottom: 1px solid #a9b4be;
   background-image: url('/assets/main.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -77,13 +76,26 @@ h1 {
 
 .items {
   display: flex;
+  justify-content: space-between;
   width: 986px;
-  margin: 80px auto 0;
+  margin: 50px auto 0;
+  color: #111D29;
 }
 
 .item {
-  width: calc(33.3% - 90px);
-  margin-right: 90px;
+  flex: 30% 0 0;
+
+  padding-top: 32px;
+
+  border-top: 4px solid #0070F2;
+}
+
+.item-2 {
+  border-color: #04ACA7;
+}
+
+.item-3 {
+  border-color: #64EDD2;;
 }
 
 .item-title {
@@ -132,90 +144,79 @@ h1 {
 }
 
 @media (max-width: 599px) {
+  .desktop {
+    display: none;
+  }
+
   .top-nav {
     display: block;
   }
 
   .logo {
-    margin: 0 auto;
+    margin: 16px 24px;
   }
 
   .top-navigation {
     display: flex;
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  .top-nav-item {
-    padding: 12px 8px;
-
-    & + & {
-      margin-left: 8px;
-    }
+    justify-content: space-around;
+    margin: 8px 0 0;
   }
 
   .header {
-    margin: 12px 12px 0;
-    padding: 24px;
+    margin: 12px 16px 0;
+    padding: 24px 24px 150px;
     display: block;
   }
 
   .title {
-    font-size: 35px;
-    line-height: 45px;
-
-    br {
-      display: none;
-    }
+    font-size: 58px;
+    line-height: 64px;
   }
 
   .slogan {
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 24px;
+    line-height: 32px;
     padding: 0;
-    margin-top: 16px;
+    margin-top: 24px;
   }
 
   .image {
     width: 300px;
-    height: 168px;
-    margin-top: -20px;
+    height: 425px;
+    margin-top: -120px;
+    background-image: url('/assets/main-mob.png');
   }
 
   .items {
     flex-direction: column;
-    align-items: center;
     width: 100%;
     margin: 0;
   }
 
   .item {
-    width: 80%;
-    margin: 24px 0 0;
-  }
-
-  .item-title {
-    font-size: 18px;
-    line-height: 20px;
-  }
-
-  .item-text {
-    font-size: 14px;
-    line-height: 20px;
+    margin: 36px 20px 0;
+    padding-top: 20px;
   }
 
   .footer {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 50px;
+    margin-left: 20px;
+  }
+
+  .footer-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-nav-item {
+    margin-top: 24px;
   }
 
   .copy {
-    margin: 16px auto 0;
+    margin: 48px 0 0;
     order: 2;
-  }
-
-  .footer-nav-item:last-child {
-    margin: 0;
   }
 }

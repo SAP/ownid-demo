@@ -8,7 +8,7 @@
 
 .container {
   max-width: 480px;
-  width: calc(100% - 32px);
+  width: calc(100% - 16px);
   margin: 48px auto 0;
 }
 
@@ -25,4 +25,17 @@
   text-align: center;
   font-size: 14px;
   line-height: 24px;
+}
+
+.forgot-link {
+  color: #354A5F;
+  text-decoration: none;
+
+  line-height: 24px;
+
+  margin: 12px 0 20px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

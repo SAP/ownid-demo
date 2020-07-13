@@ -38,10 +38,8 @@
       display: flex;
       justify-content: center;
       margin: 30px 15px 0;
-
-      a {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-      }
+      border: 2px solid #111d29;
+      border-radius: 20px;
     }
   }
 }
