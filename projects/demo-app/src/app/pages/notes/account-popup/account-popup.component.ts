@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChan
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AppStore, IProfile } from '../../../app.store';
-import { GigyaService } from '../../../services/gigya.service';
+// import { GigyaService } from '../../../services/gigya.service';
 
 @Component({
   selector: 'account-popup',
@@ -22,7 +22,7 @@ export class AccountPopupComponent implements OnChanges {
 
   constructor(
     formBuilder: FormBuilder,
-    private gigyaService: GigyaService,
+    // private gigyaService: GigyaService,
     private store: AppStore,
     private ngZone: NgZone
   ) {
