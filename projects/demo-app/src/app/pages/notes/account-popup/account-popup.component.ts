@@ -45,7 +45,7 @@ export class AccountPopupComponent implements OnChanges {
   onLink($event: any) {
     if ($event.status) {
       this.ngZone.run(() => {
-        this.gigyaService.setOwnidUser(true);
+        // this.gigyaService.setOwnidUser(true);
         this.onClick.emit();
       });
     }
