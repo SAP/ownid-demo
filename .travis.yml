@@ -43,7 +43,7 @@ jobs:
         REPOSITORY_URI=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop 
         REPOSITORY_DEMO_URI=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-demo-app-develop
         GIGYA_1=3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
-        GIGYA_2=3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
+        GIGYA_2=3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
         GIGYA_DEMO=3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
 
 before_install:
