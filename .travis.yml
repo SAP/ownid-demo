@@ -57,6 +57,7 @@ install:
 
 before_script:
   - aws s3 cp s3://ownid-sdks-bucket/$ENV/web-ui-sdk/latest src/assets/ownid-web-ui-sdk --recursive
+  - aws s3 cp s3://ownid-sdks-bucket/$ENV/web-ui-sdk/latest projects/demo-app/src/assets/ownid-web-ui-sdk --recursive
 
 script:
   - yarn lint
