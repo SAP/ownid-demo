@@ -1,0 +1,46 @@
+<div class="container">
+  <a class="logo" routerLink="/"></a>
+
+  <div class="content">
+    <nav class="own-nav-tabs">
+      <a class="own-nav-link" routerLink="/instant-login">Log in</a>
+      <a class="own-nav-link active" routerLink="/instant-register">Create Account</a>
+    </nav>
+
+    <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="errors" *ngIf="errors$ | async as errors">{{errors}}</div>
+
+      <input class="own-input" type="text" placeholder="First Name" formControlName="firstName">
+
+      <input class="own-input" type="email" placeholder="Email" formControlName="email">
+
+      <div class="check-label">
+        <input class="own-check" type="checkbox" formControlName="skipPassword" id="skip-password">
+
+        <label class="own-label" for="skip-password">
+          Skip password with OwnId
+        </label>
+      </div>
+
+      <ownid
+          *ngIf="form.value.skipPassword"
+          type="register"
+          [partial]="true"
+          (onRegister)="onRegister($event)"></ownid>
+
+      <input *ngIf="!form.value.skipPassword"
+             class="own-input"
+             type="password"
+             placeholder="Password"
+             formControlName="password">
+
+      <button class="own-button" type="submit">Create Account</button>
+    </form>
+
+    <div class="terms">By creating an account you agree to our <a class="own-link" routerLink="/terms">Terms of
+      Service.</a></div>
+  </div>
+</div>
+
+

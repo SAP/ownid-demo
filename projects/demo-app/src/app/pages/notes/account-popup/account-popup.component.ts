@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChan
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AppStore, IProfile } from '../../../app.store';
+
 // import { GigyaService } from '../../../services/gigya.service';
 
 @Component({
@@ -41,13 +42,10 @@ export class AccountPopupComponent implements OnChanges {
     this.form.get('email')?.setValue(this.profile?.email);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onLink($event: any) {
-    if ($event.status) {
-      this.ngZone.run(() => {
-        // this.gigyaService.setOwnidUser(true);
-        this.onClick.emit();
-      });
-    }
+  onLink() {
+    this.ngZone.run(() => {
+      // this.gigyaService.setOwnidUser(true);
+      this.onClick.emit();
+    });
   }
 }

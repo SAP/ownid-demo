@@ -1,0 +1,41 @@
+:host {
+  background: #E5E5E5;
+}
+
+.logo {
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 480px;
+  width: calc(100% - 16px);
+  margin: 48px auto 0;
+}
+
+.content {
+  margin-top: 40px;
+  padding: 24px 24px 32px;
+
+  background: #FFFFFF;
+  box-shadow: 0 8px 16px rgba(4, 172, 167, 0.16), 0 0 2px rgba(4, 172, 167, 0.16);
+  border-radius: 6px;
+}
+
+.text {
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.forgot-link {
+  color: #354A5F;
+  text-decoration: none;
+
+  line-height: 24px;
+
+  margin: 12px 0 20px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,30 @@
+<div class="container">
+  <a class="logo" routerLink="/"></a>
+
+  <div class="content">
+    <nav class="own-nav-tabs">
+      <a class="own-nav-link active" routerLink="/instant-login">Log in</a>
+      <a class="own-nav-link" routerLink="/instant-register">Create Account</a>
+    </nav>
+
+    <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="errors" *ngIf="errors">{{errors}}</div>
+
+      <input class="own-input" type="email" placeholder="Email" formControlName="email">
+
+      <input class="own-input" type="password" placeholder="Password" formControlName="password">
+
+      <ownid type="login" [partial]="true"  (onLogin)="onLogin($event)"></ownid>
+
+      <div class="text">
+        <a class="forgot-link" routerLink="/forgot-password">Forgot Password</a>
+      </div>
+
+      <button class="own-button" type="submit">Log In</button>
+
+    </form>
+  </div>
+</div>
+
+
