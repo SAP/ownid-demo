@@ -1,13 +1,13 @@
 import { ConsoleLogger } from '@services/console-logger.service';
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  Input,
+  Component,
   ElementRef,
-  Output,
   EventEmitter,
-  OnDestroy
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
 } from "@angular/core";
 import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/components/widget.component';
 import { environment } from '../../../environments/environment';
@@ -21,6 +21,10 @@ export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
 
   @Input() data: unknown | null = null;
+
+  @Input() partial = false;
+
+  @Input() toggleElement = null;
 
   @Output() onLogin = new EventEmitter();
 
@@ -56,6 +60,9 @@ export class OwnidComponent implements OnInit, OnDestroy {
         element: this.elRef.nativeElement,
         type: this.type,
         data: this.data,
+        partial: this.partial,
+        // eslint-disable-next-line unicorn/prefer-query-selector
+        toggleElement: this.toggleElement ? window.document.getElementById(this.toggleElement!): null,
         onLogin: this.onLogin.emit.bind(this.onLogin),
         onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),

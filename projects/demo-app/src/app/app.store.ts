@@ -20,4 +20,6 @@ export class AppStore {
   readonly notes$ = new BehaviorSubject<INote[]>([]);
 
   readonly isOwnidUser$ = new BehaviorSubject<boolean>(false);
+
+  readonly formError$ = new BehaviorSubject<string | null>(null);
 }

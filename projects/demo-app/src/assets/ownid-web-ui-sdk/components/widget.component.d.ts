@@ -13,6 +13,7 @@ export default class WidgetComponent extends BaseComponent {
     private link;
     private cacheExpiration;
     private contexts;
+    private finalResponse;
     constructor(config: IWidgetConfig, requestService: RequestService, disableDesktop?: boolean, disableMobile?: boolean);
     protected init(config: IWidgetConfig): Promise<void>;
     protected getContext(contextUrl: string, data?: any): Promise<void>;
@@ -29,4 +30,6 @@ export default class WidgetComponent extends BaseComponent {
     update(config: IPartialConfig): void;
     private attachPostMessagesHandler;
     private reCreateWidget;
+    private addInfoIcon;
+    private callOnSuccess;
 }

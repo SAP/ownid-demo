@@ -11,6 +11,11 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
+    path: 'instant-login',
+    loadChildren: () => import('./pages/instant-login/instant-login.module').then((m) => m.InstantLoginModule),
+    canActivate: [LoginGuard],
+  },
+  {
     path: 'forgot-password',
     loadChildren: () => import('./pages/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
     canActivate: [LoginGuard],
@@ -23,6 +28,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/registration/registration.module').then((m) => m.RegistrationModule),
+    canActivate: [LoginGuard],
+  },
+  {
+    path: 'instant-register',
+    loadChildren: () => import('./pages/instant-registration/instant-registration.module').then((m) => m.InstantRegistrationModule),
     canActivate: [LoginGuard],
   },
   {
