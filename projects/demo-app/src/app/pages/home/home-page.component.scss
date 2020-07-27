@@ -31,7 +31,7 @@ h1 {
   border-radius: 10px;
   text-decoration: none;
   margin: 16px 25px 0 130px;
-  width: 200px;
+  width: 220px;
 
   &:not(.own-button) {
     color: #475E75;
@@ -162,6 +162,7 @@ h1 {
 
   .top-nav-item {
     margin-left: 0;
+    width: calc(100% - 40px);
   }
 
   .header {

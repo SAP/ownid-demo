@@ -18,16 +18,18 @@
       <div class="check-label">
         <input class="own-check" type="checkbox" formControlName="skipPassword" id="skip-password">
 
-        <label class="own-label" for="skip-password">
-          Skip password with OwnId
+        <label class="own-label" for="skip-password" id="skip-password-label">
+          Skip password with OwnID
         </label>
       </div>
 
-      <ownid
-          *ngIf="form.value.skipPassword"
-          type="register"
-          [partial]="true"
-          (onRegister)="onRegister($event)"></ownid>
+      <ownid class="ownid"
+             [ngClass]="{show: form.value.skipPassword}"
+             type="register"
+             [partial]="true"
+             (onRegister)="onRegister($event)"
+             toggleElement="skip-password-label"
+      ></ownid>
 
       <input *ngIf="!form.value.skipPassword"
              class="own-input"
@@ -35,7 +37,7 @@
              placeholder="Password"
              formControlName="password">
 
-      <button class="own-button" type="submit">Create Account</button>
+      <button *ngIf="!form.value.skipPassword || !isMobile() && ((errors$ | async) || !formValid)" class="own-button" type="submit">Create Account</button>
     </form>
 
     <div class="terms">By creating an account you agree to our <a class="own-link" routerLink="/terms">Terms of

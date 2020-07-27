@@ -7,6 +7,10 @@
       <a class="own-nav-link" routerLink="/instant-register">Create Account</a>
     </nav>
 
+    <ownid type="login" [partial]="true"  (onLogin)="onLogin($event)"></ownid>
+
+    <div class="or">OR</div>
+
     <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
       <div class="errors" *ngIf="errors">{{errors}}</div>
@@ -14,8 +18,6 @@
       <input class="own-input" type="email" placeholder="Email" formControlName="email">
 
       <input class="own-input" type="password" placeholder="Password" formControlName="password">
-
-      <ownid type="login" [partial]="true"  (onLogin)="onLogin($event)"></ownid>
 
       <div class="text">
         <a class="forgot-link" routerLink="/forgot-password">Forgot Password</a>

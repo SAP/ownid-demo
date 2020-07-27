@@ -31,4 +31,14 @@
 
 .check-label {
   display: flex;
+  align-items: center;
+}
+
+.ownid {
+  display: none;
+  margin-bottom: 16px;
+}
+
+.show {
+  display: block;
 }
