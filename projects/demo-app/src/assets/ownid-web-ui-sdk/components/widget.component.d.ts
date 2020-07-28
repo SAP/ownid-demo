@@ -7,13 +7,16 @@ export default class WidgetComponent extends BaseComponent {
     protected disableDesktop: boolean;
     protected disableMobile: boolean;
     widgetReady: Promise<void>;
+    finalResponse: any | null;
+    returnError: string | null;
     private statusTimeout;
     private refreshLinkTimeout;
     private qr;
     private link;
     private cacheExpiration;
     private contexts;
-    private finalResponse;
+    private postMessagesHandlerAttached;
+    private webappResolver;
     constructor(config: IWidgetConfig, requestService: RequestService, disableDesktop?: boolean, disableMobile?: boolean);
     protected init(config: IWidgetConfig): Promise<void>;
     protected getContext(contextUrl: string, data?: any): Promise<void>;
@@ -32,4 +35,6 @@ export default class WidgetComponent extends BaseComponent {
     private reCreateWidget;
     private addInfoIcon;
     private callOnSuccess;
+    openWebapp(): Promise<unknown>;
+    private apiReply;
 }
