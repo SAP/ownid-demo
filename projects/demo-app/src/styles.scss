@@ -53,11 +53,11 @@ body {
 .own-check {
   display: none;
 
-  &:checked + .own-label {
+  &:checked + label {
     background-image: url('/assets/icons/box-checked.svg');
   }
 
-  & + .own-label {
+  & + label {
     font-size: 14px;
     line-height: 24px;
 

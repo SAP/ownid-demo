@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
 const REGISTER_URL = environment.ownidURLPrefix.replace('ownid', 'not-ownid/register');
 
 @Injectable()
-export class CustomRegistrationCommand implements IDataCommand<{ [key: string]: string }> {
+export class CustomRegistrationCommand implements IDataCommand<{ data: { [key: string]: string }, ownidWidget: unknown }> {
   constructor(
     private router: Router,
     private appStore: AppStore,
@@ -19,7 +19,7 @@ export class CustomRegistrationCommand implements IDataCommand<{ [key: string]: 
     private gigyaService: GigyaService,
   ) {}
 
-  execute(data: { [key: string]: string }) {
+  async execute({ data, ownidWidget }: { data: { [key: string]: string }, ownidWidget: unknown }) {
     this.appStore.formError$.next(null);
 
     if (!data.skipPassword) {
@@ -32,11 +32,15 @@ export class CustomRegistrationCommand implements IDataCommand<{ [key: string]: 
       return;
     }
 
-    if (data.skipPassword && !data.pubKey) {
-      this.appStore.formError$.next('You should scan QR code to proceed with registration');
+    // @ts-ignore
+    const ownidResponse = await window.ownid.getOwnIDPayload(ownidWidget);
+
+    if (ownidResponse.error) {
+      this.appStore.formError$.next(ownidResponse.message);
+      return;
     }
 
-    this.httpClient.post(REGISTER_URL, data)
+    this.httpClient.post(REGISTER_URL, { ...data, pubKey: ownidResponse.data.publicKey })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .subscribe((statusRS: any) => {
         document.cookie = `${ statusRS.sessionInfo.cookieName }=${ statusRS.sessionInfo.cookieValue }; path=/`;

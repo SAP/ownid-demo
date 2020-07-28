@@ -34,6 +34,8 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   @Output() onRecover = new EventEmitter();
 
+  @Output() ownidWidgetRef = new EventEmitter();
+
   private ownidWidget: WidgetComponent | undefined;
 
   constructor(private elRef: ElementRef) {}
@@ -69,6 +71,8 @@ export class OwnidComponent implements OnInit, OnDestroy {
         onRecover: this.onRecover.emit.bind(this.onRecover),
       });
     }
+
+    this.ownidWidgetRef.emit(this.ownidWidget);
   }
 
   ngOnDestroy() {

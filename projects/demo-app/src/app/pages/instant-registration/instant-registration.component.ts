@@ -15,9 +15,7 @@ export class InstantRegistrationComponent {
 
   errors$: Observable<string | null>;
 
-  formValid = true;
-
-  private pubKey = '';
+  private ownidWidget: unknown | null = null;
 
   constructor(
     formBuilder: FormBuilder,
@@ -35,22 +33,14 @@ export class InstantRegistrationComponent {
   }
 
   onSubmit() {
-    this.formValid = this.form.valid;
-    if (this.form.valid) {
-
-      this.customRegistrationCommand.execute({ ...this.form.value, pubKey: this.pubKey })
+    if (this.form.valid && this.ownidWidget) {
+      this.customRegistrationCommand.execute({ data: this.form.value, ownidWidget: this.ownidWidget })
     }
 
     Object.values(this.form.controls).forEach((field: AbstractControl) => {
       field.setValue(field.value);
       field.markAsTouched();
     });
-  }
-
-  onRegister(statusRS: { publicKey: string }) {
-    this.pubKey = statusRS.publicKey;
-
-    this.onSubmit();
   }
 
   isMobile(): boolean {
@@ -64,4 +54,7 @@ export class InstantRegistrationComponent {
     );
   }
 
+  onOwnIDWidgetReady(ownidWidget: unknown) {
+    this.ownidWidget = ownidWidget;
+  }
 }
