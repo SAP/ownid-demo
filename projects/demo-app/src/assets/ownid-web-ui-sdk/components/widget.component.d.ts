@@ -31,6 +31,7 @@ export default class WidgetComponent extends BaseComponent {
     private refreshLinkOrQR;
     destroy(): void;
     update(config: IPartialConfig): void;
+    private onMessage;
     private attachPostMessagesHandler;
     private reCreateWidget;
     private addInfoIcon;

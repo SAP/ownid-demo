@@ -7,5 +7,6 @@ export default class OwnIDUiSdk {
     init(config?: IInitConfig): void;
     render(config: IWidgetConfig): WidgetComponent | null;
     getOwnIDPayload(widget: WidgetComponent): Promise<unknown>;
+    generateOwnIDPassword(length: number): string;
     renderLinkGigya(config: IWidgetConfig, apiKey: string): Promise<GigyaLinkWidgetComponent | null>;
 }
