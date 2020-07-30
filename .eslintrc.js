@@ -7,7 +7,7 @@ module.exports = {
     "eslint-comments",
     "jest",
     "promise",
-    "unicorn"
+    "unicorn",
   ],
   extends: [
     "airbnb-typescript/base",
@@ -17,15 +17,21 @@ module.exports = {
     "plugin:promise/recommended",
     "plugin:unicorn/recommended",
     "prettier",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
   ],
   env: {
     node: true,
     browser: true,
-    jest: true
+    jest: true,
   },
   parserOptions: {
-    project: "./tsconfig.json"
+    project: [
+      "./tsconfig.app.json",
+      "./tsconfig.spec.json",
+      "tsconfig.json",
+      "./projects/demo-app/tsconfig.app.json",
+      "./projects/demo-app/tsconfig.spec.json",
+    ],
   },
   rules: {
     "class-methods-use-this": "off",
@@ -37,26 +43,29 @@ module.exports = {
     "@typescript-eslint/no-useless-constructor": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/ban-ts-comment": "off",
-    "unicorn/no-null":"off",
+    "unicorn/no-null": "off",
     "no-param-reassign": "off",
     "no-plusplus": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
   settings: {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts"]
+      "@typescript-eslint/parser": [".ts"],
     },
     "import/resolver": {
       // use <root>/tsconfig.json
       typescript: {
-        alwaysTryTypes: true // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+        alwaysTryTypes: true, // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
       },
 
       // use <root>/path/to/folder/tsconfig.json
       typescript: {
-        directory: "./tsconfig.json"
-      }
-    }
-  }
+        project: [
+          "./tsconfig.app.json",
+          "./projects/demo-app/tsconfig.app.json",
+        ],
+      },
+    },
+  },
 };

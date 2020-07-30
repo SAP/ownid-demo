@@ -1,6 +1,6 @@
-import { Injectable, NgZone } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Injectable, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class GigyaService {
@@ -13,9 +13,9 @@ export class GigyaService {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         callback: (data: any) =>
           this.ngZone.run(() => {
-            observer.next(data.status === "OK");
+            observer.next(data.status === 'OK');
             observer.complete();
-          })
+          }),
       });
     });
   }
@@ -27,7 +27,7 @@ export class GigyaService {
       loginID: email,
       password,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callback: (data: any) => this.ngZone.run(() => callback(data))
+      callback: (data: any) => this.ngZone.run(() => callback(data)),
     });
   }
 
@@ -35,7 +35,7 @@ export class GigyaService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { email, password, firstName, lastName }: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    callback: (profile: any) => void
+    callback: (profile: any) => void,
   ) {
     // @ts-ignore
     window.gigya!.accounts.initRegistration({
@@ -48,20 +48,20 @@ export class GigyaService {
           password,
           profile: {
             firstName,
-            lastName
+            lastName,
           },
           finalizeRegistration: true,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          callback: (data: any) => this.ngZone.run(() => callback(data))
+          callback: (data: any) => this.ngZone.run(() => callback(data)),
         });
-      }
+      },
     });
   }
 
   logout() {
     // @ts-ignore
     window.gigya!.accounts.logout({
-      callback: () => this.ngZone.run(() => this.router.navigateByUrl("/login"))
+      callback: () => this.ngZone.run(() => this.router.navigateByUrl('/login')),
     });
   }
 
@@ -70,7 +70,7 @@ export class GigyaService {
     // @ts-ignore
     window.gigya!.accounts.getAccountInfo({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callback: (data: any) => this.ngZone.run(() => callback(data))
+      callback: (data: any) => this.ngZone.run(() => callback(data)),
     });
   }
 
@@ -80,7 +80,7 @@ export class GigyaService {
     window.gigya!.accounts.resetPassword({
       ...params,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callback: (data: any) => this.ngZone.run(() => callback(data))
+      callback: (data: any) => this.ngZone.run(() => callback(data)),
     });
   }
 }

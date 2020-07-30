@@ -1,8 +1,8 @@
-import { Router } from "@angular/router";
-import { AppStore, IProfile } from "../../../app.store";
-import { SetProfileCommand } from "./set-profile.command";
+import { Router } from '@angular/router';
+import { AppStore, IProfile } from '../../../app.store';
+import { SetProfileCommand } from './set-profile.command';
 
-describe("SignPageComponent", () => {
+describe('SignPageComponent', () => {
   let appStore: AppStore;
   let router: Router;
 
@@ -14,13 +14,13 @@ describe("SignPageComponent", () => {
     router.navigateByUrl = jest.fn();
   });
 
-  describe("execute", () => {
-    it("should update profile value", () => {
+  describe('execute', () => {
+    it('should update profile value', () => {
       const sut = new SetProfileCommand(appStore);
 
-      sut.execute({ email: "asd@asd.asd" } as IProfile);
+      sut.execute({ email: 'asd@asd.asd' } as IProfile);
 
-      expect(appStore.profile$.next).toBeCalledWith({ email: "asd@asd.asd" });
+      expect(appStore.profile$.next).toBeCalledWith({ email: 'asd@asd.asd' });
     });
   });
 });

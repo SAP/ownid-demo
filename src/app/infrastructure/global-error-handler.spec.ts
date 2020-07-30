@@ -1,8 +1,8 @@
-import { GlobalErrorHandler } from "./global-error-handler";
+import { GlobalErrorHandler } from './global-error-handler';
 
-describe("GlobalErrorHandler", () => {
-  describe("handleError", () => {
-    test("calls console.error", () => {
+describe('GlobalErrorHandler', () => {
+  describe('handleError', () => {
+    test('calls console.error', () => {
       // eslint-disable-next-line no-console
       console.error = jest.fn();
       const err = {} as Error;

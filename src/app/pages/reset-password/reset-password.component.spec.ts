@@ -1,14 +1,14 @@
-import { async, TestBed } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { RouterTestingModule } from "@angular/router/testing";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { FormBuilder } from "@angular/forms";
-import { of } from "rxjs";
+import { async, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { of } from 'rxjs';
 
-import { GigyaService } from "../../services/gigya.service";
-import { ResetPasswordComponent } from "./reset-password.component";
+import { GigyaService } from '../../services/gigya.service';
+import { ResetPasswordComponent } from './reset-password.component';
 
-describe("ResetPasswordComponent", () => {
+describe('ResetPasswordComponent', () => {
   let actRoute: ActivatedRoute;
   let fb: FormBuilder;
   let gigyaService: GigyaService;
@@ -17,138 +17,105 @@ describe("ResetPasswordComponent", () => {
   beforeEach(() => {
     actRoute = {
       queryParamMap: of({
-        get: () => "pwrt"
-      } as Params)
+        get: () => 'pwrt',
+      } as Params),
     } as ActivatedRoute;
 
     fb = {} as FormBuilder;
     fb.group = jest.fn().mockReturnValue({ valid: true, value: {} });
 
     gigyaService = {} as GigyaService;
-    gigyaService.resetPassword = jest
-      .fn()
-      .mockImplementation(
-        (params: never, callBack: (data: unknown) => void) => {
-          callBack({ status: "OK" });
-        }
-      );
+    gigyaService.resetPassword = jest.fn().mockImplementation((params: never, callBack: (data: unknown) => void) => {
+      callBack({ status: 'OK' });
+    });
 
     router = {} as Router;
     router.navigateByUrl = jest.fn();
   });
 
-  describe("Snapshot", () => {
+  describe('Snapshot', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
         providers: [
           {
             provide: FormBuilder,
-            useValue: fb
+            useValue: fb,
           },
           {
             provide: GigyaService,
-            useValue: gigyaService
+            useValue: gigyaService,
           },
           {
             provide: ActivatedRoute,
-            useValue: actRoute
-          }
+            useValue: actRoute,
+          },
         ],
         declarations: [ResetPasswordComponent],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     }));
 
-    test("check snapshot", () => {
+    test('check snapshot', () => {
       const fixture = TestBed.createComponent(ResetPasswordComponent);
 
       expect(fixture).toMatchSnapshot();
     });
   });
 
-  describe("controller", () => {
-    it("should set pwrt$", () => {
+  describe('controller', () => {
+    it('should set pwrt$', () => {
       return new Promise((resolve) => {
-        const sut = new ResetPasswordComponent(
-          actRoute,
-          fb,
-          gigyaService,
-          router
-        );
+        const sut = new ResetPasswordComponent(actRoute, fb, gigyaService, router);
 
         sut.pwrt$.subscribe((val) => {
-          expect(val).toEqual("pwrt");
+          expect(val).toEqual('pwrt');
           resolve();
         });
       });
     });
   });
 
-  describe("onSubmit", () => {
-    it("should redirect to /login", () => {
-      const sut = new ResetPasswordComponent(
-        actRoute,
-        fb,
-        gigyaService,
-        router
-      );
+  describe('onSubmit', () => {
+    it('should redirect to /login', () => {
+      const sut = new ResetPasswordComponent(actRoute, fb, gigyaService, router);
 
-      sut.onSubmit("token");
+      sut.onSubmit('token');
 
-      expect(router.navigateByUrl).toBeCalledWith("/login");
+      expect(router.navigateByUrl).toBeCalledWith('/login');
     });
 
-    it("should not redirect to /login on gigya error", () => {
-      const sut = new ResetPasswordComponent(
-        actRoute,
-        fb,
-        gigyaService,
-        router
-      );
+    it('should not redirect to /login on gigya error', () => {
+      const sut = new ResetPasswordComponent(actRoute, fb, gigyaService, router);
 
-      gigyaService.resetPassword = jest
-        .fn()
-        .mockImplementation(
-          (params: never, callBack: (data: unknown) => void) => {
-            callBack({ status: "FAIL", errorDetails: { errors: [true] } });
-          }
-        );
+      gigyaService.resetPassword = jest.fn().mockImplementation((params: never, callBack: (data: unknown) => void) => {
+        callBack({ status: 'FAIL', errorDetails: { errors: [true] } });
+      });
 
-      sut.onSubmit("token");
+      sut.onSubmit('token');
 
       expect(sut.errors).toEqual({ errors: [true] });
-      expect(router.navigateByUrl).not.toBeCalledWith("/login");
+      expect(router.navigateByUrl).not.toBeCalledWith('/login');
     });
 
-    it("should not redirect to /login when form is invalid", () => {
+    it('should not redirect to /login when form is invalid', () => {
       fb.group = jest.fn().mockReturnValue({ valid: false });
 
-      const sut = new ResetPasswordComponent(
-        actRoute,
-        fb,
-        gigyaService,
-        router
-      );
+      const sut = new ResetPasswordComponent(actRoute, fb, gigyaService, router);
 
-      sut.onSubmit("token");
+      sut.onSubmit('token');
 
-      expect(router.navigateByUrl).not.toBeCalledWith("/login");
+      expect(router.navigateByUrl).not.toBeCalledWith('/login');
     });
   });
 
-  describe("onRecover", () => {
-    it("should redirect to /login", () => {
-      const sut = new ResetPasswordComponent(
-        actRoute,
-        fb,
-        gigyaService,
-        router
-      );
+  describe('onRecover', () => {
+    it('should redirect to /login', () => {
+      const sut = new ResetPasswordComponent(actRoute, fb, gigyaService, router);
 
       sut.onRecover({});
 
-      expect(router.navigateByUrl).toBeCalledWith("/login");
+      expect(router.navigateByUrl).toBeCalledWith('/login');
     });
   });
 });

@@ -1,4 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
 
 export interface INote {
   characters: number;
@@ -14,6 +15,7 @@ export interface IProfile {
   name: string;
 }
 
+@Injectable()
 export class AppStore {
   readonly profile$ = new BehaviorSubject<IProfile>({} as IProfile);
 
