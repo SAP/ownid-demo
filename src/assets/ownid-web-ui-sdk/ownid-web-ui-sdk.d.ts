@@ -1,6 +1,6 @@
 import WidgetComponent from './components/widget.component';
 import { IInitConfig, IWidgetConfig } from './interfaces/i-widget.interfaces';
-import GigyaLinkWidgetComponent from "./components/gigya-link-widget.component";
+import GigyaLinkWidgetComponent from './components/gigya-link-widget.component';
 export default class OwnIDUiSdk {
     config: IInitConfig;
     isGigyaAdded: boolean;

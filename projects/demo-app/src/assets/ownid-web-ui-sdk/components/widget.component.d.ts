@@ -16,6 +16,7 @@ export default class WidgetComponent extends BaseComponent {
     private cacheExpiration;
     private contexts;
     private postMessagesHandlerAttached;
+    private isDestroyed;
     private webappResolver;
     constructor(config: IWidgetConfig, requestService: RequestService, disableDesktop?: boolean, disableMobile?: boolean);
     protected init(config: IWidgetConfig): Promise<void>;
