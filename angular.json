@@ -23,6 +23,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "crossOrigin": "anonymous",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
@@ -145,6 +146,7 @@
             "main": "projects/demo-app/src/main.ts",
             "polyfills": "projects/demo-app/src/polyfills.ts",
             "tsConfig": "projects/demo-app/tsconfig.app.json",
+            "crossOrigin": "anonymous",
             "aot": true,
             "assets": [
               "projects/demo-app/src/favicon.ico",
