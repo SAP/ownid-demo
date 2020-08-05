@@ -194,11 +194,27 @@
                 }
               ]
             },
+            "staging2": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.staging2.ts"
+                }
+              ]
+            },
             "dev": {
               "fileReplacements": [
                 {
                   "replace": "projects/demo-app/src/environments/environment.ts",
                   "with": "projects/demo-app/src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "dev2": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.dev2.ts"
                 }
               ]
             }
