@@ -13,6 +13,7 @@ export default class WidgetComponent extends BaseComponent {
     private refreshLinkTimeout;
     private qr;
     private link;
+    private linked;
     private cacheExpiration;
     private contexts;
     private postMessagesHandlerAttached;

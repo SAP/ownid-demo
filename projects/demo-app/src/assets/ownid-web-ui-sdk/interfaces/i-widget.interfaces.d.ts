@@ -31,10 +31,10 @@ export interface IWidgetConfig {
     statusInterval?: number;
     partial?: boolean;
     toggleElement?: HTMLElement;
-    onLogin?: (response: object) => void;
-    onRegister?: (response: object) => void;
-    onLink?: (response: object) => void;
-    onRecover?: (response: object) => void;
+    onLogin?: (response: unknown) => void;
+    onRegister?: (response: unknown) => void;
+    onLink?: (response: unknown) => void;
+    onRecover?: (response: unknown) => void;
 }
 export interface IPartialConfig {
     language?: Languages;
@@ -43,8 +43,8 @@ export interface IPartialConfig {
     desktopTitle?: string;
     desktopSubtitle?: string;
     statusInterval?: number;
-    onLogin?: (response: object) => void;
-    onRegister?: (response: object) => void;
-    onLink?: (response: object) => void;
-    onRecover?: (response: object) => void;
+    onLogin?: (response: unknown) => void;
+    onRegister?: (response: unknown) => void;
+    onLink?: (response: unknown) => void;
+    onRecover?: (response: unknown) => void;
 }

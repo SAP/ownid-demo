@@ -207,18 +207,15 @@ body {
 
 ownid {
   display: block;
-  min-height: 160px;
   margin: 0 -20px;
 }
 
 @media (max-width: 599px) {
   ownid {
-    min-height: 40px;
     margin: 0;
 
-    &:not(:empty) {
-      border: 2px solid #111D29;
-      border-radius: 20px;
+    &:not(:empty) button  {
+      border: 2px solid #111D29 !important;
     }
   }
 }
