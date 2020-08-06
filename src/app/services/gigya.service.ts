@@ -33,7 +33,7 @@ export class GigyaService {
 
   register(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    { email, password, firstName, lastName }: any,
+    { email, password, firstName, lastName, data }: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     callback: (profile: any) => void,
   ) {
@@ -50,9 +50,10 @@ export class GigyaService {
             firstName,
             lastName,
           },
+          data,
           finalizeRegistration: true,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          callback: (data: any) => this.ngZone.run(() => callback(data)),
+          callback: (res: any) => this.ngZone.run(() => callback(res)),
         });
       },
     });
