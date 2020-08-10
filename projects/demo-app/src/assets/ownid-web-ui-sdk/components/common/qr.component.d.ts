@@ -3,8 +3,11 @@ declare type QrOptions = {
     title: string;
     subtitle: string;
     href: string;
+    type: string;
+    lang: string;
 };
 export default class Qr extends BaseCommonComponent<QrOptions> {
+    private options;
     private qrCodeWrapper;
     private securityCheckShown;
     private spendingShown;
@@ -16,5 +19,6 @@ export default class Qr extends BaseCommonComponent<QrOptions> {
     showDone(): void;
     private generateQRCode;
     private addOwnIDStyleTag;
+    private pendingTemplate;
 }
 export {};

@@ -1,4 +1,4 @@
-import { ConsoleLogger } from "@services/console-logger.service";
+import { ConsoleLogger } from '@services/console-logger.service';
 import {
   Component,
   OnInit,
@@ -7,15 +7,15 @@ import {
   ElementRef,
   Output,
   EventEmitter,
-  OnDestroy
-} from "@angular/core";
-import WidgetComponent from "../../../assets/ownid-web-ui-sdk/components/widget.component";
-import { environment } from "../../../environments/environment";
+  OnDestroy,
+} from '@angular/core';
+import WidgetComponent from '../../../assets/ownid-web-ui-sdk/components/widget.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: "ownid",
-  template: "",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'ownid',
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
@@ -40,18 +40,18 @@ export class OwnidComponent implements OnInit, OnDestroy {
       statusInterval: 1000,
       URLPrefix: environment.ownidURLPrefix,
       logger: new ConsoleLogger(),
-      logLevel: "info"
+      logLevel: 'info',
     });
 
-    if (this.type === "link") {
+    if (this.type === 'link') {
       // @ts-ignore-next-line
       this.ownidWidget = await window.ownid!.renderLinkGigya(
         {
           element: this.elRef.nativeElement,
           type: this.type,
-          onLink: this.onLink.emit.bind(this.onLink)
+          onLink: this.onLink.emit.bind(this.onLink),
         },
-        environment.gigyaApiKey
+        environment.gigyaApiKey,
       );
     } else {
       // @ts-ignore-next-line
@@ -62,7 +62,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
         onLogin: this.onLogin.emit.bind(this.onLogin),
         onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),
-        onRecover: this.onRecover.emit.bind(this.onRecover)
+        onRecover: this.onRecover.emit.bind(this.onRecover),
       });
     }
   }

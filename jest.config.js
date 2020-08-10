@@ -1,6 +1,10 @@
 module.exports = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/src/test/setupJest.ts'],
+  moduleNameMapper: {
+    "@services/(.*)": "<rootDir>/src/app/services/$1",
+    "@repositories/(.*)": "<rootDir>/src/app/repositories/$1"
+  },
   collectCoverageFrom: [
     'src/app/**/*.ts',
     '!**/*.spec.{js,ts}',

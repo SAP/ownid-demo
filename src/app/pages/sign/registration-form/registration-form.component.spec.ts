@@ -1,12 +1,12 @@
-import { async, TestBed } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { GigyaService } from "@services/gigya.service";
-import { FormBuilder } from "@angular/forms";
-import { RouterTestingModule } from "@angular/router/testing";
-import { Router } from "@angular/router";
-import { RegistrationFormComponent } from "./registration-form.component";
+import { async, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { GigyaService } from '@services/gigya.service';
+import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { RegistrationFormComponent } from './registration-form.component';
 
-describe("RegistrationFormComponent", () => {
+describe('RegistrationFormComponent', () => {
   let gigyaService: GigyaService;
   let router: Router;
 
@@ -17,7 +17,7 @@ describe("RegistrationFormComponent", () => {
     router.navigateByUrl = jest.fn();
   });
 
-  describe("Snapshot", () => {
+  describe('Snapshot', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
@@ -25,53 +25,45 @@ describe("RegistrationFormComponent", () => {
           FormBuilder,
           {
             provide: GigyaService,
-            useValue: gigyaService
-          }
+            useValue: gigyaService,
+          },
         ],
         declarations: [RegistrationFormComponent],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     }));
 
-    test("check snapshot", () => {
+    test('check snapshot', () => {
       const fixture = TestBed.createComponent(RegistrationFormComponent);
 
       expect(fixture).toMatchSnapshot();
     });
   });
 
-  describe("register", () => {
-    it("should call gigyaService.register and redirect to /account if success", () => {
-      const sut = new RegistrationFormComponent(
-        new FormBuilder(),
-        gigyaService,
-        router
-      );
-      sut.form.patchValue({ email: "test@mail.com", password: "1234567" });
+  describe('register', () => {
+    it('should call gigyaService.register and redirect to /account if success', () => {
+      const sut = new RegistrationFormComponent(new FormBuilder(), gigyaService, router);
+      sut.form.patchValue({ email: 'test@mail.com', password: '1234567' });
       return new Promise((resolve) => {
         gigyaService.register = jest.fn().mockImplementation((data, c) => {
           expect(data).not.toBeNull();
-          c({ status: "OK" });
+          c({ status: 'OK' });
           expect(gigyaService.register).toBeCalled();
-          expect(router.navigateByUrl).toBeCalledWith("/account");
+          expect(router.navigateByUrl).toBeCalledWith('/account');
           resolve();
         });
         sut.register();
       });
     });
 
-    it("should call gigyaService.register and redirect set errors if failed", () => {
+    it('should call gigyaService.register and redirect set errors if failed', () => {
       return new Promise((resolve) => {
-        const sut = new RegistrationFormComponent(
-          new FormBuilder(),
-          gigyaService,
-          router
-        );
-        sut.form.patchValue({ email: "test@mail.com", password: "1234567" });
-        const errorDetails = "fakeDetails";
+        const sut = new RegistrationFormComponent(new FormBuilder(), gigyaService, router);
+        sut.form.patchValue({ email: 'test@mail.com', password: '1234567' });
+        const errorDetails = 'fakeDetails';
         gigyaService.register = jest.fn().mockImplementation((data, c) => {
           expect(data).not.toBeNull();
-          c({ status: "FAIL", errorDetails });
+          c({ status: 'FAIL', errorDetails });
           expect(gigyaService.register).toBeCalled();
           expect(sut.errors).toBe(errorDetails);
           resolve();
@@ -80,13 +72,9 @@ describe("RegistrationFormComponent", () => {
       });
     });
 
-    it("should do nothing if form validation fails", () => {
-      const sut = new RegistrationFormComponent(
-        new FormBuilder(),
-        gigyaService,
-        router
-      );
-      sut.form.patchValue({ email: "testil.com", password: "" });
+    it('should do nothing if form validation fails', () => {
+      const sut = new RegistrationFormComponent(new FormBuilder(), gigyaService, router);
+      sut.form.patchValue({ email: 'testil.com', password: '' });
       sut.register();
       expect(gigyaService.register).not.toBeCalled();
       expect(sut.errors).toBe(null);

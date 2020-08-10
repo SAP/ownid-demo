@@ -1,9 +1,9 @@
-import { Router } from "@angular/router";
-import { UserGuardService } from "@services/user-guard.service";
-import { GigyaService } from "@services/gigya.service";
-import { Observable } from "rxjs";
+import { Router } from '@angular/router';
+import { UserGuardService } from '@services/user-guard.service';
+import { GigyaService } from '@services/gigya.service';
+import { Observable } from 'rxjs';
 
-describe("PersistentStorageService", () => {
+describe('PersistentStorageService', () => {
   let router: Router;
   let gigyaService: GigyaService;
 
@@ -13,12 +13,12 @@ describe("PersistentStorageService", () => {
     gigyaService = {} as GigyaService;
   });
 
-  describe("canActivate", () => {
-    it("should return true", () => {
+  describe('canActivate', () => {
+    it('should return true', () => {
       return new Promise((resolve) => {
         const sut = new UserGuardService(gigyaService, router);
         gigyaService.isLoggedIn = jest.fn().mockReturnValue(
-          new Observable<boolean>((subscriber) => subscriber.next(true))
+          new Observable<boolean>((subscriber) => subscriber.next(true)),
         );
 
         sut.canActivate().subscribe((canActivate) => {
@@ -28,16 +28,16 @@ describe("PersistentStorageService", () => {
       });
     });
 
-    it("should return false and navigate to login page", () => {
+    it('should return false and navigate to login page', () => {
       return new Promise((resolve) => {
         const sut = new UserGuardService(gigyaService, router);
         gigyaService.isLoggedIn = jest.fn().mockReturnValue(
-          new Observable<boolean>((subscriber) => subscriber.next(false))
+          new Observable<boolean>((subscriber) => subscriber.next(false)),
         );
 
         sut.canActivate().subscribe((canActivate) => {
           expect(canActivate).toBeFalsy();
-          expect(router.navigateByUrl).toBeCalledWith("/login");
+          expect(router.navigateByUrl).toBeCalledWith('/login');
           resolve();
         });
       });

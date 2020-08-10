@@ -553,3 +553,4 @@ MigrationBackup/
 dist
 build
 projects/demo-app/dist
+*.trx

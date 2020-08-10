@@ -9,4 +9,7 @@ src/setupJest.ts
 src/test
 server
 assets
+src/environments
+projects/demo-app/src/environments
+e2e
 

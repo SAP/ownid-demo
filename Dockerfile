@@ -4,6 +4,7 @@ COPY ./dist /usr/share/nginx/html
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.template.conf /etc/nginx/nginx.template.conf
+COPY ./scripts/.htpasswd /etc/nginx/.htpasswd
 
 ENV NETCORE3_SERVICE="localhost:5002"
 

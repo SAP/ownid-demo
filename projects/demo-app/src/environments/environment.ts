@@ -1,14 +1,13 @@
+import { IEnvironment, OwnIDFlow } from './i-environment';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { IEnvironment } from "../../../../src/environments/i-environment";
-
 export const environment: IEnvironment = {
   production: false,
-  gigyaApiKey:
-    "3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_",
-  ownidURLPrefix: "/netcore3/ownid",
+  gigyaApiKey: '3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_',
+  ownidURLPrefix: '/netcore3/ownid',
+  flow: OwnIDFlow.classic,
 };
 
 /*

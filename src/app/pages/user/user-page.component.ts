@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, NgZone } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { GigyaService } from "@services/gigya.service";
-import { AppStore, IProfile } from "../../app.store";
-import { SetProfileCommand } from "../sign/commands/set-profile.command";
+import { ChangeDetectionStrategy, Component, NgZone } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { GigyaService } from '@services/gigya.service';
+import { AppStore, IProfile } from '../../app.store';
+import { SetProfileCommand } from '../sign/commands/set-profile.command';
 
 @Component({
-  selector: "app-user-page",
-  templateUrl: "./user-page.component.html",
-  styleUrls: ["./user-page.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-user-page',
+  templateUrl: './user-page.component.html',
+  styleUrls: ['./user-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPageComponent {
   profile$: BehaviorSubject<IProfile>;
@@ -19,7 +19,7 @@ export class UserPageComponent {
     private store: AppStore,
     private setProfileCommand: SetProfileCommand,
     private gigyaService: GigyaService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
   ) {
     this.profile$ = this.store.profile$;
     this.linked$ = new BehaviorSubject<boolean>(false);

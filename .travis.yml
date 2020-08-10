@@ -37,6 +37,7 @@ jobs:
         GIGYA_1=3_dEHMimJM2kxcz8gaoI1Sss9kohyJ6LP17qDYd2UIlUfNowsPglEUANJX7R812-uh
         GIGYA_2=3_DS2fdSlSzClFXUfkKHaxJq9-Zknssg2UHamCntjp2jRcL74a_x5HbhDxvHZ6a4q2
         GIGYA_DEMO=3_O4QE0Kk7QstG4VGDPED5omrr8mgbTuf_Gim8V_Y19YDP75m_msuGtNGQz89X0KWP
+        GIGYA_DEMO_2=3_uQMbdn-ceccHKTdOmcCqrTDsGq3e7anDWcAxm2g4jFdE63dTpv1S8NCKy_sf_eEA
     - if: branch = develop
       env: 
         ENV=dev 
@@ -45,6 +46,7 @@ jobs:
         GIGYA_1=3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
         GIGYA_2=3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
         GIGYA_DEMO=3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
+        GIGYA_DEMO_2=3_7_S7SAvBaZSfIIO9A-kLKFXVzjo3tPUMI0_5KNmAC6tdotjPx8MRy1lxtsfJpcT-
 
 before_install:
   - pyenv global 3.7.1
@@ -60,10 +62,9 @@ before_script:
   - aws s3 cp s3://ownid-sdks-bucket/$ENV/web-ui-sdk/latest projects/demo-app/src/assets/ownid-web-ui-sdk --recursive
 
 script:
-  - yarn lint
   - yarn test:ci
   - sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2
-  - sh scripts/build_demo.sh $ENV $GIGYA_DEMO
+  - sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2
 
 before_deploy:
   - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl

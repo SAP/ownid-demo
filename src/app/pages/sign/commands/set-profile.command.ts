@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { IDataCommand } from "../../i-data-command";
-import { AppStore, IProfile } from "../../../app.store";
+import { Injectable } from '@angular/core';
+import { IDataCommand } from '../../i-data-command';
+import { AppStore, IProfile } from '../../../app.store';
 
 @Injectable()
 export class SetProfileCommand implements IDataCommand<IProfile> {

@@ -1,4 +1,5 @@
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 export interface IProfile {
   email: string;
@@ -7,6 +8,7 @@ export interface IProfile {
   lastName: string;
 }
 
+@Injectable()
 export class AppStore {
   readonly profile$ = new BehaviorSubject<IProfile>({} as IProfile);
 }

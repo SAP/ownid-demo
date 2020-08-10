@@ -1,4 +1,4 @@
-import { ILogger } from "src/assets/ownid-web-ui-sdk/interfaces/i-logger.interfaces";
+import { ILogger } from 'src/assets/ownid-web-ui-sdk/interfaces/i-logger.interfaces';
 
 export class ConsoleLogger implements ILogger {
   logDebug(message: string): void {

@@ -8,8 +8,8 @@
     <div>
       <div class="slogan">The simplest way to keep and access your notes everywhere for free.</div>
       <div class="top-navigation">
-        <a class="top-nav-item own-button" routerLink="/login">Create OwnID Profile Demo</a>
-        <a class="top-nav-item own-button" routerLink="/instant-login">Authentication Only Demo</a>
+        <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button" routerLink="/login">Create OwnID Profile Demo</a>
+        <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button" routerLink="/instant-login">Authentication Only Demo</a>
       </div>
     </div>
   </header>

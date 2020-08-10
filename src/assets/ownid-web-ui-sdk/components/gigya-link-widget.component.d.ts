@@ -1,6 +1,6 @@
-import WidgetComponent from "./widget.component";
-import { IWidgetConfig } from "../interfaces/i-widget.interfaces";
-import RequestService from "../services/request.service";
+import WidgetComponent from './widget.component';
+import { IWidgetConfig } from '../interfaces/i-widget.interfaces';
+import RequestService from '../services/request.service';
 export default class GigyaLinkWidgetComponent extends WidgetComponent {
     protected config: IWidgetConfig;
     protected requestService: RequestService;

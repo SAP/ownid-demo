@@ -5,9 +5,8 @@ import { IEnvironment } from "./i-environment";
 
 export const environment: IEnvironment = {
   production: false,
-  gigyaApiKey:
-    "3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W",
-  ownidURLPrefix: "/netcore3/ownid"
+  gigyaApiKey: "3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W",
+  ownidURLPrefix: "/netcore3/ownid",
 };
 
 /*

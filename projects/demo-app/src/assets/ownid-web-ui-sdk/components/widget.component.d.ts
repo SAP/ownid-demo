@@ -13,9 +13,11 @@ export default class WidgetComponent extends BaseComponent {
     private refreshLinkTimeout;
     private qr;
     private link;
+    private linked;
     private cacheExpiration;
     private contexts;
     private postMessagesHandlerAttached;
+    private isDestroyed;
     private webappResolver;
     constructor(config: IWidgetConfig, requestService: RequestService, disableDesktop?: boolean, disableMobile?: boolean);
     protected init(config: IWidgetConfig): Promise<void>;
@@ -31,6 +33,7 @@ export default class WidgetComponent extends BaseComponent {
     private refreshLinkOrQR;
     destroy(): void;
     update(config: IPartialConfig): void;
+    private onMessage;
     private attachPostMessagesHandler;
     private reCreateWidget;
     private addInfoIcon;

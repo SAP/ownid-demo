@@ -1,10 +1,10 @@
-import { async, TestBed } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { RouterTestingModule } from "@angular/router/testing";
-import { Router } from "@angular/router";
-import { IOwnidRs, SignPageComponent } from "./sign-page.component";
+import { async, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { IOwnidRs, SignPageComponent } from './sign-page.component';
 
-describe("SignPageComponent", () => {
+describe('SignPageComponent', () => {
   let router: Router;
 
   beforeEach(() => {
@@ -12,29 +12,29 @@ describe("SignPageComponent", () => {
     router.navigateByUrl = jest.fn();
   });
 
-  describe("Snapshot", () => {
+  describe('Snapshot', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
         declarations: [SignPageComponent],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     }));
 
-    test("check snapshot", () => {
+    test('check snapshot', () => {
       const fixture = TestBed.createComponent(SignPageComponent);
 
       expect(fixture).toMatchSnapshot();
     });
   });
 
-  describe("onSuccess", () => {
-    it("should redirect to /account and set cookies", () => {
+  describe('onSuccess', () => {
+    it('should redirect to /account and set cookies', () => {
       const sut = new SignPageComponent(router);
-      const cookieName = "fakeName";
-      const cookieValue = "fakeValue";
+      const cookieName = 'fakeName';
+      const cookieValue = 'fakeValue';
       sut.onSuccess({ sessionInfo: { cookieName, cookieValue } } as IOwnidRs);
-      expect(router.navigateByUrl).toBeCalledWith("/account");
+      expect(router.navigateByUrl).toBeCalledWith('/account');
     });
   });
 });
