@@ -9,7 +9,7 @@ import {
   EventEmitter,
   OnDestroy,
 } from '@angular/core';
-import WidgetComponent from '../../../assets/ownid-web-ui-sdk/components/widget.component';
+import WidgetComponent from '../../../assets/ownid-web-ui-sdk/types/components/widget.component';
 import { environment } from '../../../environments/environment';
 
 @Component({

@@ -9,7 +9,7 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/components/widget.component';
+import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/types/components/widget.component';
 import { environment } from '../../../environments/environment';
 
 @Component({
