@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GigyaService } from '../../services/gigya.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -17,6 +18,7 @@ export class ForgotPasswordComponent {
   constructor(
     formBuilder: FormBuilder,
     private gigyaService: GigyaService,
+    private router : Router,
   ) {
     this.form = formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
@@ -41,5 +43,9 @@ export class ForgotPasswordComponent {
         this.emailSent = true;
       });
     }
+  }
+
+  onGoToLogin() {
+    this.router.navigateByUrl('/')
   }
 }
