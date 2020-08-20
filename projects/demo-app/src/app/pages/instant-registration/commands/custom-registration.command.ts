@@ -48,8 +48,9 @@ export class CustomRegistrationCommand implements IDataCommand<{ data: { [key: s
         password: window.ownid.generateOwnIDPassword(12),
         data: {
           ownIdConnections: [{
-            keyHsh: ownidResponse.data.hash,
-            pubKey: ownidResponse.data.publicKey,
+            ...ownidResponse.data
+            // keyHsh: ownidResponse.data.hash,
+            // pubKey: ownidResponse.data.publicKey,
           }]
         },
       };
