@@ -14,9 +14,16 @@ interface FIDO2base64 {
 
 @Component({
   selector: 'passwordless',
-  template: '',
+  templateUrl:'./passwordless.component.html',
+  styleUrls: ['./passwordless.component.scss']
 })
 export class PasswordlessComponent {
+  private url: string | null = null;
+
+  private type: string | null = null;
+
+  private challenge: string | null = null;
+
   constructor(private actRoute: ActivatedRoute) {
     this.actRoute.queryParamMap
       .pipe(
@@ -29,33 +36,42 @@ export class PasswordlessComponent {
           return;
         }
 
-        let challenge;
+        this.url = url;
+        this.type = type;
+
         const decodedUrl = decodeURIComponent(url);
         const contextRegex = /.+ownid\/(.+)\/.+/g;
         const match = contextRegex.exec(decodedUrl);
 
         if (match) {
-          [, challenge] = match;
+          const [, challenge] = match;
+          this.challenge = challenge;
         } else {
           // eslint-disable-next-line no-console
           console.error('Context not found. Try again later.')
           return;
         }
-
-        const fido2Resp = type === 'r'
-          ? await this.register(challenge)
-          : await this.login(challenge);
-
-        if (!fido2Resp) {
-          // eslint-disable-next-line no-console
-          console.error('FIDO2 response failed. Try again later.')
-          return;
-        }
-
-        const data = JSON.stringify({ fido2: { ...fido2Resp, type } });
-
-        window.open(`//${ url }&data=${data}`, '_self');
       });
+  }
+
+  async onClick() {
+    if (!this.challenge) {
+      return;
+    }
+
+    const fido2Resp = this.type === 'r'
+      ? await this.register(this.challenge)
+      : await this.login(this.challenge);
+
+    if (!fido2Resp) {
+      // eslint-disable-next-line no-console
+      console.error('FIDO2 response failed. Try again later.')
+      return;
+    }
+
+    const data = JSON.stringify({ fido2: { ...fido2Resp, type: this.type } });
+
+    window.open(`//${ this.url }&data=${data}`, '_self');
   }
 
   async register(challenge: string): Promise<FIDO2base64 | null> {
