@@ -105,6 +105,8 @@ export class PasswordlessComponent {
       const { attestationObject, clientDataJSON } = newCred.response;
       const userId = PasswordlessComponent.uint8ArrayToBase64(publicKey.user.id);
 
+      PasswordlessComponent.setCookie(`userID`, userId, 365);
+
       return {
         userId,
         clientDataJSON: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(clientDataJSON)),
@@ -141,9 +143,15 @@ export class PasswordlessComponent {
       // @ts-ignore
       const { authenticatorData, signature, clientDataJSON, userHandle } = cred!.response;
 
+      const userId = PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(userHandle)) || PasswordlessComponent.getCookie(`userID`);
+      if (!userId) {
+        console.error('userId not found or userHandle is empty', userId, userHandle);
+        return null;
+      }
+
       return {
         credentialId: cred!.id,
-        userId: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(userHandle)),
+        userId,
         clientDataJSON: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(clientDataJSON)),
         authenticatorData: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(authenticatorData)),
         signature: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(signature)),
