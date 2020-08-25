@@ -9,7 +9,7 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/components/widget.component';
+import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/types/components/widget.component';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -24,7 +24,9 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   @Input() partial = false;
 
-  @Input() toggleElement = null;
+  @Input() toggleElement: string | null = null;
+
+  @Input() tooltip = null;
 
   @Output() onLogin = new EventEmitter();
 
@@ -63,6 +65,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
         type: this.type,
         data: this.data,
         partial: this.partial,
+        tooltip: this.tooltip,
         // eslint-disable-next-line unicorn/prefer-query-selector
         toggleElement: this.toggleElement ? window.document.getElementById(this.toggleElement!): null,
         onLogin: this.onLogin.emit.bind(this.onLogin),

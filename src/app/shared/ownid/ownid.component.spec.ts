@@ -1,7 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { OwnidComponent } from './ownid.component';
-import WidgetComponent from '../../../assets/ownid-web-ui-sdk/components/widget.component';
+import WidgetComponent from '../../../assets/ownid-web-ui-sdk/types/components/widget.component';
 
 describe('OwnidComponent', () => {
   describe('Snapshot', () => {

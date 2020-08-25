@@ -23,6 +23,7 @@
              type="register"
              [partial]="true"
              toggleElement="skip-password"
+             [tooltip]="{ offset: [0, -120], targetEl: '.ownid-label.ownid-toggle' }"
              (ownidWidgetRef)="onOwnIDWidgetReady($event)"
       ></ownid>
 

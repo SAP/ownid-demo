@@ -41,6 +41,10 @@ const routes: Routes = [
     canActivate: [NotesGuard],
   },
   {
+    path: 'passwordless',
+    loadChildren: () => import('./pages/passwordless/passwordless.module').then((m) => m.PasswordlessModule),
+  },
+  {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
     canActivate: [LoginGuard],
