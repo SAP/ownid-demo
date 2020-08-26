@@ -1,0 +1,92 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "app/*": ["./*"],
+      "@/*": ["src/*"],
+      "@": [
+        "src/index.js",
+        "src/index.ts",
+        "src/index.json",
+        "src/index.vue",
+        "src/index.scss",
+        "src/index.css"
+      ],
+      "src/*": ["src/*"],
+      "src": [
+        "src/index.js",
+        "src/index.ts",
+        "src/index.json",
+        "src/index.vue",
+        "src/index.scss",
+        "src/index.css"
+      ],
+      
+      "layouts/*": ["src/components/layouts/*"],
+      "layouts": [
+        "src/components/layouts/index.js",
+        "src/components/layouts/index.ts",
+        "src/components/layouts/index.json",
+        "src/components/layouts/index.vue",
+        "src/components/layouts/index.scss",
+        "src/components/layouts/index.css"
+      ],
+      "components/*": ["src/components/*"],
+      "controls/*": ["src/components/controls/*"],
+      "controls": [
+        "src/components/controls/index.js",
+        "src/components/controls/index.ts",
+        "src/components/controls/index.json",
+        "src/components/controls/index.vue",
+        "src/components/controls/index.scss",
+        "src/components/controls/index.css"
+      ],
+      "views/*": ["src/components/views/*"],
+      "views": [
+        "src/components/views/index.js",
+        "src/components/views/index.ts",
+        "src/components/views/index.json",
+        "src/components/views/index.vue",
+        "src/components/views/index.scss",
+        "src/components/views/index.css"
+      ],
+      "subviews/*": ["src/components/views/subviews/*"],
+      "subviews": [
+        "src/components/views/subviews/index.js",
+        "src/components/views/subviews/index.ts",
+        "src/components/views/subviews/index.json",
+        "src/components/views/subviews/index.vue",
+        "src/components/views/subviews/index.scss",
+        "src/components/views/subviews/index.css"
+      ],
+      "helpers/*": ["src/helpers*"],
+      "helpers": [
+        "src/helpers/index.js",
+        "src/helpers/index.ts",
+        "src/helpers/index.json",
+        "src/helpers/index.vue",
+        "src/helpers/index.scss",
+        "src/helpers/index.css"
+      ],
+      "statics/*": ["src/statics/*"],
+      "statics": [
+        "src/statics/index.js",
+        "src/statics/index.ts",
+        "src/statics/index.json",
+        "src/statics/index.vue",
+        "src/statics/index.scss",
+        "src/statics/index.css"
+      ],
+      "~assets/*": ["src/assets/*"],
+      "~assets": [
+        "src/assets/index.js",
+        "src/assets/index.ts",
+        "src/assets/index.json",
+        "src/assets/index.vue",
+        "src/assets/index.scss",
+        "src/assets/index.css"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
