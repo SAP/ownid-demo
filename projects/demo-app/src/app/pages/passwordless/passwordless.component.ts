@@ -4,17 +4,19 @@ import { filter, map } from 'rxjs/operators';
 
 interface FIDO2base64 {
   clientDataJSON: string;
-  userId: string;
+  credentialId: string | null;
   attestationObject?: string;
-  credentialId?: string | null;
   authenticatorData?: string;
   signature?: string;
   type?: string;
+  userId?: string;
 }
+
+const SUPPORTED_IOS_VERSION = 14;
 
 @Component({
   selector: 'passwordless',
-  templateUrl:'./passwordless.component.html',
+  templateUrl: './passwordless.component.html',
   styleUrls: ['./passwordless.component.scss']
 })
 export class PasswordlessComponent {
@@ -31,7 +33,13 @@ export class PasswordlessComponent {
         map((params) => ({ url: params.get('q') as string, type: params.get('t') as string })),
       )
       .subscribe(async ({ url, type }) => {
-        if (!navigator.credentials || !window.crypto) {
+        const iosVersion = PasswordlessComponent.getIOSVersion();
+
+        const fallback = !navigator.credentials || !window.crypto
+          || (iosVersion && iosVersion < SUPPORTED_IOS_VERSION)
+          || PasswordlessComponent.isSamsungBrowser()
+
+        if (fallback) {
           window.open(`//${ url }`, '_self');
           return;
         }
@@ -49,7 +57,6 @@ export class PasswordlessComponent {
         } else {
           // eslint-disable-next-line no-console
           console.error('Context not found. Try again later.')
-          return;
         }
       });
   }
@@ -65,13 +72,14 @@ export class PasswordlessComponent {
 
     if (!fido2Resp) {
       // eslint-disable-next-line no-console
-      console.error('FIDO2 response failed. Try again later.')
+      console.error('FIDO2 response failed. Try again later.');
+      window.close();
       return;
     }
 
     const data = JSON.stringify({ fido2: { ...fido2Resp, type: this.type } });
 
-    window.open(`//${ this.url }&data=${data}`, '_self');
+    window.open(`//${ this.url }&data=${ data }`, '_self');
   }
 
   async register(challenge: string): Promise<FIDO2base64 | null> {
@@ -103,18 +111,17 @@ export class PasswordlessComponent {
 
       // @ts-ignore
       const { attestationObject, clientDataJSON } = newCred.response;
-      const userId = PasswordlessComponent.uint8ArrayToBase64(publicKey.user.id);
-
-      PasswordlessComponent.setCookie(`userID`, userId, 365);
 
       return {
-        userId,
+        credentialId: newCred!.id,
         clientDataJSON: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(clientDataJSON)),
         attestationObject: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(attestationObject)),
       };
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
+
+      this.handleFIDO2Exception(error);
     }
 
     return null;
@@ -135,6 +142,7 @@ export class PasswordlessComponent {
 
     const publicKey = {
       challenge: PasswordlessComponent.utf8ToUint8Array(challenge),
+      authenticatorSelection: { authenticatorAttachment: 'platform'},
       allowCredentials,
     }
 
@@ -143,15 +151,9 @@ export class PasswordlessComponent {
       // @ts-ignore
       const { authenticatorData, signature, clientDataJSON, userHandle } = cred!.response;
 
-      const userId = PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(userHandle)) || PasswordlessComponent.getCookie(`userID`);
-      if (!userId) {
-        console.error('userId not found or userHandle is empty', userId, userHandle);
-        return null;
-      }
-
       return {
         credentialId: cred!.id,
-        userId,
+        userId: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(userHandle)),
         clientDataJSON: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(clientDataJSON)),
         authenticatorData: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(authenticatorData)),
         signature: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(signature)),
@@ -159,9 +161,20 @@ export class PasswordlessComponent {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
+
+      this.handleFIDO2Exception(error);
     }
 
     return null;
+  }
+
+  handleFIDO2Exception (error: DOMException) {
+    if (error.code === DOMException.ABORT_ERR ) {
+      window.close();
+      return;
+    }
+
+    window.open(`//${ this.url }`, '_self');
   }
 
   static setCookie(name: string, value: string, days: number): void {
@@ -206,6 +219,20 @@ export class PasswordlessComponent {
     const str = PasswordlessComponent.uint8ArrayToBase64(a);
     return decodeURIComponent(escape(atob(str)));
   }
+
+  static getIOSVersion() {
+    const agent = window.navigator.userAgent;
+    const start = agent.indexOf('OS');
+    if (agent.includes('iPhone') && start > -1) {
+      return window.Number(agent.slice(start + 3, start + 7).replace('_', '.'));
+    }
+    return 0;
+  }
+
+  static isSamsungBrowser(): boolean {
+    return (/samsung|sgh-[int]|gt-[in]|sm-[anptz]|shv-e|sch-[ijrs]|sph-l/i).test(navigator.userAgent);
+  }
+
 }
 
 

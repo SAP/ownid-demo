@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GigyaService } from '../../services/gigya.service';
 import { Router } from '@angular/router';
+import { GigyaService } from '../../services/gigya.service';
 
 @Component({
   selector: 'login',

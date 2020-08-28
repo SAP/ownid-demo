@@ -62,7 +62,7 @@ before_script:
   - aws s3 cp s3://cdn.ownid.com/$ENV/js/latest projects/demo-app/src/assets/ownid-web-ui-sdk --recursive
 
 script:
-  # - yarn test:ci
+#  - yarn test:ci
   - sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2
   - sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2
 
