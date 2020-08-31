@@ -105,7 +105,9 @@ export class PasswordlessComponent {
     try {
       const newCred = await navigator.credentials.create({ publicKey });
 
-      if (newCred!.id) {
+      if (PasswordlessComponent.getCookie(`credID`)) {
+        document.cookie = `credID=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+      } else {
         PasswordlessComponent.setCookie(`credID`, newCred!.id, 365);
       }
 
@@ -142,7 +144,7 @@ export class PasswordlessComponent {
 
     const publicKey = {
       challenge: PasswordlessComponent.utf8ToUint8Array(challenge),
-      authenticatorSelection: { authenticatorAttachment: 'platform'},
+      authenticatorSelection: { authenticatorAttachment: 'platform' },
       allowCredentials,
     }
 
@@ -168,8 +170,8 @@ export class PasswordlessComponent {
     return null;
   }
 
-  handleFIDO2Exception (error: DOMException) {
-    if (error.code === DOMException.ABORT_ERR ) {
+  handleFIDO2Exception(error: DOMException) {
+    if (error.code === DOMException.ABORT_ERR) {
       window.close();
       return;
     }
