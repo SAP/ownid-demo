@@ -9,7 +9,6 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import WidgetComponent from '../../../../../../src/assets/ownid-web-ui-sdk/types/components/widget.component';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -36,9 +35,12 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   @Output() onRecover = new EventEmitter();
 
+  @Output() onError = new EventEmitter();
+
   @Output() ownidWidgetRef = new EventEmitter();
 
-  private ownidWidget: WidgetComponent | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private ownidWidget: any;
 
   constructor(private elRef: ElementRef) {}
 
@@ -72,6 +74,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
         onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),
         onRecover: this.onRecover.emit.bind(this.onRecover),
+        onError: this.onError.emit.bind(this.onError),
       });
     }
 

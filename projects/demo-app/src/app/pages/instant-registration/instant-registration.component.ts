@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { CustomRegistrationCommand } from './commands/custom-registration.command';
 import { AppStore } from '../../app.store';
@@ -13,7 +13,7 @@ import { AppStore } from '../../app.store';
 export class InstantRegistrationComponent {
   form: FormGroup;
 
-  errors$: Observable<string | null>;
+  errors$: BehaviorSubject<string | null>;
 
   private ownidWidget: unknown | null = null;
 
@@ -56,5 +56,9 @@ export class InstantRegistrationComponent {
 
   onOwnIDWidgetReady(ownidWidget: unknown) {
     this.ownidWidget = ownidWidget;
+  }
+
+  onError(errorMessage: string) {
+    this.errors$.next(errorMessage);
   }
 }

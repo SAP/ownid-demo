@@ -25,6 +25,7 @@
              toggleElement="skip-password"
              [tooltip]="{ offset: [0, -120], targetEl: '.ownid-label.ownid-toggle' }"
              (ownidWidgetRef)="onOwnIDWidgetReady($event)"
+             (onError)="onError($event)"
       ></ownid>
 
       <input class="own-input"
