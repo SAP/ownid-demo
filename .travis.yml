@@ -82,5 +82,6 @@ deploy:
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(develop|master)$
+
 after_deploy:
-  - script: scripts/test_runner.sh demo-site
+  - sh scripts/test_runner.sh demo-site $ENV
