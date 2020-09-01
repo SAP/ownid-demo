@@ -78,7 +78,10 @@ deploy:
 - provider: script
   script:
     sh scripts/deploy.sh $REPOSITORY_URI $REPOSITORY_DEMO_URI $IMAGE_TAG $ENV
-    scripts/test_runner.sh demo-site
+
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(develop|master)$
+
+after_deploy:
+  - sh scripts/test_runner.sh demo-site $ENV
