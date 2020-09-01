@@ -1,3 +1,5 @@
+#!bin/bash
+
 REPO_SLUG=OwnID%2Fautomation
 
 TEST_COMPONENTS=${1:-""}
