@@ -49,8 +49,6 @@ export class CustomRegistrationCommand implements IDataCommand<{ data: { [key: s
         data: {
           ownIdConnections: [{
             ...ownidResponse.data
-            // keyHsh: ownidResponse.data.hash,
-            // pubKey: ownidResponse.data.publicKey,
           }]
         },
       };
