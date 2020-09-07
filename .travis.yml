@@ -18,9 +18,11 @@ cache:
 
 env:
   global:
+    - secure: NDtY1i1VYxMeopm1Dh1EP8Znps/rPgEwNLAwOefoQPB1BbbqZYQA0IjBM5ArDz25MSh5OSFumWb5MBZ71FsKE5oBLjWnAWXqzWj8jiNGfWtsg+DENCXTaPD7pF6YHppWpucodvGi6QAzFaYC7gIG3xrj89kJvAW+DiK7JFxBmvbAMGhI5G/JrOwreTHlbmFjiNj6q+x8R85/GRxB7SOHuwf5kdsylKsFrolyYsDhYe98pH422alH10RSPYJyVler6K3rOLjDlNWxzYPOu4z2V6AV49SG8F/u7gbOuvl9gB9IpwzsWv4O11CmFrz0d3Y/CzF0LBD2NXrD1bq3d+sphir03KOBb9kcm/jPPSk0jlU5B2cDZbOXWRwI3NFYNavPtnscIx2TQwybDdF0snqFD+qWHqnc2JcBqtmdnrYu+wHzreFcrpmdHwfDlJOgQZS2EExief2mux0QkEtdx0bgizb1uOFApYOI44XvKhMwInTculrqwbGDvirPLlNSUDCnveMkkRHtWkMwYenW5GGKwPSwIWsTUQjExuNRlaAEbOp2SyaUcHkmxdb+Jv7HS5HGyxSJ63kV5hmIHO20t5rbs+VqcObAzqXL7ro6S4kwzrpXebY97VgiJhb/Gal86W7AA+eHOf6BKQPYXwL+gurJHwnQeuSb5VvL2TRhVeRxcx4=
     - secure: QAWiAr6jeHg68ymgdAf45F+hi+raOfclzNnzeTB9UNvYD+uS13TyaAsUkZz5WA2CcKIoA/a854bT1+CyTKz1IEXJBAs75Kf5kYWFzFHZFGgwzHIrNXzUA4Oj0yXeyu/3Ut9/+qjpNdvi4hGPLodkdQc42Qq+w+LCgytXWoThk//K1tY3uEZN7CnSXzU4uXflnHNQMb5/QQ+PmajpCVLfqv/Y1XoFr1iERVYo64Mmiw9NcqrgtmWAhVBq3jcLi2pwTKe09SKqhJA4AAgrLlNcJIsTlz2KFOhU3LNsj49mB+HSEWJBSF/qtygBaNtA8CF/BgRRFTBU+tzDBqCj7BJPOmfVcvpyhLH3O/Ve2EoBJ8iiBszNJvQDAgTTfHYjxFyVZtirtNbgDlwZRtcyAH7rZgsl7jHHRbRwoNc2cM7K1OYF3m6qoGFl80A13U/8IarIlfFeqtQNpjsNWPQP0g47xDAUDxB7SMOPLVc1KiIDHQzBGB10/XlZLwomB0wznv7ulpBhDMUuDUW8PtydI0oj8UTOnqHLxllWKrqbXvyrTT9qRwAbl2C9PRYzdMIUGmf0wcg56VTdzpg/83Mih+1Xm1nmXUMot06bXuKxMphraf4cI3xSjevD/jM16ubW1WU7hdLSL1I691Dli2zTrMF9s2b+5MmRO3O5VNyCSsZ7BcQ=
     - secure: iBo7KW99OofackgKUVAVSMdTEz7jaxue/Gkjyofm7yVbJNDECCUsndLYQFn5lUvgL6eXY02EFLEDk/QyMbDPigXKf5z0rPlk6wbiomYst22PbOj+cbM2gi+cag8kyrMuNbJfpfjC1PG3JjgkmRxarnu7ru7+zbZbeGWaWmV2y/JungZSaMWTwbaiyEP0UQQ/Mf4QtS2SBgBdfqvnR4QdauIK+cA27CD8muNUx0jKV/4N3UgVWxAV0XCdQo5oyttNgbsJwaaDduWhuZ/iFRtSNhszaPMvYmXAGBbzjD5pE0KZwUlauUO0pYKZsDDscb+cRnscDbckwJVpSyVWd0iz9uTrPtrmUzY/Eqv7dbyp+9GqWODWi9721DmF5BHTVf+GqUYN3y6MLWffKPgtaoBdV0Fbp/4OK47CyzODmF/0DKnLl/cTQH6K9/cCgqWk0f5HgPSLi65byeWH59IAKsLpgXGwOLSNega9qu4oIu6uTFJ3McMmFaPCv6z9Jlvx8TmAdYfKPej+D+843On2JGQnqdUhtYpzS4BlB8p22C8BBA+cjemWtnkGsDUEDbqyTG9RU00VE0xCSnF7jc90KstiQ7sRQBh9j9U/+CoAY4rkw8f8pjsgH15KdFdeyw9Cp7Xl8r/Q80hwTa7Z3BGfv+TMbD2PhQ3FGBbBazOKOrndJo0=
     - IMAGE_TAG=$TRAVIS_COMMIT
+
 
 branches:
   only:
@@ -62,7 +64,7 @@ before_script:
   - aws s3 cp s3://cdn.ownid.com/$ENV/js/latest projects/demo-app/src/assets/ownid-web-ui-sdk --recursive
 
 script:
-  # - yarn test:ci
+#  - yarn test:ci
   - sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2
   - sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2
 
@@ -75,7 +77,12 @@ before_deploy:
 
 deploy:
 - provider: script
-  script: sh scripts/deploy.sh $REPOSITORY_URI $REPOSITORY_DEMO_URI $IMAGE_TAG $ENV
+  script:
+    sh scripts/deploy.sh $REPOSITORY_URI $REPOSITORY_DEMO_URI $IMAGE_TAG $ENV
+
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(develop|master)$
+
+after_deploy:
+  - bash scripts/test_runner.sh demo-site $ENV

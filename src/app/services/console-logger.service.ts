@@ -1,6 +1,4 @@
-import { ILogger } from 'src/assets/ownid-web-ui-sdk/types/interfaces/i-logger.interfaces';
-
-export class ConsoleLogger implements ILogger {
+export class ConsoleLogger {
   logDebug(message: string): void {
     // eslint-disable-next-line no-console
     console.debug(message);
