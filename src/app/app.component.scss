@@ -17,6 +17,10 @@
   display: flex;
   justify-content: center;
   font-size: 12px;
+  
+  .row {
+    height: 20px;
+  }
 }
 
 @media (max-width: 599px) {
@@ -34,3 +38,4 @@
     margin: 0 auto;
   }
 }
+
