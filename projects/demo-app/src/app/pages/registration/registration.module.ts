@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration.component';
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
+import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
 
 @NgModule({
   declarations: [RegistrationComponent],
@@ -12,6 +13,7 @@ import { OwnidModule } from '../../shared/ownid/ownid.module';
     RegistrationRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
+    DemoFooterModule
   ]
 })
 export class RegistrationModule { }

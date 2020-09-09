@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InstantLoginComponent } from './instant-login.component';
 import { InstantLoginRoutingModule } from './instant-login-routing.module';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
+import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
 
 @NgModule({
   declarations: [InstantLoginComponent],
@@ -12,6 +13,7 @@ import { OwnidModule } from '../../shared/ownid/ownid.module';
     InstantLoginRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
+    DemoFooterModule
   ]
 })
 export class InstantLoginModule { }
