@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { GigyaService } from '../../services/gigya.service';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { AppStore } from '../../app.store';
+import { RegistrationCommand } from './commands/registration.command';
 
 @Component({
   selector: 'login',
@@ -11,36 +12,41 @@ import { GigyaService } from '../../services/gigya.service';
 export class RegistrationComponent {
   form: FormGroup;
 
-  errors: string | null = null;
+  errors$: BehaviorSubject<string | null>;
+
+  private ownidWidget: unknown | null = null;
 
   constructor(
     formBuilder: FormBuilder,
-    private gigyaService: GigyaService,
-    private router: Router,
+    private appStore: AppStore,
+    private registrationCommand: RegistrationCommand,
   ) {
     this.form = formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', []],
+      confirmPassword: ['', []],
     });
+
+    this.errors$ = this.appStore.formError$;
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.errors = null;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.gigyaService.register(this.form.value, (data: any) => {
-        if (data.status === 'FAIL') {
-          this.errors = data.errorDetails;
-        }
-      })
+    if (this.form.valid && this.ownidWidget) {
+      this.registrationCommand.execute({ data: this.form.value, ownidWidget: this.ownidWidget })
     }
+
+    Object.values(this.form.controls).forEach((field: AbstractControl) => {
+      field.setValue(field.value);
+      field.markAsTouched();
+    });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onRegister(statusRS: any) {
-    document.cookie = `${ statusRS.sessionInfo.cookieName }=${ statusRS.sessionInfo.cookieValue }; path=/`;
-    this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/notes'));
+  onOwnIDWidgetReady(ownidWidget: unknown) {
+    this.ownidWidget = ownidWidget;
+  }
+
+  onError(errorMessage: string) {
+    this.errors$.next(errorMessage);
   }
 }

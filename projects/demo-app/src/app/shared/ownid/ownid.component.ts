@@ -27,6 +27,8 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   @Input() tooltip = null;
 
+  @Input() inline: { targetElement: string; additionalElements?: string[]; offset?: [number, number] } | null = null;
+
   @Output() onLogin = new EventEmitter();
 
   @Output() onRegister = new EventEmitter();
@@ -61,6 +63,12 @@ export class OwnidComponent implements OnInit, OnDestroy {
         onLink: this.onLink.emit.bind(this.onLink),
       }, environment.gigyaApiKey);
     } else {
+      const inline = this.inline ? {
+        targetElement: document.querySelector(this.inline.targetElement),
+        additionalElements: this.inline.additionalElements?.map((selector) => document.querySelector(selector)),
+        offset: this.inline.offset
+      } : null;
+
       // @ts-ignore-next-line
       this.ownidWidget = window.ownid!.render({
         element: this.elRef.nativeElement,
@@ -68,8 +76,9 @@ export class OwnidComponent implements OnInit, OnDestroy {
         data: this.data,
         partial: this.partial,
         tooltip: this.tooltip,
+        inline,
         // eslint-disable-next-line unicorn/prefer-query-selector
-        toggleElement: this.toggleElement ? window.document.getElementById(this.toggleElement!): null,
+        toggleElement: this.toggleElement ? window.document.getElementById(this.toggleElement!) : null,
         onLogin: this.onLogin.emit.bind(this.onLogin),
         onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),

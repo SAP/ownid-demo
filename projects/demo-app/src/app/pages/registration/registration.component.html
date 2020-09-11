@@ -7,19 +7,23 @@
       <a class="own-nav-link active" routerLink="/register">Create Account</a>
     </nav>
 
-    <ownid type="register" (onRegister)="onRegister($event)"></ownid>
-
-    <div class="or">OR</div>
-
     <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <div class="errors" *ngIf="errors">{{errors}}</div>
+      <div class="errors" *ngIf="errors$ | async as errors">{{errors}}</div>
 
       <input class="own-input" type="text" placeholder="First Name" formControlName="name">
 
       <input class="own-input" type="email" placeholder="Email" formControlName="email">
 
-      <input class="own-input" type="password" placeholder="Password" formControlName="password">
+      <input class="own-input inline-password" type="password" placeholder="Password" formControlName="password">
+
+      <input class="own-input inline-confirm-password" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+
+      <ownid type="register"
+             (ownidWidgetRef)="onOwnIDWidgetReady($event)"
+             (onError)="onError($event)"
+             [inline]="{ targetElement: '.inline-password', additionalElements: ['.inline-confirm-password'], offset: [0, -10] }"
+      ></ownid>
 
       <button class="own-button" type="submit">Create Account</button>
     </form>

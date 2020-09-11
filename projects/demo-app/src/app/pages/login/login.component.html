@@ -7,22 +7,21 @@
       <a class="own-nav-link" routerLink="/register">Create Account</a>
     </nav>
 
-    <ownid type="login" (onLogin)="onLogin($event)"></ownid>
-
-    <div class="or">OR</div>
-
     <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
       <div class="errors" *ngIf="errors">{{errors}}</div>
 
       <input class="own-input" type="email" placeholder="Email" formControlName="email">
 
-      <input class="own-input" type="password" placeholder="Password" formControlName="password">
+      <input class="own-input inline-password" type="password" placeholder="Password" formControlName="password">
 
+      <ownid type="login" (onLogin)="onLogin($event)"
+             [inline]="{ targetElement: '.inline-password', offset: [0, -10] }"
 
+      ></ownid>
 
       <div class="text">
-        <a class="forgot-link" routerLink="/forgot-password">Forgot Password</a>
+        <a class="forgot-link" routerLink="/forgot-password">Can't login?</a>
       </div>
 
       <button class="own-button" type="submit">Log In</button>
