@@ -22,11 +22,15 @@ const SUPPORTED_IOS_VERSION = 14;
 export class PasswordlessComponent {
   private url: string | null = null;
 
-  private type: string | null = null;
-
   private challenge: string | null = null;
 
+  type: string | null = null;
+
+  name: string;
+
   constructor(private actRoute: ActivatedRoute) {
+    this.name = window.location.hostname;
+
     this.actRoute.queryParamMap
       .pipe(
         filter((params) => !!params.get('q') && !!params.get('t')),
