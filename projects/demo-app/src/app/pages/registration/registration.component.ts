@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { AppStore } from '../../app.store';
@@ -9,26 +9,42 @@ import { RegistrationCommand } from './commands/registration.command';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnDestroy{
   form: FormGroup;
 
   errors$: BehaviorSubject<string | null>;
 
-  private ownidWidget: unknown | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private ownidWidget: any | null = null;
+
+  private observer: MutationObserver;
 
   constructor(
     formBuilder: FormBuilder,
     private appStore: AppStore,
     private registrationCommand: RegistrationCommand,
+    private elementRef: ElementRef,
   ) {
     this.form = formBuilder.group({
-      name: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', []],
       confirmPassword: ['', []],
     });
 
     this.errors$ = this.appStore.formError$;
+
+    this.observer = new MutationObserver(() => this.ownidWidget?.recalculatePosition());
+
+    this.observer.observe(this.elementRef.nativeElement, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  ngOnDestroy() {
+    this.observer.disconnect();
   }
 
   onSubmit() {
