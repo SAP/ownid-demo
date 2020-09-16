@@ -59,6 +59,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
         element: this.elRef.nativeElement,
         type: this.type,
         data: this.data,
+        language: 'en',
         onLogin: this.onLogin.emit.bind(this.onLogin),
         onRegister: this.onRegister.emit.bind(this.onRegister),
         onLink: this.onLink.emit.bind(this.onLink),

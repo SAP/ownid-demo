@@ -77,6 +77,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
         partial: this.partial,
         tooltip: this.tooltip,
         inline,
+        language: 'en',
         // eslint-disable-next-line unicorn/prefer-query-selector
         toggleElement: this.toggleElement ? window.document.getElementById(this.toggleElement!) : null,
         onLogin: this.onLogin.emit.bind(this.onLogin),

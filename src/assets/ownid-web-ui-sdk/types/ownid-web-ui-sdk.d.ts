@@ -2,6 +2,7 @@ import WidgetComponent from './components/widget.component';
 import { IInitConfig, IWidgetConfig } from './interfaces/i-widget.interfaces';
 import GigyaLinkWidgetComponent from './components/gigya-link-widget.component';
 export default class OwnIDUiSdk {
+    version: string;
     config: IInitConfig;
     isGigyaAdded: boolean;
     init(config?: IInitConfig): void;

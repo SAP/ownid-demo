@@ -10,6 +10,7 @@ export default class LinkButton extends BaseCommonComponent<LinkButtonOptions> {
     protected render(options: LinkButtonOptions): HTMLElement;
     update(href: string): void;
     disableButton(): void;
+    private addOwnIDStyleTag;
     private openWindow;
 }
 export {};

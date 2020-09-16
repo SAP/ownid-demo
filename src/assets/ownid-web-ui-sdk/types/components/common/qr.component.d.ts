@@ -5,6 +5,7 @@ declare type QrOptions = {
     href: string;
     type: string;
     lang: string;
+    tooltip: boolean;
 };
 export default class Qr extends BaseCommonComponent<QrOptions> {
     private options;

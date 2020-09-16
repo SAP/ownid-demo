@@ -9,6 +9,7 @@ export default class WidgetComponent extends BaseComponent {
     widgetReady: Promise<void>;
     finalResponse: any | null;
     returnError: string | null;
+    disabled: boolean;
     private statusTimeout;
     private refreshLinkTimeout;
     private qr;
@@ -19,6 +20,10 @@ export default class WidgetComponent extends BaseComponent {
     private postMessagesHandlerAttached;
     private isDestroyed;
     private webappResolver;
+    private toggleElements;
+    private note;
+    private inline;
+    private globalEventCallbacks;
     constructor(config: IWidgetConfig, requestService: RequestService, disableDesktop?: boolean, disableMobile?: boolean);
     protected init(config: IWidgetConfig): Promise<void>;
     protected getContext(contextUrl: string, data?: any): Promise<void>;
@@ -37,7 +42,14 @@ export default class WidgetComponent extends BaseComponent {
     private attachPostMessagesHandler;
     private reCreateWidget;
     private addInfoIcon;
+    private toggleQrTooltip;
     private callOnSuccess;
     openWebapp(): Promise<unknown>;
+    private addOwnIDStyleTag;
     private apiReply;
+    private callOnError;
+    private renderInlineWidget;
+    private addCallback2GlobalEvent;
+    private renderNote;
+    recalculatePosition(): void;
 }
