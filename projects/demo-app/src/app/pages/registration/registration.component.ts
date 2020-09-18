@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnDestroy{
     this.observer = new MutationObserver(() => this.ownidWidget?.recalculatePosition());
 
     this.observer.observe(this.elementRef.nativeElement, {
-      attributes: true,
+      attributes: false,
       childList: true,
       subtree: true,
     });
