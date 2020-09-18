@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 interface FIDO2base64 {
   clientDataJSON: string;
@@ -9,7 +10,6 @@ interface FIDO2base64 {
   authenticatorData?: string;
   signature?: string;
   type?: string;
-  userId?: string;
 }
 
 const SUPPORTED_IOS_VERSION = 14;
@@ -28,7 +28,10 @@ export class PasswordlessComponent {
 
   name: string;
 
-  constructor(private actRoute: ActivatedRoute) {
+  constructor(
+    private actRoute: ActivatedRoute,
+    private httpClient: HttpClient,
+  ) {
     this.name = window.location.hostname;
 
     this.actRoute.queryParamMap
@@ -61,6 +64,26 @@ export class PasswordlessComponent {
         } else {
           // eslint-disable-next-line no-console
           console.error('Context not found. Try again later.')
+        }
+
+        const credID = PasswordlessComponent.getCookie(`credID`);
+
+        if (type === 'l' && !credID) {
+          // go to "user not found
+          console.log('user not Found');
+        }
+
+        if (type === 'r' && credID) {
+          const callbackMatch = /q=([^&]*)/.exec(decodedUrl);
+
+          if (callbackMatch) {
+            this.httpClient.post<{isUserExists: boolean}>(`//${ callbackMatch[1] }/is-fido2-user-exists/${ credID }`, null)
+              .subscribe((data: {isUserExists: boolean}) => {
+                if (data.isUserExists) {
+                  window.close();
+                }
+              });
+          }
         }
       });
   }
@@ -109,11 +132,7 @@ export class PasswordlessComponent {
     try {
       const newCred = await navigator.credentials.create({ publicKey });
 
-      if (PasswordlessComponent.getCookie(`credID`)) {
-        document.cookie = `credID=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-      } else {
-        PasswordlessComponent.setCookie(`credID`, newCred!.id, 365);
-      }
+      PasswordlessComponent.setCookie(`credID`, newCred!.id, 365);
 
       // @ts-ignore
       const { attestationObject, clientDataJSON } = newCred.response;
@@ -155,11 +174,10 @@ export class PasswordlessComponent {
     try {
       const cred = await navigator.credentials.get({ publicKey });
       // @ts-ignore
-      const { authenticatorData, signature, clientDataJSON, userHandle } = cred!.response;
+      const { authenticatorData, signature, clientDataJSON } = cred!.response;
 
       return {
         credentialId: cred!.id,
-        userId: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(userHandle)),
         clientDataJSON: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(clientDataJSON)),
         authenticatorData: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(authenticatorData)),
         signature: PasswordlessComponent.uint8ArrayToBase64(new Uint8Array(signature)),
