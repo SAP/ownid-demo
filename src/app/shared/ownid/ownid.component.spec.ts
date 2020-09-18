@@ -1,7 +1,6 @@
 import { async, TestBed } from '@angular/core/testing';
 import { ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { OwnidComponent } from './ownid.component';
-import WidgetComponent from '../../../assets/ownid-web-ui-sdk/types/components/widget.component';
 
 describe('OwnidComponent', () => {
   describe('Snapshot', () => {
@@ -45,7 +44,9 @@ describe('OwnidComponent', () => {
       window.ownid = {
         init: jest.fn(),
         render: jest.fn(),
-        renderLinkGigya: jest.fn(),
+        gigya: {
+          renderLink: jest.fn()
+        },
       };
 
       const sut = new OwnidComponent(el);
@@ -54,7 +55,7 @@ describe('OwnidComponent', () => {
 
       sut.ngOnInit();
       // @ts-ignore-next-line
-      expect(window.ownid!.renderLinkGigya).toBeCalled();
+      expect(window.ownid!.gigya.renderLink).toBeCalled();
     });
   });
 
@@ -72,7 +73,8 @@ describe('OwnidComponent', () => {
 
       sut.type = 'login';
 
-      sut.ownidWidget = {} as WidgetComponent;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      sut.ownidWidget = {} as any;
       sut.ownidWidget.destroy = jest.fn();
 
       sut.ngOnDestroy();

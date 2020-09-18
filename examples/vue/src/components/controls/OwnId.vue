@@ -26,7 +26,7 @@ export default {
     console.log(this.type)
     if (this.type === 'link') {
       // @ts-ignore-next-line
-      this.ownidWidget = await window.ownid.renderLinkGigya(
+      this.ownidWidget = await window.ownid.gigya.renderLink(
         {
           element: vm.$refs['ownid-container'],
           type: this.type,

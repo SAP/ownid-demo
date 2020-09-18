@@ -57,7 +57,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
     if (this.type === 'link') {
       // @ts-ignore-next-line
-      this.ownidWidget = await window.ownid!.renderLinkGigya({
+      this.ownidWidget = await window.ownid!.gigya.renderLink({
         element: this.elRef.nativeElement,
         type: this.type,
         onLink: this.onLink.emit.bind(this.onLink),
