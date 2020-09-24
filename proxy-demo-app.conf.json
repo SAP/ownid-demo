@@ -1,12 +1,12 @@
 {
   "/netcore3/ownid": {
-    "target": "https://client.dev.ownid.com",
+    "target": "https://server.demo.dev.ownid.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/netcore3/not-ownid": {
-    "target": "https://client.dev.ownid.com",
+    "target": "https://server.demo.ownid.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

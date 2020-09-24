@@ -10,8 +10,8 @@ sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigy
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.ownid.com\/${ENV}\/js\/latest\/gigya-sdk.es5.js\"><\/script>/" dist/index.html
 docker build  -t ownid-client-app:latest .
     
-# 2 client app
-yarn ng build --configuration=${ENV}2
-sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_2}\"><\/script>/" dist/index.html
-sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.ownid.com\/${ENV}\/js\/latest\/gigya-sdk.es5.js\"><\/script>/" dist/index.html
-docker build  -t ownid-client-app:latest2 .
+# # 2 client app
+# yarn ng build --configuration=${ENV}2
+# sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_2}\"><\/script>/" dist/index.html
+# sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.ownid.com\/${ENV}\/js\/latest\/gigya-sdk.es5.js\"><\/script>/" dist/index.html
+# docker build  -t ownid-client-app:latest2 .
