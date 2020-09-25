@@ -43,9 +43,6 @@ exports[`SignPageComponent Snapshot check snapshot 1`] = `
             <mat-tab
               label="Register"
             >
-              <ownid
-                type="register"
-              />
               <registration-form />
             </mat-tab>
           </mat-tab-group>

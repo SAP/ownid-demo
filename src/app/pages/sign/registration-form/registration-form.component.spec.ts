@@ -80,4 +80,14 @@ describe('RegistrationFormComponent', () => {
       expect(sut.errors).toBe(null);
     });
   });
+
+  describe('onSuccessOwnIdResgister', () => {
+    it('should do nothing if form validation fails', () => {
+      const sut = new RegistrationFormComponent(new FormBuilder(), gigyaService, router);
+      const resp = {data : {}};
+      sut.onSuccessOwnIdResgister(resp);
+      expect(sut.showForm).toBe(true);
+      expect(sut.registerResponse).toBe(resp);
+    });
+  });
 });

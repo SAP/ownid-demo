@@ -33,10 +33,11 @@ export class GigyaService {
 
   register(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    { email, password, firstName, lastName, data }: any,
+    { email, firstName, lastName, data }: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     callback: (profile: any) => void,
   ) {
+    const password = this.generateRandomString(12);
     // @ts-ignore
     window.gigya!.accounts.initRegistration({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -83,5 +84,12 @@ export class GigyaService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback: (data: any) => this.ngZone.run(() => callback(data)),
     });
+  }
+
+  private generateRandomString(length: number): string {
+    let result = '';
+    const possibleChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for (let i = length; i > 0; --i) result += possibleChars[Math.floor(Math.random() * possibleChars.length)];
+    return result;
   }
 }

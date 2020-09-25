@@ -8,6 +8,7 @@ exports[`OwnidComponent Snapshot check snapshot 1`] = `
   onLogin={[Function EventEmitter_]}
   onRecover={[Function EventEmitter_]}
   onRegister={[Function EventEmitter_]}
+  partial="false"
   type="null"
 >
   

@@ -1,4 +1,5 @@
-<form [formGroup]="form" (ngSubmit)="register()" >
+<ownid type="register" (onRegister)="onSuccessOwnIdResgister($event)" [partial]="true" *ngIf="!showForm"></ownid>
+<form [formGroup]="form" (ngSubmit)="register()" *ngIf="showForm">
 <p>
   <span class="errors" *ngIf="errors">{{errors}}</span>
 </p>
@@ -27,36 +28,6 @@
       >You must enter a value</mat-error
     >
     <mat-error *ngIf="form.controls.email.hasError('email')">Not a valid email</mat-error>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field class="form-field">
-    <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hide = !hide"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide"
-    >
-      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field class="form-field">
-    <mat-label>Confirm password</mat-label>
-    <input matInput [type]="hideConfirm ? 'password' : 'text'" required />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hideConfirm = !hideConfirm"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hideConfirm"
-    >
-      <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
   </mat-form-field>
 </p>
 <p>

@@ -20,6 +20,8 @@ export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
 
   @Input() data: unknown | null = null;
+  
+  @Input() partial: boolean = false;
 
   @Output() onLogin = new EventEmitter();
 
@@ -58,6 +60,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
       this.ownidWidget = window.ownid!.render({
         element: this.elRef.nativeElement,
         type: this.type,
+        partial: this.partial,
         data: this.data,
         language: 'en',
         onLogin: this.onLogin.emit.bind(this.onLogin),
