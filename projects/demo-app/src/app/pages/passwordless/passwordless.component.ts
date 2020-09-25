@@ -69,8 +69,7 @@ export class PasswordlessComponent {
         const credID = PasswordlessComponent.getCookie(`credID`);
 
         if (type === 'l' && !credID) {
-          // go to "user not found
-          console.log('user not Found');
+          this.type = 'r'; // we are falling back to register flow if user not found
         }
 
         if (type === 'r' && credID) {

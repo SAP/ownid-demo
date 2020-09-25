@@ -57,7 +57,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
     if (this.type === 'link') {
       // @ts-ignore-next-line
-      this.ownidWidget = await window.ownid!.gigya.renderLink({
+      window.ownidWidget = this.ownidWidget = await window.ownid!.gigya.renderLink({
         element: this.elRef.nativeElement,
         type: this.type,
         onLink: this.onLink.emit.bind(this.onLink),
@@ -70,7 +70,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
       } : null;
 
       // @ts-ignore-next-line
-      this.ownidWidget = window.ownid!.render({
+      window.ownidWidget = this.ownidWidget = window.ownid!.render({
         element: this.elRef.nativeElement,
         type: this.type,
         data: this.data,

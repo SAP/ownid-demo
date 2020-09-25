@@ -223,8 +223,13 @@ ownid {
   }
 }
 
+.ownid-inline-warn,
 .ownid-note {
   font-size: 14px;
-  line-height: 20px;
+  line-height: 24px;
   color: #354A5F;
+}
+
+.ownid-note {
+  margin-bottom: 16px;
 }
