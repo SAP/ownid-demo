@@ -22,11 +22,12 @@ export class GigyaService {
       // @ts-ignore
       window.gigya!.accounts.getAccountInfo({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        callback: (data: any) => this.ngZone.run(() => {
-          observer.next(data.status === 'OK');
-          observer.complete();
-        }),
-      })
+        callback: (data: any) =>
+          this.ngZone.run(() => {
+            observer.next(data.status === 'OK');
+            observer.complete();
+          }),
+      });
     });
   }
 
@@ -42,7 +43,7 @@ export class GigyaService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register({ email, password, name }: any, callback: (profile: any) => void) {
+  register({ email, password, firstName, data }: any, callback: (profile: any) => void) {
     // @ts-ignore
     window.gigya!.accounts.initRegistration({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,13 +54,14 @@ export class GigyaService {
           email,
           password,
           profile: {
-            firstName: name,
+            firstName,
           },
+          data,
           finalizeRegistration: true,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          callback: (data: any) => this.ngZone.run(() => callback(data))
+          callback: (res: any) => this.ngZone.run(() => callback(res)),
         });
-      }
+      },
     });
   }
 
@@ -78,7 +80,7 @@ export class GigyaService {
     // @ts-ignore
     window.gigya!.accounts.getAccountInfo({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callback: (data: any) => this.ngZone.run(() => callback(data))
+      callback: (data: any) => this.ngZone.run(() => callback(data)),
     });
   }
 

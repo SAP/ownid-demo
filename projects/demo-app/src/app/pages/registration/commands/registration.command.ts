@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { GigyaService } from '@services/gigya.service';
+import { GigyaService } from '../../../services/gigya.service';
 
 import { AppStore } from '../../../app.store';
 import { IDataCommand } from '../../i-data-command';
