@@ -53,12 +53,6 @@ before_install:
   - pip install -U pip
   - pip install awscli
   - "$(aws ecr get-login --region us-east-2 --no-include-email)"
-  - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - sudo mv kubectl /usr/local/bin
-  - kubectl version --short --client
-  - aws eks --region us-east-2 update-kubeconfig --name ownid-eks
-  - kubectl -ndev get all
 
 install:
   - yarn
