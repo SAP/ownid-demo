@@ -77,7 +77,7 @@ deploy:
 - provider: script
   script:
     sh scripts/deploy.sh $REPOSITORY_URI $REPOSITORY_DEMO_URI $IMAGE_TAG $ENV
-
+  skip_cleanup: true
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(develop|master)$
