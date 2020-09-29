@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
 import { IProfile } from '../../app.store';
 
 export interface ISessionInfo {
@@ -20,10 +19,13 @@ export interface IOwnidRs {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignPageComponent {
-  constructor(private router: Router) {}
+  constructor() {}
 
-  onSuccess(data: IOwnidRs): void {
-    document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
-    this.router.navigateByUrl('/account');
+  onSuccessLogin(data: IOwnidRs): void {
+    // document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
+    // this.router.navigateByUrl('/account');
+    
+    // eslint-disable-next-line no-console
+    console.info(data);
   }
 }
