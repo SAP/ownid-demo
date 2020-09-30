@@ -60,18 +60,6 @@ export class LoginComponent {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLogin(statusRS: any) {
-    console.log('statusRS', statusRS);
-
-    // if (statusRS.fido2CredentialId) {
-    //
-    //
-    // }
-
-
-    // fido2CredentialId: "AYDsvOTvT0xXFff1SPOnTuchV21EONGJvX1eItkKBXGXAHvvHGnZWNivHb7MTfC0UYKyzUS33FyjpESDsODDie8S8X7nBhNMwiEE_a_DUXlvojrK5FdDOjCJ4w"
-    // fido2SignatureCounter: 1600870796
-    // pubKey:
-
     if (statusRS.sessionInfo) {
       document.cookie = `${ statusRS.sessionInfo.cookieName }=${ statusRS.sessionInfo.cookieValue }; path=/`;
       this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/notes'));

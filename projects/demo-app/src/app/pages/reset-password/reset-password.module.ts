@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
 import { ResetPasswordRoutingModule } from './reset-password-routing.module';
 import { ResetPasswordComponent } from './reset-password.component';
+import { ResetPasswordCommand } from './commands/reset-password.command';
 
 @NgModule({
   declarations: [ResetPasswordComponent],
@@ -12,6 +13,9 @@ import { ResetPasswordComponent } from './reset-password.component';
     ResetPasswordRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
+  ],
+  providers: [
+    ResetPasswordCommand,
   ]
 })
 export class ResetPasswordModule { }
