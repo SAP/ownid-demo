@@ -104,7 +104,9 @@ export class GigyaService {
     window.gigya!.accounts.getAccountInfo({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       include: 'data', callback: (userData: any) => {
-        this.setData({ownIdConnections: [...userData.data.ownIdConnections, ...conData ]}, callback)
+        const ownIdConnections = [ ...conData, ...(userData.data.ownIdConnections ?? []) ];
+        
+        this.setData({ownIdConnections}, callback)
       }
     });
   }
