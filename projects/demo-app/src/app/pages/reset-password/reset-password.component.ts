@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -18,12 +18,15 @@ export class ResetPasswordComponent {
 
   pwrt$: Observable<string>;
 
+  private observer: MutationObserver;
+
   constructor(
     actRoute: ActivatedRoute,
     formBuilder: FormBuilder,
     appStore: AppStore,
     private resetPasswordCommand: ResetPasswordCommand,
     private router: Router,
+    private elementRef: ElementRef,
   ) {
     this.pwrt$ = actRoute.queryParamMap.pipe(
       filter((params) => !!params.get('pwrt')),
@@ -36,6 +39,19 @@ export class ResetPasswordComponent {
     });
 
     this.errors$ = appStore.formError$;
+
+    // @ts-ignore
+    this.observer = new MutationObserver(() => window.ownidWidget?.recalculatePosition());
+
+    this.observer.observe(this.elementRef.nativeElement, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  ngOnDestroy() {
+    this.observer.disconnect();
   }
 
   onSubmit(passwordResetToken: string) {

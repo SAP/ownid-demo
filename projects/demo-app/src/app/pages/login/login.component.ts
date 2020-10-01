@@ -13,9 +13,6 @@ export class LoginComponent {
 
   errors: string | null = null;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private ownidWidget: any | null = null;
-
   private observer: MutationObserver;
 
   constructor(
@@ -29,10 +26,11 @@ export class LoginComponent {
       password: ['', [Validators.required]],
     });
 
-    this.observer = new MutationObserver(() => this.ownidWidget?.recalculatePosition());
+    // @ts-ignore
+    this.observer = new MutationObserver(() => window.ownidWidget?.recalculatePosition());
 
     this.observer.observe(this.elementRef.nativeElement, {
-      attributes: true,
+      attributes: false,
       childList: true,
       subtree: true,
     });
