@@ -98,6 +98,17 @@ export class GigyaService {
     })
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addOwnIdConnections(conData: any, callback: () => void = () => {}) {
+    // @ts-ignore
+    window.gigya!.accounts.getAccountInfo({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      include: 'data', callback: (userData: any) => {
+        this.setData({ownIdConnections: [...userData.data.ownIdConnections, ...conData ]}, callback)
+      }
+    });
+  }
+
   deleteAccount() {
     // @ts-ignore
     window.gigya!.accounts.getAccountInfo({

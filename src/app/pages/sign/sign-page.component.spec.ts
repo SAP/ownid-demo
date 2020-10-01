@@ -30,7 +30,7 @@ describe('SignPageComponent', () => {
 
   describe('onSuccessLogin', () => {
     it('should redirect to /account and set cookies', () => {
-      const sut = new SignPageComponent(router);
+      const sut = new SignPageComponent();
       const cookieName = 'fakeName';
       const cookieValue = 'fakeValue';
       sut.onSuccessLogin({ sessionInfo: { cookieName, cookieValue } } as IOwnidRs);

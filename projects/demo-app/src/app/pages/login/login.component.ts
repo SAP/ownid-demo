@@ -49,9 +49,9 @@ export class LoginComponent {
         } else {
           // @ts-ignore
           const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
-
+          
           if (statusRS.data) {
-            this.gigyaService.setData({ ownIdConnections: [{ ...statusRS.data }] });
+            this.gigyaService.addOwnIdConnections(statusRS.data);
           }
         }
       });

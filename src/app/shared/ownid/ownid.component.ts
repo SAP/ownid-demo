@@ -20,7 +20,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
 
   @Input() data: unknown | null = null;
-  
+
   @Input() partial = false;
 
   @Output() onLogin = new EventEmitter();

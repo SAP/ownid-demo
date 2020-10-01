@@ -24,7 +24,7 @@ export class SignPageComponent {
   onSuccessLogin(data: IOwnidRs): void {
     // document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
     // this.router.navigateByUrl('/account');
-    
+
     // eslint-disable-next-line no-console
     console.info(data);
   }

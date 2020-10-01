@@ -13,16 +13,16 @@ export class RegistrationFormComponent {
   form: FormGroup;
 
   errors: string | null = null;
-  
+
   showForm = false;
-  
+
   registerResponse: any;
 
   public constructor(formBuilder: FormBuilder, private gigyaService: GigyaService, private router: Router) {
     this.form = formBuilder.group({
       lastName: [''],
       firstName: [''],
-      email: ['', [Validators.email, Validators.required]]
+      email: ['', [Validators.email, Validators.required]],
     });
   }
 
@@ -30,13 +30,16 @@ export class RegistrationFormComponent {
     this.errors = null;
     if (this.form.valid) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.gigyaService.register({...this.form.value, data: {ownIdConnections : [ this.registerResponse ]}}, (data: any) => {
-        if (data.status === 'FAIL') {
-          this.errors = data.errorDetails;
-        } else {
-          this.router.navigateByUrl('/account');
-        }
-      });
+      this.gigyaService.register(
+        { ...this.form.value, data: { ownIdConnections: [this.registerResponse] } },
+        (data: any) => {
+          if (data.status === 'FAIL') {
+            this.errors = data.errorDetails;
+          } else {
+            this.router.navigateByUrl('/account');
+          }
+        },
+      );
     }
   }
 

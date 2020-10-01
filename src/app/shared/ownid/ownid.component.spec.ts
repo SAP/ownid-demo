@@ -45,7 +45,7 @@ describe('OwnidComponent', () => {
         init: jest.fn(),
         render: jest.fn(),
         gigya: {
-          renderLink: jest.fn()
+          renderLink: jest.fn(),
         },
       };
 
