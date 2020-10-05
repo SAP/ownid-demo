@@ -34,3 +34,14 @@ echo Images update
 kubectl apply -f manifests/$ENV/demo.yaml
 kubectl -n=$ENV set image deployment/ownid-demo-app-deployment ownid-demo-app=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
 # kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
+
+if [ "$ENV" = "staging" ]; then
+
+        # Demo 2 update
+        echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_2 to registry
+        docker tag ownid-demo-app:latest2 $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
+        docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
+
+      echo Updating DEMO2
+      kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
+fi
