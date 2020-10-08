@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GigyaService } from '@services/gigya.service';
 import { DemoFooterModule } from './../../shared/demo-footer/demo-footer.module';
+import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
 
 import { InstantRegistrationComponent } from './instant-registration.component';
 import { InstantRegistrationRoutingModule } from './instant-registration-routing.module';
@@ -16,7 +17,8 @@ import { CustomRegistrationCommand } from './commands/custom-registration.comman
     InstantRegistrationRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
-    DemoFooterModule
+    DemoFooterModule,
+    DemoHeaderModule
   ],
   providers: [
     CustomRegistrationCommand,

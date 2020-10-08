@@ -6,6 +6,7 @@ import { RegistrationComponent } from './registration.component';
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
 import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
+import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
 import { RegistrationCommand } from './commands/registration.command';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RegistrationCommand } from './commands/registration.command';
     RegistrationRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
-    DemoFooterModule
+    DemoFooterModule,
+    DemoHeaderModule
   ],
   providers: [
     RegistrationCommand,

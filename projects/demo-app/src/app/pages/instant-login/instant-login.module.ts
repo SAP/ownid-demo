@@ -4,7 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InstantLoginComponent } from './instant-login.component';
 import { InstantLoginRoutingModule } from './instant-login-routing.module';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
-import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
+import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module';
+import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
 
 @NgModule({
   declarations: [InstantLoginComponent],
@@ -13,7 +14,8 @@ import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
     InstantLoginRoutingModule,
     ReactiveFormsModule,
     OwnidModule,
-    DemoFooterModule
+    DemoFooterModule,
+    DemoHeaderModule
   ]
 })
 export class InstantLoginModule { }

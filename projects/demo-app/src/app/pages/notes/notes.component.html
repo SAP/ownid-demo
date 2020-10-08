@@ -1,83 +1,23 @@
+<demo-header></demo-header>
 <ng-container *ngIf="{ note: note$ | async } as context">
-  <div class="sidebar"
-       [ngClass]="{closed: sidebarClosed, 'mob-closed': mobSidebarClosed}">
-    <header class="header">
-      <div class="profile"
+  <div class="container">
+    
+    <div class="content">
+    <div class="profile"
            *ngIf="profile$ | async as profile"
            clickOutside
            (clickOutside)="showProfileTooltip = false"
            (click)="showProfileTooltip = !showProfileTooltip">
-        {{profile.name}}
-        <div class="profile-arrow-icon"></div>
-        <div class="profile-tooltip"
-             *ngIf="showProfileTooltip">
-          <div class="tooltip-link" (click)="showAccount = true">
+       Welcome {{profile.name}}! You are signed in. 
+    </div>
+    <div class="tooltip-link" (click)="showAccount = true">
             <div class="profile-icon"></div>
-            Account
-          </div>
-          <div class="tooltip-link">
-            <div class="help-icon"></div>
-            Help
-          </div>
-          <div class="tooltip-link" (click)="onLogout()">
+            My Account
+    </div>
+    <div class="tooltip-link" (click)="onLogout()">
             <div class="logout-icon"></div>
             Log out
-          </div>
-        </div>
-      </div>
-
-      <div class="note-add-icon icon"
-           (click)="addNote()">
-        Add
-      </div>
-    </header>
-
-    <div class="sidebar-content"
-         *ngIf="notes$ | async as notes">
-      <a class="notes-list-item"
-         *ngFor="let note of notes"
-         [ngClass]="{ active : context.note?.id === note.id, empty: !note.body }"
-         (click)="mobSidebarClosed = true"
-         [routerLink]="['/notes/' + note.id]"
-         [innerHTML]="note.body || '<div>New Note...</div><div>No additional text</div>'">
-      </a>
     </div>
-  </div>
-
-  <div class="main">
-    <header class="header">
-      <div class="close-sidebar-icon icon"
-           [ngClass]="{ open: sidebarClosed, 'mob-open': mobSidebarClosed }"
-           (click)="sidebarClosed = !sidebarClosed; mobSidebarClosed = !mobSidebarClosed">
-        Close
-      </div>
-      <div class="actions">
-        <div class="note-delete-icon icon"
-             [ngClass]="{ disabled: !context.note }"
-             (click)="deleteNote(context.note.id)">
-          Delete
-        </div>
-        <div class="info-icon icon"
-             [ngClass]="{ disabled: !context.note }"
-             clickOutside
-             (clickOutside)="showTooltip = false"
-             (click)="showTooltip = !showTooltip">
-          Info
-        </div>
-      </div>
-
-      <div class="info-tooltip"
-           *ngIf="showTooltip">
-        <div class="tooltip-text">Modified</div>
-        <div class="tooltip-text date">{{context.note.updated | date: 'medium'}}</div>
-        <div class="tooltip-text">{{context.note.words}} words</div>
-        <div class="tooltip-text">{{context.note.characters}} characters</div>
-      </div>
-
-    </header>
-
-    <div class="note" *ngIf="context.note">
-      <note-edit [note]="context.note"></note-edit>
     </div>
   </div>
 </ng-container>
@@ -85,3 +25,4 @@
 <ng-container *ngIf="profile$ | async as profile">
   <account-popup [profile]="profile" (onClick)="showAccount = false" *ngIf="showAccount"></account-popup>
 </ng-container>
+<demo-footer></demo-footer>
