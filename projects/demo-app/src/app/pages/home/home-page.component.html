@@ -3,14 +3,14 @@
   <!-- <a class="logo" routerLink="/"></a> -->
 
   <div class="content">
-          <div class= "title-home"> OwnID Demo </div>
-          <div class = "subtitle-home"> OwnID enables your users to create a digital identity on their phone to instantly login to your websites or apps.</div>
-          <div class = "slogan-home"> Passwords are finally gone.</div>
+          <div class="title-home"> OwnID Demo </div>
+          <div class="subtitle-home"> OwnID enables your users to create a digital identity on their phone to instantly login to your websites or apps.</div>
+          <div class="slogan-home"> Passwords are finally gone.</div>
           
-          <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button-home" routerLink="/register">Registration</a>
-          <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button-home" routerLink="/login">Login</a>
-          <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button-home" routerLink="/instant-register">Registration</a>
-          <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button-home" routerLink="/instant-login">Login</a>
+          <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button-home" routerLink="/register">Try it now!</a>
+          <!-- <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button-home" routerLink="/login">Try Login!</a> -->
+          <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button-home" routerLink="/instant-register">Try it now!</a>
+          <!-- <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button-home" routerLink="/instant-login">Login</a> -->
   </div>
 
 </div>

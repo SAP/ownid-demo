@@ -70,7 +70,7 @@ export class GigyaService {
     window.gigya!.accounts.logout({
       callback: () => this.ngZone.run(() => {
         this.appStore.profile$.next({} as IProfile);
-        this.router.navigateByUrl('/')
+        this.router.navigateByUrl('/login')
       }),
     });
   }

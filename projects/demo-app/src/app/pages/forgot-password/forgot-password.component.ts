@@ -46,6 +46,6 @@ export class ForgotPasswordComponent {
   }
 
   onGoToLogin() {
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/login')
   }
 }
