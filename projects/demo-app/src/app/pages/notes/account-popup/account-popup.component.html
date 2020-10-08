@@ -10,9 +10,10 @@
 
       <input class="own-input" type="email" placeholder="Email" formControlName="email" readonly>
 
-      <ng-container *ngIf="!(isOwnidUser$ | async) else ownidUser">
+      <!-- <ng-container *ngIf="!(isOwnidUser$ | async) else ownidUser">
         <input class="own-input" type="password" placeholder="Password" formControlName="password" readonly>
       </ng-container>
+      -->
 
       <ng-template #ownidUser>
         <a class="pass-for-ownid" href="#" target="_blank">
