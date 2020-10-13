@@ -76,7 +76,7 @@ metadata:
   labels:
     app: ownid-demo-app-2
 spec:
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   replicas: 1
   selector:
     matchLabels:
@@ -120,7 +120,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:571861302935:certificate/e66c2d16-b56c-4ca6-954c-d9cb07b5878b
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:571861302935:certificate/faee77b3-e6b7-4ced-844d-46d25922fcd2
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
   labels:

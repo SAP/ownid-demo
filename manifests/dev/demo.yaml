@@ -76,7 +76,7 @@ metadata:
   labels:
     app: ownid-demo-app-2
 spec:
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   replicas: 1
   selector:
     matchLabels:
