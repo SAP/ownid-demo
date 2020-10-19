@@ -1,6 +1,4 @@
 #!/bin/bash
-
-TRAVIS_API_TOKEN=qivICXaHsqQJiBAxxlonnw
 REPO_SLUG=OwnID%2Fautomation
 REPO_BRANCH=${3:-"development"}
 COMPONENT=${1:-"all"}
