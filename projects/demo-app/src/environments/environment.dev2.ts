@@ -2,7 +2,7 @@ import { OwnIDFlow, IEnvironment } from './i-environment';
 
 export const environment: IEnvironment = {
   production: true,
-  gigyaApiKey: '3_7_S7SAvBaZSfIIO9A-kLKFXVzjo3tPUMI0_5KNmAC6tdotjPx8MRy1lxtsfJpcT-',
-  ownidURLPrefix: '/netcore3/ownid',
-  flow: OwnIDFlow.authOnly,
+  gigyaApiKey: '3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_',
+  ownidURLPrefix: 'https://passwordless.demo.dev.skipthepassword.com/ownid',
+  flow: OwnIDFlow.classic,
 };

@@ -2,8 +2,10 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #111D29;
+  background-color: #F5F6F7;
+  overflow-x: hidden;
 }
 
 .icon {
@@ -39,6 +41,7 @@ body {
   height: 30px;
   padding: 0 11px;
   margin-bottom: 8px;
+  font-size: 0.9rem;
 
   &::placeholder {
     color: #354A5F;

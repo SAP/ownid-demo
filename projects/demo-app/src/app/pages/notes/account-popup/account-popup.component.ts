@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AppStore, IProfile } from '../../../app.store';
-
-// import { GigyaService } from '../../../services/gigya.service';
 
 @Component({
   selector: 'account-popup',
@@ -17,6 +15,8 @@ export class AccountPopupComponent implements OnChanges {
 
   @Output() onClick = new EventEmitter();
 
+  errors$: BehaviorSubject<string | null>;
+
   form: FormGroup;
 
   isOwnidUser$: Observable<boolean>;
@@ -29,6 +29,8 @@ export class AccountPopupComponent implements OnChanges {
   ) {
 
     this.isOwnidUser$ = this.store.isOwnidUser$;
+
+    this.errors$ = new BehaviorSubject<string | null>(null);
 
     this.form = formBuilder.group({
       name: ['', [Validators.required]],
@@ -47,5 +49,9 @@ export class AccountPopupComponent implements OnChanges {
       // this.gigyaService.setOwnidUser(true);
       this.onClick.emit();
     });
+  }
+
+  onError(errorMessage: string) {
+    this.errors$.next(errorMessage);
   }
 }

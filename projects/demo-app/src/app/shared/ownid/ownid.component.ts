@@ -61,6 +61,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
         element: this.elRef.nativeElement,
         type: this.type,
         onLink: this.onLink.emit.bind(this.onLink),
+        onError: this.onError.emit.bind(this.onError),
       }, environment.gigyaApiKey);
     } else {
       const inline = this.inline ? {

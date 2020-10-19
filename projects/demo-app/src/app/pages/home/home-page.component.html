@@ -1,50 +1,17 @@
+<demo-header></demo-header>
 <div class="container">
-  <nav class="top-nav">
-    <a class="logo" routerLink="/"></a>
-  </nav>
+  <!-- <a class="logo" routerLink="/"></a> -->
 
-  <header class="header">
-    <h1 class="title">Stay <br>Noted <br>Here.</h1>
-    <div>
-      <div class="slogan">The simplest way to keep and access your notes everywhere for free.</div>
-      <div class="top-navigation">
-        <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button" routerLink="/register">Create OwnID Profile Demo</a>
-        <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button" routerLink="/instant-register">Authentication Only Demo</a>
-      </div>
-    </div>
-  </header>
-  <div class="main">
-    <div class="image"></div>
-
-    <div class="items">
-      <div class="item">
-        <div class="item-title">Use it anywhere</div>
-        <div class="item-text">Stay noted across all our devices. No buttons to press. It just works.</div>
-      </div>
-
-      <div class="item item-2">
-        <div class="item-title">Always free</div>
-        <div class="item-text">Stay noted completely free.</div>
-      </div>
-
-      <div class="item item-3">
-        <div class="item-title">Clean and simple</div>
-        <div class="item-text">No ads. No fuss. Just notes.</div>
-      </div>
-    </div>
-
+  <div class="content">
+          <div class="title-home"> OwnID Demo </div>
+          <div class="subtitle-home"> OwnID enables your users to create a digital identity on their phone to instantly login to your websites or apps.</div>
+          <div class="slogan-home"> Passwords are finally gone.</div>
+          
+          <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button-home" routerLink="/register">Try it now!</a>
+          <!-- <a *ngIf="flow === OwnIDFlow.classic" class="top-nav-item own-button-home" routerLink="/login">Try Login!</a> -->
+          <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button-home" routerLink="/instant-register">Try it now!</a>
+          <!-- <a *ngIf="flow === OwnIDFlow.authOnly" class="top-nav-item own-button-home" routerLink="/instant-login">Login</a> -->
   </div>
 
-  <footer class="footer">
-    <div class="copy item-copy">© 2020 OwnID by SAP</div>
-
-    <nav>
-      <div class="footer-navigation">
-        <a class="footer-nav-item item-copy" href="#">About</a>
-        <a class="footer-nav-item item-copy" href="#">OwnId Documentation</a>
-        <a class="footer-nav-item item-copy" target="_blank" href="https://www.sap.com/corporate/en/legal/terms-of-use.html">Terms of use</a>
-        <a class="footer-nav-item item-copy" target="_blank" href="https://www.sap.com/about/legal/privacy.html">Privacy</a>
-      </div>
-    </nav>
-  </footer>
 </div>
+<demo-footer></demo-footer>
