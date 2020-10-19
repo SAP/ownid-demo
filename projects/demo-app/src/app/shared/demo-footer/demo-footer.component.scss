@@ -71,7 +71,7 @@
   margin-right: 160px;
 }
 
-@media (max-width: 599px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 599px) {
 
   .items {
     flex-direction: column;
@@ -106,4 +106,15 @@
     margin: 48px 0 0;
     order: 2;
   }
+}
+
+
+@media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 823px) 
+  //and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+    .footer {
+      position: relative;
+    }
 }
