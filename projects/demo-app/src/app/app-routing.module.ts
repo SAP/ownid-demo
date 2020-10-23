@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotesGuard } from './services/notes-guard.service';
 import { LoginGuard } from './services/login-guard.service';
 
-
 const routes: Routes = [
   {
     path: 'login',
@@ -32,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'instant-register',
-    loadChildren: () => import('./pages/instant-registration/instant-registration.module').then((m) => m.InstantRegistrationModule),
+    loadChildren: () =>
+      import('./pages/instant-registration/instant-registration.module').then((m) => m.InstantRegistrationModule),
     canActivate: [LoginGuard],
   },
   {
@@ -57,6 +57,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

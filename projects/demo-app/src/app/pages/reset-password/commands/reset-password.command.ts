@@ -7,15 +7,10 @@ import { AppStore } from '../../../app.store';
 import { IDataCommand } from '../../i-data-command';
 
 @Injectable()
-export class ResetPasswordCommand implements IDataCommand<{ passwordResetToken: string, password?: string }> {
-  constructor(
-    private appStore: AppStore,
-    private gigyaService: GigyaService,
-    private router: Router,
-  ) {
-  }
+export class ResetPasswordCommand implements IDataCommand<{ passwordResetToken: string; password?: string }> {
+  constructor(private appStore: AppStore, private gigyaService: GigyaService, private router: Router) {}
 
-  async execute({ passwordResetToken, password }: { passwordResetToken: string, password?: string }) {
+  async execute({ passwordResetToken, password }: { passwordResetToken: string; password?: string }) {
     this.appStore.formError$.next(null);
 
     // @ts-ignore
@@ -31,16 +26,19 @@ export class ResetPasswordCommand implements IDataCommand<{ passwordResetToken: 
       return;
     }
 
-    this.gigyaService.resetPassword({
-      passwordResetToken,
-      newPassword: password,
-    }, async (data: { status: string, errorDetails: string }) => {
-      if (data.status === 'FAIL') {
-        this.appStore.formError$.next(data.errorDetails);
-        return;
-      }
+    this.gigyaService.resetPassword(
+      {
+        passwordResetToken,
+        newPassword: password,
+      },
+      async (data: { status: string; errorDetails: string }) => {
+        if (data.status === 'FAIL') {
+          this.appStore.formError$.next(data.errorDetails);
+          return;
+        }
 
-      this.router.navigateByUrl('/login');
-    });
+        this.router.navigateByUrl('/login');
+      },
+    );
   }
 }

@@ -7,9 +7,9 @@ import { RegistrationCommand } from './commands/registration.command';
 @Component({
   selector: 'login',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnDestroy{
+export class RegistrationComponent implements OnDestroy {
   form: FormGroup;
 
   errors$: BehaviorSubject<string | null>;
@@ -49,7 +49,7 @@ export class RegistrationComponent implements OnDestroy{
 
   onSubmit() {
     if (this.form.valid && this.ownidWidget) {
-      this.registrationCommand.execute({ data: this.form.value, ownidWidget: this.ownidWidget })
+      this.registrationCommand.execute({ data: this.form.value, ownidWidget: this.ownidWidget });
     }
 
     Object.values(this.form.controls).forEach((field: AbstractControl) => {

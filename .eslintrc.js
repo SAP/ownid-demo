@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['import', '@typescript-eslint', 'eslint-comments', 'jest', 'promise', 'unicorn'],
+  plugins: ['import', '@typescript-eslint', 'eslint-comments', 'jest', 'promise', 'unicorn', 'prettier'],
   extends: [
     'airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
@@ -11,6 +11,7 @@ module.exports = {
     'plugin:unicorn/recommended',
     'prettier',
     'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
   ],
   env: {
     node: true,
@@ -41,6 +42,8 @@ module.exports = {
     'no-plusplus': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'no-console': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   settings: {
     'import/parsers': {

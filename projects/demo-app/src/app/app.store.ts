@@ -1,9 +1,9 @@
 import { BehaviorSubject } from 'rxjs';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 export interface INote {
   characters: number;
-  words: number
+  words: number;
   id: string;
   body: string;
   created: string;

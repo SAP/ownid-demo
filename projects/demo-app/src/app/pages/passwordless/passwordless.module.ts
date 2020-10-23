@@ -5,9 +5,6 @@ import { PasswordlessRoutingModule } from './passwordless-routing.module';
 
 @NgModule({
   declarations: [PasswordlessComponent],
-  imports: [
-    CommonModule,
-    PasswordlessRoutingModule,
-  ]
+  imports: [CommonModule, PasswordlessRoutingModule],
 })
-export class PasswordlessModule { }
+export class PasswordlessModule {}

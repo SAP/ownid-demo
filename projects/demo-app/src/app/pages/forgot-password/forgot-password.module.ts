@@ -5,7 +5,7 @@ import { OwnidModule } from '../../shared/ownid/ownid.module';
 import { ForgotPasswordRoutingModule } from './forgot-password-routing.module';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module';
-import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
+import { DemoHeaderModule } from '../../shared/demo-header/demo-header.module';
 
 @NgModule({
   declarations: [ForgotPasswordComponent],
@@ -15,7 +15,7 @@ import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module'
     ReactiveFormsModule,
     OwnidModule,
     DemoFooterModule,
-    DemoHeaderModule
-  ]
+    DemoHeaderModule,
+  ],
 })
-export class ForgotPasswordModule { }
+export class ForgotPasswordModule {}

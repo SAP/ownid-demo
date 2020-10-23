@@ -11,7 +11,7 @@ import { GetNotesCommand } from './commands/get-notes.command';
 @Component({
   selector: 'notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss']
+  styleUrls: ['./notes.component.scss'],
 })
 export class NotesComponent implements OnInit {
   sidebarClosed = false;
@@ -42,12 +42,12 @@ export class NotesComponent implements OnInit {
       filter((params) => !!params.get('id')),
       map((params) => params.get('id') as string),
     );
-    this.notes$ = this.appStore.notes$
-    this.profile$ = this.appStore.profile$
+    this.notes$ = this.appStore.notes$;
+    this.profile$ = this.appStore.profile$;
 
     this.note$ = combineLatest(this.notes$, noteId$).pipe(
-      map(([notes, noteId]) => notes.find(({id}) => id === noteId)),
-    )
+      map(([notes, noteId]) => notes.find(({ id }) => id === noteId)),
+    );
   }
 
   ngOnInit(): void {
@@ -68,6 +68,6 @@ export class NotesComponent implements OnInit {
   }
 
   onLogout() {
-    this.gigyaService.logout()
+    this.gigyaService.logout();
   }
 }

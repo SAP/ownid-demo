@@ -6,7 +6,7 @@ import { GigyaService } from '../../services/gigya.service';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   form: FormGroup;
@@ -47,7 +47,7 @@ export class LoginComponent {
         } else {
           // @ts-ignore
           const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
-          
+
           if (statusRS.data) {
             this.gigyaService.addOwnIdConnections(statusRS.data);
           }
@@ -59,7 +59,7 @@ export class LoginComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLogin(statusRS: any) {
     if (statusRS.sessionInfo) {
-      document.cookie = `${ statusRS.sessionInfo.cookieName }=${ statusRS.sessionInfo.cookieValue }; path=/`;
+      document.cookie = `${statusRS.sessionInfo.cookieName}=${statusRS.sessionInfo.cookieValue}; path=/`;
       this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/notes'));
     }
   }

@@ -13,8 +13,8 @@ import { GetNotesCommand } from './commands/get-notes.command';
 import { AccountPopupComponent } from './account-popup/account-popup.component';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
 import { GigyaService } from '../../services/gigya.service';
-import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
-import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
+import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module';
+import { DemoHeaderModule } from '../../shared/demo-header/demo-header.module';
 
 @NgModule({
   declarations: [NotesComponent, NoteEditComponent, AccountPopupComponent],
@@ -25,15 +25,8 @@ import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module'
     ReactiveFormsModule,
     OwnidModule,
     DemoFooterModule,
-    DemoHeaderModule
+    DemoHeaderModule,
   ],
-  providers: [
-    AppStore,
-    AddNoteCommand,
-    SaveNoteCommand,
-    DeleteNoteCommand,
-    GetNotesCommand,
-    GigyaService,
-  ]
+  providers: [AppStore, AddNoteCommand, SaveNoteCommand, DeleteNoteCommand, GetNotesCommand, GigyaService],
 })
 export class NotesModule {}

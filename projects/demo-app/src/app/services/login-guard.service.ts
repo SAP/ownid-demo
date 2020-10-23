@@ -6,10 +6,7 @@ import { GigyaService } from './gigya.service';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
-  constructor(
-    public gigyaService: GigyaService,
-    public router: Router,
-    ) {}
+  constructor(public gigyaService: GigyaService, public router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.gigyaService.isLoggedIn().pipe(
@@ -19,7 +16,7 @@ export class LoginGuard implements CanActivate {
         }
 
         return !isLoggedIn;
-      })
+      }),
     );
   }
 }

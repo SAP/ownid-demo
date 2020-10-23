@@ -4,9 +4,7 @@ import { ICommand } from '../../i-command';
 
 @Injectable()
 export class SaveNoteCommand implements ICommand {
-  constructor(
-    private store: AppStore,
-  ) {}
+  constructor(private store: AppStore) {}
 
   execute() {
     const notes = this.store.notes$.getValue();
