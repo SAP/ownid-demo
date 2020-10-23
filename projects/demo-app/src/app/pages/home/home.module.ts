@@ -3,15 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './home-page.component';
 import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module';
-import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
+import { DemoHeaderModule } from '../../shared/demo-header/demo-header.module';
 
 @NgModule({
   declarations: [HomePageComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    DemoFooterModule,
-    DemoHeaderModule
-  ]
+  imports: [CommonModule, HomeRoutingModule, DemoFooterModule, DemoHeaderModule],
 })
-export class HomeModule { }
+export class HomeModule {}

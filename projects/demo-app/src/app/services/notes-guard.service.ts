@@ -6,10 +6,7 @@ import { GigyaService } from './gigya.service';
 
 @Injectable()
 export class NotesGuard implements CanActivate {
-  constructor(
-    public gigyaService: GigyaService,
-    public router: Router,
-  ) {}
+  constructor(public gigyaService: GigyaService, public router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.gigyaService.isLoggedIn().pipe(
@@ -17,7 +14,7 @@ export class NotesGuard implements CanActivate {
         if (!canActivate) {
           this.router.navigateByUrl('/');
         }
-      })
+      }),
     );
   }
 }

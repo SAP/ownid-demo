@@ -5,8 +5,8 @@ import { OwnidModule } from '../../shared/ownid/ownid.module';
 import { ResetPasswordRoutingModule } from './reset-password-routing.module';
 import { ResetPasswordComponent } from './reset-password.component';
 import { ResetPasswordCommand } from './commands/reset-password.command';
-import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
-import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
+import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module';
+import { DemoHeaderModule } from '../../shared/demo-header/demo-header.module';
 
 @NgModule({
   declarations: [ResetPasswordComponent],
@@ -16,10 +16,8 @@ import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module'
     ReactiveFormsModule,
     OwnidModule,
     DemoFooterModule,
-    DemoHeaderModule
+    DemoHeaderModule,
   ],
-  providers: [
-    ResetPasswordCommand,
-  ]
+  providers: [ResetPasswordCommand],
 })
-export class ResetPasswordModule { }
+export class ResetPasswordModule {}

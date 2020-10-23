@@ -9,7 +9,7 @@ import { AppStore } from '../../app.store';
 @Component({
   selector: 'login',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent {
   form: FormGroup;

@@ -8,7 +8,7 @@ import { AppStore } from '../../app.store';
 @Component({
   selector: 'login',
   templateUrl: './instant-registration.component.html',
-  styleUrls: ['./instant-registration.component.scss']
+  styleUrls: ['./instant-registration.component.scss'],
 })
 export class InstantRegistrationComponent {
   form: FormGroup;
@@ -34,7 +34,7 @@ export class InstantRegistrationComponent {
 
   onSubmit() {
     if (this.form.valid && this.ownidWidget) {
-      this.customRegistrationCommand.execute({ data: this.form.value, ownidWidget: this.ownidWidget })
+      this.customRegistrationCommand.execute({ data: this.form.value, ownidWidget: this.ownidWidget });
     }
 
     Object.values(this.form.controls).forEach((field: AbstractControl) => {

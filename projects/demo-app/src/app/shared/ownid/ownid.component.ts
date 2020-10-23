@@ -7,14 +7,14 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
-} from "@angular/core";
+  Output,
+} from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: "ownid",
-  template: "",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'ownid',
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OwnidComponent implements OnInit, OnDestroy {
   @Input() type: string | null = null;
@@ -57,20 +57,27 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
     if (this.type === 'link') {
       // @ts-ignore-next-line
-      window.ownidWidget = this.ownidWidget = await window.ownid!.gigya.renderLink({
-        element: this.elRef.nativeElement,
-        type: this.type,
-        onLink: this.onLink.emit.bind(this.onLink),
-        onError: this.onError.emit.bind(this.onError),
-      }, environment.gigyaApiKey);
+      // eslint-disable-next-line no-multi-assign
+      window.ownidWidget = this.ownidWidget = await window.ownid!.gigya.renderLink(
+        {
+          element: this.elRef.nativeElement,
+          type: this.type,
+          onLink: this.onLink.emit.bind(this.onLink),
+          onError: this.onError.emit.bind(this.onError),
+        },
+        environment.gigyaApiKey,
+      );
     } else {
-      const inline = this.inline ? {
-        targetElement: document.querySelector(this.inline.targetElement),
-        additionalElements: this.inline.additionalElements?.map((selector) => document.querySelector(selector)),
-        offset: this.inline.offset
-      } : null;
+      const inline = this.inline
+        ? {
+            targetElement: document.querySelector(this.inline.targetElement),
+            additionalElements: this.inline.additionalElements?.map((selector) => document.querySelector(selector)),
+            offset: this.inline.offset,
+          }
+        : null;
 
       // @ts-ignore-next-line
+      // eslint-disable-next-line no-multi-assign
       window.ownidWidget = this.ownidWidget = window.ownid!.render({
         element: this.elRef.nativeElement,
         type: this.type,

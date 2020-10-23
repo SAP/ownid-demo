@@ -10,7 +10,6 @@ import { AppStore, IProfile } from '../../../app.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountPopupComponent implements OnChanges {
-
   @Input() profile: IProfile | null = null;
 
   @Output() onClick = new EventEmitter();
@@ -25,9 +24,8 @@ export class AccountPopupComponent implements OnChanges {
     formBuilder: FormBuilder,
     // private gigyaService: GigyaService,
     private store: AppStore,
-    private ngZone: NgZone
+    private ngZone: NgZone,
   ) {
-
     this.isOwnidUser$ = this.store.isOwnidUser$;
 
     this.errors$ = new BehaviorSubject<string | null>(null);

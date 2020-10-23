@@ -5,10 +5,7 @@ import { IDataCommand } from '../../i-data-command';
 
 @Injectable()
 export class DeleteNoteCommand implements IDataCommand<string> {
-  constructor(
-    private router: Router,
-    private store: AppStore,
-  ) {}
+  constructor(private router: Router, private store: AppStore) {}
 
   execute(noteId: string) {
     const notes = this.store.notes$.getValue();
@@ -16,6 +13,6 @@ export class DeleteNoteCommand implements IDataCommand<string> {
 
     this.store.notes$.next(newNotes);
 
-    this.router.navigateByUrl(`/notes${  newNotes[0] ? `/${newNotes[0].id}` : ''}`);
+    this.router.navigateByUrl(`/notes${newNotes[0] ? `/${newNotes[0].id}` : ''}`);
   }
 }

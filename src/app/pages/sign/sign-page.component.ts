@@ -19,8 +19,6 @@ export interface IOwnidRs {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignPageComponent {
-  constructor() {}
-
   onSuccessLogin(data: IOwnidRs): void {
     // document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
     // this.router.navigateByUrl('/account');

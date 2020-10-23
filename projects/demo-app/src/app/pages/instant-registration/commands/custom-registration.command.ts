@@ -13,19 +13,16 @@ interface GigyaRequestData {
     ownIdConnections: {
       keyHsh: string;
       pubKey: string;
-    }[]
-  }
+    }[];
+  };
 }
 
-
 @Injectable()
-export class CustomRegistrationCommand implements IDataCommand<{ data: { [key: string]: string }, ownidWidget: unknown }> {
-  constructor(
-    private appStore: AppStore,
-    private gigyaService: GigyaService,
-  ) {}
+export class CustomRegistrationCommand
+  implements IDataCommand<{ data: { [key: string]: string }; ownidWidget: unknown }> {
+  constructor(private appStore: AppStore, private gigyaService: GigyaService) {}
 
-  async execute({ data, ownidWidget }: { data: { [key: string]: string }, ownidWidget: unknown }) {
+  async execute({ data, ownidWidget }: { data: { [key: string]: string }; ownidWidget: unknown }) {
     this.appStore.formError$.next(null);
 
     const { email, firstName, password } = data;
@@ -47,14 +44,16 @@ export class CustomRegistrationCommand implements IDataCommand<{ data: { [key: s
         // @ts-ignore
         password: window.ownid.generateOwnIDPassword(12),
         data: {
-          ownIdConnections: [{
-            ...ownidResponse.data
-          }]
+          ownIdConnections: [
+            {
+              ...ownidResponse.data,
+            },
+          ],
         },
       };
     }
 
-    this.gigyaService.register(gigyaRequestData, (resp: { status: string, errorDetails: string }) => {
+    this.gigyaService.register(gigyaRequestData, (resp: { status: string; errorDetails: string }) => {
       if (resp.status === 'FAIL') {
         this.appStore.formError$.next(resp.errorDetails);
       }
