@@ -33,6 +33,8 @@ docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG
 echo Images update
 kubectl apply -f manifests/$ENV/demo.yaml
 kubectl -n=$ENV set image deployment/ownid-demo-app-deployment ownid-demo-app=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
+kubectl -n=$ENV set image deployment/ownid-demo-app-3-deployment ownid-demo-app-3=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
+kubectl -n=$ENV set image deployment/ownid-demo-app-4-deployment ownid-demo-app-4=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
 # kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
 
 # Demo 2 update
