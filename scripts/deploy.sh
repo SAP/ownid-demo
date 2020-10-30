@@ -4,6 +4,8 @@ REPOSITORY_URI=$1
 REPOSITORY_DEMO_URI=$2
 IMAGE_TAG=$3
 IMAGE_TAG_2=$3_
+IMAGE_TAG_3=$3_f3
+IMAGE_TAG_4=$3_f4
 ENV=$4
 
 # Clients update
@@ -33,8 +35,7 @@ docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG
 echo Images update
 kubectl apply -f manifests/$ENV/demo.yaml
 kubectl -n=$ENV set image deployment/ownid-demo-app-deployment ownid-demo-app=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
-kubectl -n=$ENV set image deployment/ownid-demo-app-3-deployment ownid-demo-app-3=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
-kubectl -n=$ENV set image deployment/ownid-demo-app-4-deployment ownid-demo-app-4=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
+
 # kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
 
 # Demo 2 update
@@ -44,3 +45,20 @@ docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
 
 echo Updating DEMO2
 kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
+
+# Demo 3 update
+echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_3 to registry
+docker tag ownid-demo-app:latest3 $REPOSITORY_DEMO_URI:$IMAGE_TAG_3
+docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_3
+
+echo Updating DEMO3
+kubectl -n=$ENV set image deployment/ownid-demo-app-3-deployment ownid-demo-app-3=$REPOSITORY_DEMO_URI:$IMAGE_TAG_3 --record
+
+
+# Demo 4 update
+echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_4 to registry
+docker tag ownid-demo-app:latest4 $REPOSITORY_DEMO_URI:$IMAGE_TAG_4
+docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_4
+
+echo Updating DEMO4
+kubectl -n=$ENV set image deployment/ownid-demo-app-4-deployment ownid-demo-app-4=$REPOSITORY_DEMO_URI:$IMAGE_TAG_4 --record

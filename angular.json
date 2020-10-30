@@ -217,6 +217,22 @@
                   "with": "projects/demo-app/src/environments/environment.dev2.ts"
                 }
               ]
+            },
+            "dev3": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.dev3.ts"
+                }
+              ]
+            },
+            "dev4": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.dev4.ts"
+                }
+              ]
             }
           }
         },
