@@ -137,3 +137,143 @@ spec:
             backend:
               serviceName: ownid-demo-app-2-service
               servicePort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ownid-demo-app-3-deployment
+  namespace: dev
+  labels:
+    app: ownid-demo-app-3
+spec:
+  revisionHistoryLimit: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ownid-demo-app-3
+  template:
+    metadata:
+      labels:
+        app: ownid-demo-app-3
+    spec:
+      containers:
+        - name: ownid-demo-app-3
+          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-demo-app-develop:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: NETCORE3_SERVICE
+              value: ownid-server-netcore3-demo-3-gigya-service:5004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ownid-demo-app-3-service
+  namespace: dev
+spec:
+  type: NodePort
+  selector:
+    app: ownid-demo-app-3
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+    - port: 443
+      targetPort: 80
+      name: https
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ownid-demo-app-3-ingress
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:571861302935:certificate/b13a009b-d2f9-4708-a379-c31047621cf3
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+  labels:
+    app: ownid-demo-app-3
+spec:
+  rules:
+   - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: ownid-demo-app-3-service
+              servicePort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ownid-demo-app-4-deployment
+  namespace: dev
+  labels:
+    app: ownid-demo-app-4
+spec:
+  revisionHistoryLimit: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ownid-demo-app-4
+  template:
+    metadata:
+      labels:
+        app: ownid-demo-app-4
+    spec:
+      containers:
+        - name: ownid-demo-app-4
+          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-demo-app-develop:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: NETCORE3_SERVICE
+              value: ownid-server-netcore3-demo-4-gigya-service:5004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ownid-demo-app-4-service
+  namespace: dev
+spec:
+  type: NodePort
+  selector:
+    app: ownid-demo-app-4
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+    - port: 443
+      targetPort: 80
+      name: https
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ownid-demo-app-4-ingress
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:571861302935:certificate/b13a009b-d2f9-4708-a379-c31047621cf3
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+  labels:
+    app: ownid-demo-app-4
+spec:
+  rules:
+   - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: ownid-demo-app-4-service
+              servicePort: 80
