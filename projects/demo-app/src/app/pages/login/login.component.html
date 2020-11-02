@@ -12,12 +12,12 @@
 
       <div class="errors" *ngIf="errors">{{errors}}</div>
 
-      <input class="own-input" type="email" placeholder="Email" formControlName="email">
+      <input class="own-input inline-email" type="email" placeholder="Email" formControlName="email">
 
       <input class="own-input inline-password" type="password" placeholder="Password" formControlName="password">
 
       <ownid type="login" (onLogin)="onLogin($event)"
-             [inline]="{ targetElement: '.inline-password', offset: [0, -10] }"
+             [inline]="{ targetElement: '.inline-password', userIdElement: '.inline-email', offset: [0, -10] }"
 
       ></ownid>
 

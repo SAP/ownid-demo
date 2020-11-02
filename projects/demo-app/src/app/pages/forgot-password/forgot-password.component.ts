@@ -6,7 +6,7 @@ import { GigyaService } from '../../services/gigya.service';
 @Component({
   selector: 'login',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent {
   form: FormGroup;
@@ -15,11 +15,7 @@ export class ForgotPasswordComponent {
 
   errors: string | null = null;
 
-  constructor(
-    formBuilder: FormBuilder,
-    private gigyaService: GigyaService,
-    private router : Router,
-  ) {
+  constructor(formBuilder: FormBuilder, private gigyaService: GigyaService, private router: Router) {
     this.form = formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
     });
@@ -31,7 +27,7 @@ export class ForgotPasswordComponent {
 
       const params = {
         loginID: this.form.value.email,
-      }
+      };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.gigyaService.resetPassword(params, (data: any) => {
@@ -46,6 +42,6 @@ export class ForgotPasswordComponent {
   }
 
   onGoToLogin() {
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/login');
   }
 }

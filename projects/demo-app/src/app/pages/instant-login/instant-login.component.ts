@@ -6,18 +6,14 @@ import { GigyaService } from '../../services/gigya.service';
 @Component({
   selector: 'login',
   templateUrl: './instant-login.component.html',
-  styleUrls: ['./instant-login.component.scss']
+  styleUrls: ['./instant-login.component.scss'],
 })
 export class InstantLoginComponent {
   form: FormGroup;
 
   errors: string | null = null;
 
-  constructor(
-    formBuilder: FormBuilder,
-    private gigyaService: GigyaService,
-    private router: Router,
-  ) {
+  constructor(formBuilder: FormBuilder, private gigyaService: GigyaService, private router: Router) {
     this.form = formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],

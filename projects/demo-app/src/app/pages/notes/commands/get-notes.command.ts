@@ -5,20 +5,16 @@ import { ICommand } from '../../i-command';
 
 @Injectable()
 export class GetNotesCommand implements ICommand {
-  constructor(
-    private gigyaService: GigyaService,
-    private store: AppStore,
-  ) {}
+  constructor(private gigyaService: GigyaService, private store: AppStore) {}
 
   execute() {
-    const profile = this.store.profile$.getValue()
+    const profile = this.store.profile$.getValue();
 
     if (profile.email) {
       return;
     }
 
     this.gigyaService.getProfile((userData) => {
-
       this.store.notes$.next(userData.data?.notes || []);
 
       this.store.profile$.next({
@@ -29,8 +25,8 @@ export class GetNotesCommand implements ICommand {
       this.store.isOwnidUser$.next(!!userData.data.isOwnidUser);
     });
 
-     this.store.notes$.subscribe((notes) => {
-      this.gigyaService.setNotes(notes)
-    })
+    this.store.notes$.subscribe((notes) => {
+      this.gigyaService.setNotes(notes);
+    });
   }
 }

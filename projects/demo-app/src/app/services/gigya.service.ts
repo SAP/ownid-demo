@@ -5,15 +5,10 @@ import { AppStore, INote, IProfile } from '../app.store';
 
 @Injectable()
 export class GigyaService {
-
-  constructor(
-    private router: Router,
-    private ngZone: NgZone,
-    private appStore: AppStore,
-  ) {
+  constructor(private router: Router, private ngZone: NgZone, private appStore: AppStore) {
     // @ts-ignore
     window.gigya!.accounts.addEventHandlers({
-      onLogin: () => this.ngZone.run(() => this.router.navigateByUrl('/notes'))
+      onLogin: () => this.ngZone.run(() => this.router.navigateByUrl('/notes')),
     });
   }
 
@@ -68,10 +63,11 @@ export class GigyaService {
   logout() {
     // @ts-ignore
     window.gigya!.accounts.logout({
-      callback: () => this.ngZone.run(() => {
-        this.appStore.profile$.next({} as IProfile);
-        this.router.navigateByUrl('/login')
-      }),
+      callback: () =>
+        this.ngZone.run(() => {
+          this.appStore.profile$.next({} as IProfile);
+          this.router.navigateByUrl('/login');
+        }),
     });
   }
 
@@ -86,7 +82,7 @@ export class GigyaService {
 
   setNotes(notes: INote[]) {
     // @ts-ignore
-    window.gigya!.accounts.setAccountInfo({ data: { notes } })
+    window.gigya!.accounts.setAccountInfo({ data: { notes } });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -94,20 +90,21 @@ export class GigyaService {
     // @ts-ignore
     window.gigya!.accounts.setAccountInfo({
       data,
-      callback: () => this.ngZone.run(() => callback())
-    })
+      callback: () => this.ngZone.run(() => callback()),
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   addOwnIdConnections(conData: any, callback: () => void = () => {}) {
     // @ts-ignore
     window.gigya!.accounts.getAccountInfo({
+      include: 'data',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      include: 'data', callback: (userData: any) => {
-        const ownIdConnections = [ ...conData, ...(userData.data.ownIdConnections ?? []) ];
-        
-        this.setData({ownIdConnections}, callback)
-      }
+      callback: (userData: any) => {
+        const ownIdConnections = [...conData, ...(userData.data.ownIdConnections ?? [])];
+
+        this.setData({ ownIdConnections }, callback);
+      },
     });
   }
 
@@ -118,13 +115,13 @@ export class GigyaService {
       callback: (data: any) => {
         // @ts-ignore
         window.gigya!.accounts.deleteAccount({ UID: data.UID });
-      }
+      },
     });
   }
 
   setOwnidUser(isOwnidUser: boolean, callback: () => void = () => {}) {
     this.appStore.isOwnidUser$.next(isOwnidUser);
-    this.setData({ isOwnidUser }, callback)
+    this.setData({ isOwnidUser }, callback);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

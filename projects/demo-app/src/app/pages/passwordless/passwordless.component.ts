@@ -17,7 +17,7 @@ const SUPPORTED_IOS_VERSION = 14;
 @Component({
   selector: 'passwordless',
   templateUrl: './passwordless.component.html',
-  styleUrls: ['./passwordless.component.scss']
+  styleUrls: ['./passwordless.component.scss'],
 })
 export class PasswordlessComponent {
   private url: string | null = null;
@@ -28,10 +28,7 @@ export class PasswordlessComponent {
 
   name: string;
 
-  constructor(
-    private actRoute: ActivatedRoute,
-    private httpClient: HttpClient,
-  ) {
+  constructor(private actRoute: ActivatedRoute, private httpClient: HttpClient) {
     this.name = window.location.hostname;
 
     this.actRoute.queryParamMap
@@ -42,12 +39,14 @@ export class PasswordlessComponent {
       .subscribe(async ({ url, type }) => {
         const iosVersion = PasswordlessComponent.getIOSVersion();
 
-        const fallback = !navigator.credentials || !window.crypto
-          || (iosVersion && iosVersion < SUPPORTED_IOS_VERSION)
-          || PasswordlessComponent.isSamsungBrowser()
+        const fallback =
+          !navigator.credentials ||
+          !window.crypto ||
+          (iosVersion && iosVersion < SUPPORTED_IOS_VERSION) ||
+          PasswordlessComponent.isSamsungBrowser();
 
         if (fallback) {
-          window.open(`//${ url }`, '_self');
+          window.open(`//${url}`, '_self');
           return;
         }
 
@@ -63,7 +62,7 @@ export class PasswordlessComponent {
           this.challenge = challenge;
         } else {
           // eslint-disable-next-line no-console
-          console.error('Context not found. Try again later.')
+          console.error('Context not found. Try again later.');
         }
 
         const credID = PasswordlessComponent.getCookie(`credID`);
@@ -76,8 +75,9 @@ export class PasswordlessComponent {
           const callbackMatch = /q=([^&]*)/.exec(decodedUrl);
 
           if (callbackMatch) {
-            this.httpClient.post<{isUserExists: boolean}>(`//${ callbackMatch[1] }/is-fido2-user-exists/${ credID }`, null)
-              .subscribe((data: {isUserExists: boolean}) => {
+            this.httpClient
+              .post<{ isUserExists: boolean }>(`//${callbackMatch[1]}/is-fido2-user-exists/${credID}`, null)
+              .subscribe((data: { isUserExists: boolean }) => {
                 if (data.isUserExists) {
                   window.close();
                 }
@@ -92,9 +92,7 @@ export class PasswordlessComponent {
       return;
     }
 
-    const fido2Resp = this.type === 'r'
-      ? await this.register(this.challenge)
-      : await this.login(this.challenge);
+    const fido2Resp = this.type === 'r' ? await this.register(this.challenge) : await this.login(this.challenge);
 
     if (!fido2Resp) {
       // eslint-disable-next-line no-console
@@ -105,7 +103,7 @@ export class PasswordlessComponent {
 
     const data = JSON.stringify({ fido2: { ...fido2Resp, type: this.type } });
 
-    window.open(`//${ this.url }&data=${ data }`, '_self');
+    window.open(`//${this.url}&data=${data}`, '_self');
   }
 
   async register(challenge: string): Promise<FIDO2base64 | null> {
@@ -115,18 +113,20 @@ export class PasswordlessComponent {
       user: {
         id: window.crypto.getRandomValues(new Uint8Array(32)),
         name: 'Passwordless',
-        displayName: 'Passwordless'
+        displayName: 'Passwordless',
       },
-      pubKeyCredParams: [{
-        type: 'public-key' as PublicKeyCredentialType,
-        alg: -7
-      }],
+      pubKeyCredParams: [
+        {
+          type: 'public-key' as PublicKeyCredentialType,
+          alg: -7,
+        },
+      ],
       authenticatorSelection: {
         authenticatorAttachment: 'platform' as AuthenticatorAttachment,
         requireResidentKey: true,
-        userVerification: 'preferred' as UserVerificationRequirement
-      }
-    }
+        userVerification: 'preferred' as UserVerificationRequirement,
+      },
+    };
 
     try {
       const newCred = await navigator.credentials.create({ publicKey });
@@ -159,16 +159,16 @@ export class PasswordlessComponent {
         {
           id: PasswordlessComponent.base64ToUint8Array(credID),
           type: 'public-key',
-          transports: ['internal']
-        }
-      ]
+          transports: ['internal'],
+        },
+      ];
     }
 
     const publicKey = {
       challenge: PasswordlessComponent.utf8ToUint8Array(challenge),
       authenticatorSelection: { authenticatorAttachment: 'platform' },
       allowCredentials,
-    }
+    };
 
     try {
       const cred = await navigator.credentials.get({ publicKey });
@@ -197,21 +197,21 @@ export class PasswordlessComponent {
       return;
     }
 
-    window.open(`//${ this.url }`, '_self');
+    window.open(`//${this.url}`, '_self');
   }
 
   static setCookie(name: string, value: string, days: number): void {
     let expires = '';
     if (days) {
       const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = `; expires=${ date.toUTCString() }`;
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = `; expires=${date.toUTCString()}`;
     }
-    document.cookie = `${ name }=${ value || '' }${ expires }; path=/`;
+    document.cookie = `${name}=${value || ''}${expires}; path=/`;
   }
 
   static getCookie(name: string): string | null {
-    const nameEQ = `${ name }=`;
+    const nameEQ = `${name}=`;
     const ca = document.cookie.split(';');
 
     // eslint-disable-next-line no-restricted-syntax
@@ -253,14 +253,6 @@ export class PasswordlessComponent {
   }
 
   static isSamsungBrowser(): boolean {
-    return (/samsung|sgh-[int]|gt-[in]|sm-[anptz]|shv-e|sch-[ijrs]|sph-l/i).test(navigator.userAgent);
+    return /samsung|sgh-[int]|gt-[in]|sm-[anptz]|shv-e|sch-[ijrs]|sph-l/i.test(navigator.userAgent);
   }
-
 }
-
-
-
-
-
-
-

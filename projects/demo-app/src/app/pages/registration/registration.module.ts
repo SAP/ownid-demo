@@ -5,8 +5,8 @@ import { GigyaService } from '@services/gigya.service';
 import { RegistrationComponent } from './registration.component';
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { OwnidModule } from '../../shared/ownid/ownid.module';
-import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module'
-import { DemoHeaderModule } from './../../shared/demo-header/demo-header.module';
+import { DemoFooterModule } from '../../shared/demo-footer/demo-footer.module';
+import { DemoHeaderModule } from '../../shared/demo-header/demo-header.module';
 import { RegistrationCommand } from './commands/registration.command';
 
 @NgModule({
@@ -17,11 +17,8 @@ import { RegistrationCommand } from './commands/registration.command';
     ReactiveFormsModule,
     OwnidModule,
     DemoFooterModule,
-    DemoHeaderModule
+    DemoHeaderModule,
   ],
-  providers: [
-    RegistrationCommand,
-    GigyaService,
-  ]
+  providers: [RegistrationCommand, GigyaService],
 })
-export class RegistrationModule { }
+export class RegistrationModule {}

@@ -10,13 +10,14 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "lint": "eslint . --ext .ts --fix",
+    "lint": "eslint . --ext .ts --max-warnings=0",
     "docker:start": "yarn run build && yarn run docker:build && yarn run docker:run",
     "docker:build": "docker build -t ownid-client-app:latest .",
     "docker:run": "docker run --rm -it -p 80:80/tcp ownid-client-app:latest",
     "e2e": "ng e2e",
-    "format": "prettier-eslint --write $PWD/'src/**/*.{[jt]s, html}' && eslint . --ext .ts --fix",
-    "verify": "yarn test && yarn lint && yarn build && yarn build:demo && yarn start"
+    "format": "eslint . --ext .ts --fix",
+    "verify": "yarn test && yarn lint && yarn build && yarn build:demo && yarn start",
+    "postinstall": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +33,7 @@
     "@angular/router": "~10.1.3",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.1",
-    "zone.js": "~0.11.1"
+    "zone.js": "~0.11.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.3",
@@ -54,18 +55,22 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-unicorn": "^22.0.0",
-    "husky": "^4.3.0",
+    "husky": "^5.0.0-beta.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
     "jest": "^26.4.2",
     "jest-preset-angular": "^8.3.1",
     "jest-resolver-tsconfig-paths": "^0.13.0",
     "jest-trx-results-processor": "^2.2.0",
+    "lint-staged": "^10.4.2",
     "prettier": "^2.1.2",
-    "prettier-eslint": "^11.0.0",
-    "prettier-eslint-cli": "^5.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~9.0.0",
     "typescript": "4.0.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix --max-warnings=0"
+    ]
   }
 }

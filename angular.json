@@ -202,6 +202,22 @@
                 }
               ]
             },
+            "staging3": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.staging3.ts"
+                }
+              ]
+            },
+            "staging4": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.staging4.ts"
+                }
+              ]
+            },
             "dev": {
               "fileReplacements": [
                 {
@@ -215,6 +231,22 @@
                 {
                   "replace": "projects/demo-app/src/environments/environment.ts",
                   "with": "projects/demo-app/src/environments/environment.dev2.ts"
+                }
+              ]
+            },
+            "dev3": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.dev3.ts"
+                }
+              ]
+            },
+            "dev4": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.dev4.ts"
                 }
               ]
             }

@@ -5,10 +5,7 @@ import { ICommand } from '../../i-command';
 
 @Injectable()
 export class AddNoteCommand implements ICommand {
-  constructor(
-    private router: Router,
-    private store: AppStore,
-  ) {}
+  constructor(private router: Router, private store: AppStore) {}
 
   execute() {
     const newNote: INote = {
@@ -26,6 +23,6 @@ export class AddNoteCommand implements ICommand {
 
     this.store.notes$.next(notes);
 
-    this.router.navigateByUrl(`/notes/${  newNote.id}`);
+    this.router.navigateByUrl(`/notes/${newNote.id}`);
   }
 }

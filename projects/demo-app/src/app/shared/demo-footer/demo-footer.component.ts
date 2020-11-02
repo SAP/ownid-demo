@@ -6,4 +6,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./demo-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoFooterComponent { }
+export class DemoFooterComponent {}
