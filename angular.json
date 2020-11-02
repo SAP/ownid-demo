@@ -202,6 +202,22 @@
                 }
               ]
             },
+            "staging3": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.staging3.ts"
+                }
+              ]
+            },
+            "staging4": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.staging4.ts"
+                }
+              ]
+            },
             "dev": {
               "fileReplacements": [
                 {
