@@ -42,7 +42,7 @@ kubectl -n=$ENV set image deployment/ownid-demo-app-3-deployment ownid-demo-app-
 
 
 # Demo 4 update
-IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo-4_${$TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo-4_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
 echo Push demo4 $IMAGE_URI to registry
 docker tag ownid-demo-app:latest4 $IMAGE_URI
 docker push $IMAGE_URI
