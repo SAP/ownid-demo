@@ -16,9 +16,11 @@ spec:
       labels:
         app: ownid-client-app
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: ownid-client-app
-          image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
+          image: ownid.common.repositories.cloud.sap/client-app:latest
           ports:
             - containerPort: 80
           env:
@@ -86,9 +88,11 @@ spec:
 #       labels:
 #         app: ownid-client-app-2
 #     spec:
+#       imagePullSecrets:
+#         - name: regcred
 #       containers:
 #         - name: ownid-client-app-2
-#           image: 571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop:latest
+#           image: ownid.common.repositories.cloud.sap/client-app:latest
 #           ports:
 #             - containerPort: 80
 #           env:
