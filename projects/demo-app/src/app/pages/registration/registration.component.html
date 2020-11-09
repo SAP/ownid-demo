@@ -11,7 +11,12 @@
 
     <form class="own-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <div class="errors" *ngIf="errors$ | async as errors">{{errors}}</div>
+      <div class="errors" *ngIf="error$ | async as error">
+        {{error}}
+        <ul *ngIf="errorItems$ | async as errorItems">
+          <li *ngFor="let err of errorItems">{{ err }}</li>
+        </ul>
+      </div>
 
       <input class="own-input" type="text" placeholder="First Name" formControlName="firstName">
 

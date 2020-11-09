@@ -24,4 +24,6 @@ export class AppStore {
   readonly isOwnidUser$ = new BehaviorSubject<boolean>(false);
 
   readonly formError$ = new BehaviorSubject<string | null>(null);
+
+  readonly formErrorItems$ = new BehaviorSubject<string[] | null>(null);
 }
