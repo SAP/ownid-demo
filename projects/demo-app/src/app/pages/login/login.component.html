@@ -16,9 +16,9 @@
 
       <input class="own-input inline-password" type="password" placeholder="Password" formControlName="password">
 
-      <ownid type="login" (onLogin)="onLogin($event)"
-             [inline]="{ targetElement: '.inline-password', userIdElement: '.inline-email', offset: [0, -10] }"
-
+      <ownid type="login"
+             (onLogin)="onLogin($event)"
+             [inline]="{ targetElement: '.inline-password', userIdElement: '.inline-email', offset: [-10, 0] }"
       ></ownid>
 
       <div class="text">

@@ -29,7 +29,7 @@
       <ownid type="register"
              (ownidWidgetRef)="onOwnIDWidgetReady($event)"
              (onError)="onError($event)"
-             [inline]="{ targetElement: '.inline-password', additionalElements: ['.inline-confirm-password'], offset: [0, -10] }"
+             [inline]="{ targetElement: '.inline-password', additionalElements: ['.inline-confirm-password'], offset: [-10, 0] }"
       ></ownid>
 
       <button class="own-button" type="submit">Create Account</button>
