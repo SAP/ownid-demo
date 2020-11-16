@@ -1,64 +1,51 @@
 #!bin/sh
 
-REPOSITORY_URI=$1
-REPOSITORY_DEMO_URI=$2
-IMAGE_TAG=$3
-IMAGE_TAG_2=$3_
-IMAGE_TAG_3=$3_f3
-IMAGE_TAG_4=$3_f4
-ENV=$4
+ENV=$1
 
 # Clients update
-echo Push client $REPOSITORY_URI:$IMAGE_TAG
-docker tag ownid-client-app:latest $REPOSITORY_URI:$IMAGE_TAG
-docker push $REPOSITORY_URI:$IMAGE_TAG
-
-# echo Push client 2 $REPOSITORY_URI:$IMAGE_TAG_2
-# docker tag ownid-client-app:latest2 $REPOSITORY_URI:$IMAGE_TAG_2
-# docker push $REPOSITORY_URI:$IMAGE_TAG_2
+IMAGE_URI=$ARTIFACTORY_URL/$ENV/client/ownid-client-app_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+echo Push client $IMAGE_URI
+docker tag ownid-client-app:latest $IMAGE_URI
+docker push $IMAGE_URI
 
 echo Images update
 kubectl apply -f manifests/$ENV/client.yaml
-kubectl -n=$ENV set image deployment/ownid-client-app-deployment ownid-client-app=$REPOSITORY_URI:$IMAGE_TAG --record
-#kubectl -n=$ENV set image deployment/ownid-client-app-2-deployment ownid-client-app-2=$REPOSITORY_URI:$IMAGE_TAG_2 --record
+kubectl -n=$ENV set image deployment/ownid-client-app-deployment ownid-client-app=$IMAGE_URI --record
 
 # Demo update
-echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG to registry
-docker tag ownid-demo-app:latest $REPOSITORY_DEMO_URI:$IMAGE_TAG
-docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG
-
-# Demo 2 update
-# echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_2 to registry
-# docker tag ownid-demo-app:latest2 $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
-# docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
+IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+echo Push demo $IMAGE_URI to registry
+docker tag ownid-demo-app:latest $IMAGE_URI
+docker push $IMAGE_URI
 
 echo Images update
 kubectl apply -f manifests/$ENV/demo.yaml
-kubectl -n=$ENV set image deployment/ownid-demo-app-deployment ownid-demo-app=$REPOSITORY_DEMO_URI:$IMAGE_TAG --record
-
-# kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
+kubectl -n=$ENV set image deployment/ownid-demo-app-deployment ownid-demo-app=$IMAGE_URI --record
 
 # Demo 2 update
-echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_2 to registry
-docker tag ownid-demo-app:latest2 $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
-docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_2
+IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo-2_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+echo Push demo2 $IMAGE_URI to registry
+docker tag ownid-demo-app:latest2 $IMAGE_URI
+docker push $IMAGE_URI
 
 echo Updating DEMO2
-kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$REPOSITORY_DEMO_URI:$IMAGE_TAG_2 --record
+kubectl -n=$ENV set image deployment/ownid-demo-app-2-deployment ownid-demo-app-2=$IMAGE_URI --record
 
 # Demo 3 update
-echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_3 to registry
-docker tag ownid-demo-app:latest3 $REPOSITORY_DEMO_URI:$IMAGE_TAG_3
-docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_3
+IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo-3_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+echo Push demo3 $IMAGE_URI to registry
+docker tag ownid-demo-app:latest3 $IMAGE_URI
+docker push $IMAGE_URI
 
 echo Updating DEMO3
-kubectl -n=$ENV set image deployment/ownid-demo-app-3-deployment ownid-demo-app-3=$REPOSITORY_DEMO_URI:$IMAGE_TAG_3 --record
+kubectl -n=$ENV set image deployment/ownid-demo-app-3-deployment ownid-demo-app-3=$IMAGE_URI --record
 
 
 # Demo 4 update
-echo Push demo $REPOSITORY_DEMO_URI:$IMAGE_TAG_4 to registry
-docker tag ownid-demo-app:latest4 $REPOSITORY_DEMO_URI:$IMAGE_TAG_4
-docker push $REPOSITORY_DEMO_URI:$IMAGE_TAG_4
+IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo-4_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+echo Push demo4 $IMAGE_URI to registry
+docker tag ownid-demo-app:latest4 $IMAGE_URI
+docker push $IMAGE_URI
 
 echo Updating DEMO4
-kubectl -n=$ENV set image deployment/ownid-demo-app-4-deployment ownid-demo-app-4=$REPOSITORY_DEMO_URI:$IMAGE_TAG_4 --record
+kubectl -n=$ENV set image deployment/ownid-demo-app-4-deployment ownid-demo-app-4=$IMAGE_URI --record

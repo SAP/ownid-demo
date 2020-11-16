@@ -209,6 +209,12 @@ body {
   font-size: 14px;
   line-height: 20px;
   margin-bottom: 16px;
+
+  ul {
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+    padding-inline-start: 25px;
+  }
 }
 
 ownid {

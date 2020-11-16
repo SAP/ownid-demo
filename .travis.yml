@@ -32,8 +32,6 @@ jobs:
     - if: branch = master
       env: 
         ENV=staging 
-        REPOSITORY_URI=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-staging 
-        REPOSITORY_DEMO_URI=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-demo-app-staging
         GIGYA_1=3_dEHMimJM2kxcz8gaoI1Sss9kohyJ6LP17qDYd2UIlUfNowsPglEUANJX7R812-uh
         GIGYA_2=3_DS2fdSlSzClFXUfkKHaxJq9-Zknssg2UHamCntjp2jRcL74a_x5HbhDxvHZ6a4q2
         GIGYA_DEMO=3_O4QE0Kk7QstG4VGDPED5omrr8mgbTuf_Gim8V_Y19YDP75m_msuGtNGQz89X0KWP
@@ -41,18 +39,10 @@ jobs:
     - if: branch = develop
       env: 
         ENV=dev 
-        REPOSITORY_URI=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-client-app-develop 
-        REPOSITORY_DEMO_URI=571861302935.dkr.ecr.us-east-2.amazonaws.com/ownid-demo-app-develop
         GIGYA_1=3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
         GIGYA_2=3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
         GIGYA_DEMO=3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
         GIGYA_DEMO_2=3_7_S7SAvBaZSfIIO9A-kLKFXVzjo3tPUMI0_5KNmAC6tdotjPx8MRy1lxtsfJpcT-
-
-before_install:
-  - pyenv global 3.7.1
-  - pip install -U pip
-  - pip install awscli
-  - "$(aws ecr get-login --region us-east-2 --no-include-email)"
 
 install:
   - yarn
@@ -63,16 +53,20 @@ script:
   - sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2
 
 before_deploy:
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
   - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv kubectl /usr/local/bin
   - kubectl version --short --client
   - aws eks --region us-east-2 update-kubeconfig --name ownid-eks
+  - docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD $ARTIFACTORY_URL
 
 deploy:
 - provider: script
   script:
-    sh scripts/deploy.sh $REPOSITORY_URI $REPOSITORY_DEMO_URI $IMAGE_TAG $ENV
+    sh scripts/deploy.sh $ENV
   skip_cleanup: true
   on:
     all_branches: true

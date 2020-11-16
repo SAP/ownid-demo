@@ -12,7 +12,9 @@ import { RegistrationCommand } from './commands/registration.command';
 export class RegistrationComponent implements OnDestroy {
   form: FormGroup;
 
-  errors$: BehaviorSubject<string | null>;
+  error$: BehaviorSubject<string | null>;
+
+  errorItems$: BehaviorSubject<string[] | null>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ownidWidget: any | null = null;
@@ -32,7 +34,8 @@ export class RegistrationComponent implements OnDestroy {
       confirmPassword: ['', []],
     });
 
-    this.errors$ = this.appStore.formError$;
+    this.error$ = this.appStore.formError$;
+    this.errorItems$ = this.appStore.formErrorItems$;
 
     this.observer = new MutationObserver(() => this.ownidWidget?.recalculatePosition());
 
@@ -63,6 +66,6 @@ export class RegistrationComponent implements OnDestroy {
   }
 
   onError(errorMessage: string) {
-    this.errors$.next(errorMessage);
+    this.error$.next(errorMessage);
   }
 }
