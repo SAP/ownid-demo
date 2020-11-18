@@ -46,7 +46,7 @@ install:
   - yarn
 
 script:
-  - if [ "$ENV" != "prod" ]; then scripts/build_demo.sh $ENV $GIGYA_DEMO; fi
+  - if [ "$ENV" != "prod" ]; then sh scripts/build_demo.sh $ENV $GIGYA_DEMO; fi
   - if [ "$ENV" = "prod" ]; then sh scripts/prod/build_demo.sh; fi
 
 before_deploy:
