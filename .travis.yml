@@ -53,7 +53,7 @@ install:
 
 script:
   - if [ "$ENV" != "prod" ]; then sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2 && sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2; fi
-  - if [ "$ENV" = "prod" ]; then sh scripts/prod/build.sh; fi
+  - if [ "$ENV" = "prod" ]; then sh scripts/prod/build_demo.sh; fi
 
 before_deploy:
   - pyenv global 3.7.1
