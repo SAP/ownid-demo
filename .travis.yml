@@ -26,6 +26,7 @@ branches:
   only:
   - master
   - develop
+  - /^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$/
 
 jobs:
   include:
@@ -43,14 +44,16 @@ jobs:
         GIGYA_2=3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
         GIGYA_DEMO=3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
         GIGYA_DEMO_2=3_7_S7SAvBaZSfIIO9A-kLKFXVzjo3tPUMI0_5KNmAC6tdotjPx8MRy1lxtsfJpcT-
+    - if: branch =~ ^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$
+      env:
+        ENV=prod
 
 install:
   - yarn
 
 script:
-#  - yarn test:ci
-  - sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2
-  - sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2
+  - if [ $TRAVIS_BRANCH =~ ^(develop|master)$ ]; then sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2 && sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2;fi
+  - if [ $TRAVIS_BRANCH =~ ^release\/.*$ ]; then sh scripts/prod/build.sh;fi
 
 before_deploy:
   - pyenv global 3.7.1
@@ -64,13 +67,18 @@ before_deploy:
   - docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD $ARTIFACTORY_URL
 
 deploy:
-- provider: script
-  script:
-    sh scripts/deploy.sh $ENV
-  skip_cleanup: true
-  on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(develop|master)$
+  - provider: script
+    script: sh scripts/deploy.sh $ENV
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(develop|master)$      
+  - provider: script
+    script: sh scripts/prod/deploy.sh
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^release\/.*$
 
 after_deploy:
   - bash scripts/test_runner.sh demo-site $ENV
