@@ -52,8 +52,8 @@ install:
   - yarn
 
 script:
-  - if [ $TRAVIS_BRANCH =~ ^(develop|master)$ ]; then sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2 && sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2;fi
-  - if [ $TRAVIS_BRANCH =~ ^release\/.*$ ]; then sh scripts/prod/build.sh;fi
+  - if [ $TRAVIS_BRANCH =~ ^(develop|master)$ ]; then sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2 && sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2; fi
+  - if [ $TRAVIS_BRANCH =~ ^release\/.*$ ]; then sh scripts/prod/build.sh; fi
 
 before_deploy:
   - pyenv global 3.7.1
