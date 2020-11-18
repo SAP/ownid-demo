@@ -23,9 +23,6 @@ spec:
           image: ownid.common.repositories.cloud.sap/demo-app:latest
           ports:
             - containerPort: 80
-          env:
-            - name: NETCORE3_SERVICE
-              value: ownid-server-netcore3-demo-gigya-service:5004
 ---
 apiVersion: v1
 kind: Service
@@ -95,9 +92,6 @@ spec:
           image: ownid.common.repositories.cloud.sap/demo-app:latest
           ports:
             - containerPort: 80
-          env:
-            - name: NETCORE3_SERVICE
-              value: ownid-server-netcore3-demo-gigya-service:5004
 ---
 apiVersion: v1
 kind: Service
@@ -167,9 +161,6 @@ spec:
           image: ownid.common.repositories.cloud.sap/demo-app:latest
           ports:
             - containerPort: 80
-          env:
-            - name: NETCORE3_SERVICE
-              value: ownid-server-netcore3-demo-3-gigya-service:5004
 ---
 apiVersion: v1
 kind: Service
@@ -239,9 +230,6 @@ spec:
           image: ownid.common.repositories.cloud.sap/demo-app:latest
           ports:
             - containerPort: 80
-          env:
-            - name: NETCORE3_SERVICE
-              value: ownid-server-netcore3-demo-4-gigya-service:5004
 ---
 apiVersion: v1
 kind: Service
