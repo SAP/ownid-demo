@@ -2,7 +2,7 @@ import { OwnIDFlow, IEnvironment } from './i-environment';
 
 export const environment: IEnvironment = {
   production: true,
-  gigyaApiKey: '3_PB4ieNpwSS1acHt7bb9UmosWpzHgXiTNW5OHaea2b833e4WhchqkzJum3vP60EGM',
-  ownidURLPrefix: 'https://server.demo.staging.ownid.com/ownid',
+  gigyaApiKey: '3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_',
+  ownidURLPrefix: 'https://server.demo.dev.ownid.com/ownid',
   flow: OwnIDFlow.classic,
 };
