@@ -3,14 +3,14 @@
 ENV=$1
 
 # Clients update
-IMAGE_URI=$ARTIFACTORY_URL/$ENV/client/ownid-client-app_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
-echo Push client $IMAGE_URI
-docker tag ownid-client-app:latest $IMAGE_URI
-docker push $IMAGE_URI
+# IMAGE_URI=$ARTIFACTORY_URL/$ENV/client/ownid-client-app_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT
+# echo Push client $IMAGE_URI
+# docker tag ownid-client-app:latest $IMAGE_URI
+# docker push $IMAGE_URI
 
-echo Images update
-kubectl apply -f manifests/$ENV/client.yaml
-kubectl -n=$ENV set image deployment/ownid-client-app-deployment ownid-client-app=$IMAGE_URI --record
+# echo Images update
+# kubectl apply -f manifests/$ENV/client.yaml
+# kubectl -n=$ENV set image deployment/ownid-client-app-deployment ownid-client-app=$IMAGE_URI --record
 
 # Demo update
 IMAGE_URI=$ARTIFACTORY_URL/$ENV/demo/ownid-demo_${TRAVIS_BUILD_NUMBER-}:$TRAVIS_COMMIT

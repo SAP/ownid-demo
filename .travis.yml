@@ -26,31 +26,28 @@ branches:
   only:
   - master
   - develop
+  - /^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$/
 
 jobs:
   include:
     - if: branch = master
       env: 
         ENV=staging 
-        GIGYA_1=3_dEHMimJM2kxcz8gaoI1Sss9kohyJ6LP17qDYd2UIlUfNowsPglEUANJX7R812-uh
-        GIGYA_2=3_DS2fdSlSzClFXUfkKHaxJq9-Zknssg2UHamCntjp2jRcL74a_x5HbhDxvHZ6a4q2
-        GIGYA_DEMO=3_O4QE0Kk7QstG4VGDPED5omrr8mgbTuf_Gim8V_Y19YDP75m_msuGtNGQz89X0KWP
-        GIGYA_DEMO_2=3_uQMbdn-ceccHKTdOmcCqrTDsGq3e7anDWcAxm2g4jFdE63dTpv1S8NCKy_sf_eEA
+        GIGYA_DEMO=3_PB4ieNpwSS1acHt7bb9UmosWpzHgXiTNW5OHaea2b833e4WhchqkzJum3vP60EGM
     - if: branch = develop
       env: 
         ENV=dev 
-        GIGYA_1=3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W
-        GIGYA_2=3_2a9se4yNIANdKO12w7Thbs9TKvylPuzZ3HKu4U_Ys6OhNE6aJKwyyGAPFslL0gJr
         GIGYA_DEMO=3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
-        GIGYA_DEMO_2=3_7_S7SAvBaZSfIIO9A-kLKFXVzjo3tPUMI0_5KNmAC6tdotjPx8MRy1lxtsfJpcT-
+    - if: branch =~ ^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$
+      env:
+        ENV=prod
 
 install:
   - yarn
 
 script:
-#  - yarn test:ci
-  - sh scripts/build.sh $ENV $GIGYA_1 $GIGYA_2
-  - sh scripts/build_demo.sh $ENV $GIGYA_DEMO $GIGYA_DEMO_2
+  - if [ "$ENV" != "prod" ]; then sh scripts/build_demo.sh $ENV $GIGYA_DEMO; fi
+  - if [ "$ENV" = "prod" ]; then sh scripts/prod/build_demo.sh; fi
 
 before_deploy:
   - pyenv global 3.7.1
@@ -64,13 +61,18 @@ before_deploy:
   - docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD $ARTIFACTORY_URL
 
 deploy:
-- provider: script
-  script:
-    sh scripts/deploy.sh $ENV
-  skip_cleanup: true
-  on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(develop|master)$
+  - provider: script
+    script: sh scripts/deploy.sh $ENV
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(develop|master)$      
+  - provider: script
+    script: sh scripts/prod/deploy.sh
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^release\/.*$
 
 after_deploy:
   - bash scripts/test_runner.sh demo-site $ENV

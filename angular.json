@@ -182,6 +182,14 @@
               "fileReplacements": [
                 {
                   "replace": "projects/demo-app/src/environments/environment.ts",
+                  "with": "projects/demo-app/src/environments/environment.production.ts"
+                }
+              ]
+            },
+            "prod": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-app/src/environments/environment.ts",
                   "with": "projects/demo-app/src/environments/environment.prod.ts"
                 }
               ]
