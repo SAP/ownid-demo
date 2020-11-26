@@ -151,6 +151,10 @@
 .skip-pass-img {
   margin: 0 auto 16px;
   width: 270px;
+
+  img {
+    width: 270px;
+  }
 }
 
 @media (max-width: 599px) {
