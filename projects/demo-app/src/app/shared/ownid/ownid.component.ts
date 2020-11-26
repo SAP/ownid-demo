@@ -61,66 +61,41 @@ export class OwnidComponent implements OnInit, OnDestroy {
       onMagicLinkLogin: this.onLogin.emit.bind(this.onLogin),
     });
 
-    if (this.type === 'link') {
-      // @ts-ignore-next-line
-      // eslint-disable-next-line no-multi-assign
-      window.ownidWidget = this.ownidWidget = await window.ownid!.gigya.renderLink(
-        {
-          element: this.elRef.nativeElement,
-          type: this.type,
-          onLink: this.onLink.emit.bind(this.onLink),
-          onError: this.onError.emit.bind(this.onError),
-        },
-        environment.gigyaApiKey,
-      );
-    } else {
-      const inline = this.inline
-        ? {
-            targetElement: document.querySelector(this.inline.targetElement),
-            userIdElement: this.inline.userIdElement ? document.querySelector(this.inline.userIdElement) : null,
-            additionalElements: this.inline.additionalElements?.map((selector) => document.querySelector(selector)),
-            offset: this.inline.offset,
-          }
-        : null;
+    const inline = this.inline
+      ? {
+          targetElement: document.querySelector(this.inline.targetElement),
+          userIdElement: this.inline.userIdElement ? document.querySelector(this.inline.userIdElement) : null,
+          additionalElements: this.inline.additionalElements?.map((selector) => document.querySelector(selector)),
+          offset: this.inline.offset,
+        }
+      : null;
 
-      // @ts-ignore-next-line
-      // eslint-disable-next-line no-multi-assign
-      const options = {
-        element: this.elRef.nativeElement,
-        type: this.type,
-        data: this.data,
-        partial: this.partial,
-        tooltip: this.tooltip,
-        inline,
-        language: 'en',
-        // eslint-disable-next-line unicorn/prefer-query-selector
-        toggleElement: this.toggleElement ? window.document.getElementById(this.toggleElement!) : null,
-        onLogin: this.onLogin.emit.bind(this.onLogin),
-        onRegister: this.onRegister.emit.bind(this.onRegister),
-        onLink: this.onLink.emit.bind(this.onLink),
-        onRecover: this.onRecover.emit.bind(this.onRecover),
-        onError: this.onError.emit.bind(this.onError),
-      };
+    // @ts-ignore-next-line
+    // eslint-disable-next-line no-multi-assign
+    const options = {
+      element: this.elRef.nativeElement,
+      type: this.type,
+      data: this.data,
+      partial: this.partial,
+      tooltip: this.tooltip,
+      inline,
+      language: 'en',
+      toggleElement: this.toggleElement ? window.document.querySelector(this.toggleElement) : null,
+      onLogin: this.onLogin.emit.bind(this.onLogin),
+      onRegister: this.onRegister.emit.bind(this.onRegister),
+      onLink: this.onLink.emit.bind(this.onLink),
+      onRecover: this.onRecover.emit.bind(this.onRecover),
+      onError: this.onError.emit.bind(this.onError),
+    };
 
-      const useGigya = this.type === 'login' && this.inline;
-      const component = useGigya ? await this.useGigya(options) : this.useDefault(options);
+    // @ts-ignore-next-line
+    const component = window.ownid!.render(options);
 
-      // @ts-ignore-next-line
-      window.ownidWidget = component;
-      this.ownidWidget = component;
-    }
+    // @ts-ignore-next-line
+    window.ownidWidget = component;
+    this.ownidWidget = component;
 
     this.ownidWidgetRef.emit(this.ownidWidget);
-  }
-
-  private async useGigya(options: any): Promise<any> {
-    // @ts-ignore-next-line
-    return window.ownid!.gigya.renderGigyaOwnIdWidget(options);
-  }
-
-  private useDefault(options: any): any {
-    // @ts-ignore-next-line
-    return window.ownid!.render(options);
   }
 
   ngOnDestroy() {
