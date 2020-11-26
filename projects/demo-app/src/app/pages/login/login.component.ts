@@ -56,6 +56,19 @@ export class LoginComponent {
     }
   }
 
+  sendMagicLink() {
+    const { email } = this.form.value;
+
+    if (!email) return;
+
+    // @ts-ignore
+    // eslint-disable-next-line promise/catch-or-return,promise/always-return
+    window.ownid!.sendMagicLink(email).then(() => {
+      // eslint-disable-next-line no-alert
+      window.alert(`Magic Link was sent to ${email}`);
+    });
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLogin(statusRS: any) {
     if (statusRS.sessionInfo) {

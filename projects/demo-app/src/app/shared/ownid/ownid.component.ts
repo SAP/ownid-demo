@@ -58,6 +58,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
       URLPrefix: environment.ownidURLPrefix,
       logger: new ConsoleLogger(),
       logLevel: 'info',
+      onMagicLinkLogin: this.onLogin.emit.bind(this.onLogin),
     });
 
     if (this.type === 'link') {
