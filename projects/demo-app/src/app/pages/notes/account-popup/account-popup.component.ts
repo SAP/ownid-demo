@@ -20,12 +20,7 @@ export class AccountPopupComponent implements OnChanges {
 
   isOwnidUser$: Observable<boolean>;
 
-  constructor(
-    formBuilder: FormBuilder,
-    // private gigyaService: GigyaService,
-    private store: AppStore,
-    private ngZone: NgZone,
-  ) {
+  constructor(formBuilder: FormBuilder, private store: AppStore, private ngZone: NgZone) {
     this.isOwnidUser$ = this.store.isOwnidUser$;
 
     this.errors$ = new BehaviorSubject<string | null>(null);
@@ -44,7 +39,6 @@ export class AccountPopupComponent implements OnChanges {
 
   onLink() {
     this.ngZone.run(() => {
-      // this.gigyaService.setOwnidUser(true);
       this.onClick.emit();
     });
   }

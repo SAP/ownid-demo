@@ -1,5 +1,4 @@
 
-
 .info-icon {
   background: url('/assets/icons/info.svg');
 }
@@ -10,14 +9,14 @@
   height: 16px;
 }
 
-.logout-icon{
+.logout-icon {
   background: url('/assets/icons/check-out.svg');
   width: 24px;
   height: 24px;
   margin-right: 10px;
 }
 
-.help-icon{
+.help-icon {
   background: url('/assets/icons/help.svg');
   width: 20px;
   height: 20px;
@@ -25,7 +24,14 @@
 }
 
 .profile-icon {
-  background: url('/assets/icons/account-circle.svg');
+  background: url('/assets/icons/profile-circle.svg');
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.feedback-icon {
+  background: url('/assets/icons/megaphone.svg');
   width: 24px;
   height: 24px;
   margin-right: 10px;
@@ -110,15 +116,19 @@
   color: #5B738B;
 }
 
-.tooltip-link {
+.tooltip-link,
+.tooltip-link:active,
+.tooltip-link:visited, {
   display: flex;
+  align-items: center;
   padding: 5px;
   cursor: pointer;
+  text-decoration: none;
+}
 
-  &:hover {
-    background: #F5F6F7;
-    border-radius: 4px;
-  }
+.tooltip-link:hover {
+  background: #F5F6F7;
+  border-radius: 4px;
 }
 
 .profile {
@@ -136,6 +146,15 @@
   right: auto;
   left: 16px;
   padding: 12px 8px;
+}
+
+.skip-pass-img {
+  margin: 0 auto 16px;
+  width: 270px;
+
+  img {
+    width: 270px;
+  }
 }
 
 @media (max-width: 599px) {
