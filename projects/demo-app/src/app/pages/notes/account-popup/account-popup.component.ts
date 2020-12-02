@@ -37,10 +37,12 @@ export class AccountPopupComponent implements OnChanges {
     this.form.get('email')?.setValue(this.profile?.email);
   }
 
-  onLink() {
+  onLink({ metadata }: { metadata: string }) {
     this.ngZone.run(() => {
       this.onClick.emit();
     });
+
+    console.log('metadata', metadata);
   }
 
   onError(errorMessage: string) {

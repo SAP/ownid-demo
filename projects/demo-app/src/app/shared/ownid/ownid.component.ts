@@ -81,10 +81,10 @@ export class OwnidComponent implements OnInit, OnDestroy {
       inline,
       language: 'en',
       toggleElement: this.toggleElement ? window.document.querySelector(this.toggleElement) : null,
-      onLogin: this.onLogin.emit.bind(this.onLogin),
-      onRegister: this.onRegister.emit.bind(this.onRegister),
-      onLink: this.onLink.emit.bind(this.onLink),
-      onRecover: this.onRecover.emit.bind(this.onRecover),
+      onLogin: (data: unknown, metadata: string) => this.onLogin.emit({ data, metadata }),
+      onRegister: (data: unknown, metadata: string) => this.onRegister.emit({ data, metadata }),
+      onLink: (data: unknown, metadata: string) => this.onLink.emit({ data, metadata }),
+      onRecover: (data: unknown, metadata: string) => this.onRecover.emit({ data, metadata }),
       onError: this.onError.emit.bind(this.onError),
     };
 

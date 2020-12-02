@@ -70,10 +70,12 @@ export class LoginComponent {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onLogin(statusRS: any) {
-    if (statusRS.sessionInfo) {
-      document.cookie = `${statusRS.sessionInfo.cookieName}=${statusRS.sessionInfo.cookieValue}; path=/`;
+  onLogin({ data, metadata }: { data: any; metadata: string }) {
+    if (data.sessionInfo) {
+      document.cookie = `${data.sessionInfo.cookieName}=${data.sessionInfo.cookieValue}; path=/`;
       this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/notes'));
     }
+
+    console.log('metadata', metadata);
   }
 }
