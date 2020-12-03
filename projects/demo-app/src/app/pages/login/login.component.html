@@ -26,8 +26,11 @@
       </div>
 
       <button class="own-button" type="submit">Log In</button>
-      <hr style="width: 100%">
-      <button class="own-button" type="button" (click)="sendMagicLink()">Send Magic Link</button>
+      
+      <div *ngIf="showMagic">
+        <hr style="width: 100%">
+        <button class="own-button" type="button" style="width: 100%" (click)="sendMagicLink()">Send Magic Link</button>
+      </div>
     </form>
   </div>
 
