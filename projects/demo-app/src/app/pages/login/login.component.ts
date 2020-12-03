@@ -51,8 +51,6 @@ export class LoginComponent {
           if (statusRS.data) {
             this.gigyaService.addOwnIdConnections(statusRS.data);
           }
-
-          console.log('metadata', statusRS.metadata);
         }
       });
     }
