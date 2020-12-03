@@ -37,7 +37,6 @@ export class RegistrationCommand implements IDataCommand<{ data: { [key: string]
     const { email, firstName, password } = data;
 
     let gigyaRequestData: IGigyaRequestData = { email, firstName, password };
-    let ownidResponseMetadata = '';
 
     if (!ownidWidget.disabled) {
       // @ts-ignore
@@ -47,8 +46,6 @@ export class RegistrationCommand implements IDataCommand<{ data: { [key: string]
         this.appStore.formError$.next(ownidResponse.message);
         return;
       }
-
-      ownidResponseMetadata = ownidResponse.metadata;
 
       gigyaRequestData = {
         email,
@@ -68,8 +65,6 @@ export class RegistrationCommand implements IDataCommand<{ data: { [key: string]
     this.gigyaService.register(gigyaRequestData, (resp: IGigyaResponse) => {
       this.appStore.formError$.next(null);
       this.appStore.formErrorItems$.next(null);
-
-      console.log('metadata', ownidResponseMetadata);
 
       if (resp.status !== 'FAIL') return;
 

@@ -60,10 +60,8 @@ export class ResetPasswordComponent {
     }
   }
 
-  onRecover({ metadata }: { metadata: string }) {
+  onRecover() {
     this.router.navigateByUrl('/login');
-
-    console.log('metadata', metadata);
   }
 
   onError(errorMessage: string) {
