@@ -52,13 +52,6 @@ export class RegistrationCommand implements IDataCommand<{ data: { [key: string]
         firstName,
         // @ts-ignore
         password: window.ownid.generateOwnIDPassword(12),
-        data: {
-          ownIdConnections: [
-            {
-              ...ownidResponse.data,
-            },
-          ],
-        },
       };
     }
 
@@ -66,7 +59,19 @@ export class RegistrationCommand implements IDataCommand<{ data: { [key: string]
       this.appStore.formError$.next(null);
       this.appStore.formErrorItems$.next(null);
 
-      if (resp.status !== 'FAIL') return;
+      if (resp.status !== 'FAIL') {
+        if (!ownidWidget.disabled) {
+          // @ts-ignore
+          // eslint-disable-next-line promise/catch-or-return,promise/always-return
+          window.ownid.addOwnIDConnectionOnServer(ownidWidget, resp.UID).then((widgetResponse) => {
+            if (widgetResponse?.error) {
+              this.appStore.formError$.next(widgetResponse.message);
+            }
+            return widgetResponse;
+          });
+        }
+        return;
+      }
 
       if (!resp.validationErrors) {
         this.appStore.formError$.next(resp.errorDetails);
