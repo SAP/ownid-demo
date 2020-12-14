@@ -54,7 +54,14 @@ export class LoginComponent {
           const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
 
           if (statusRS.data) {
-            this.gigyaService.addOwnIdConnections(statusRS.data);
+            // @ts-ignore
+            // eslint-disable-next-line promise/catch-or-return,promise/always-return
+            window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, data.UID).then((widgetResponse) => {
+              if (widgetResponse?.error) {
+                this.errors = widgetResponse.message;
+              }
+              return widgetResponse;
+            });
           }
         }
       });
