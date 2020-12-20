@@ -9,6 +9,8 @@ It does not cover server side integration. Examples can be found at correspondin
 
 Evaluation is possible even without any back-end implementation. You can follow the developer-tutorial to set your environment. This is using OwnID back-end that already include the SAP CDC (Gigya) integration. Later on you can provide your SAP CDC (Gigya) credentials to set your production environment or you can take OwnID server SDK and implement the integration to your Identity Management System.
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/ownid-demo)](https://api.reuse.software/info/github.com/SAP/ownid-demo)
+
 ## Documentation
 OwnID Documentation you can find on our [Documentation](https://docs.ownid.com) page
 
