@@ -35,6 +35,11 @@ jobs:
 
     - name: Docker login
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $DOCKER_URL
+    
+    - name: Generate build number
+      uses: einaregilsson/build-number@v3
+      with:
+        token: ${{secrets.github_token}}
 
     - name: Install Dependencies
       run: yarn
@@ -45,7 +50,7 @@ jobs:
     
     - name: Deploy Dev
       if: github.ref == 'refs/heads/develop'
-      run: bash scripts/deploy.sh dev
+      run: bash scripts/deploy.sh dev $BUILD_NUMBER
     
     - name: Build Staging
       if: github.ref == 'refs/heads/master'
@@ -53,7 +58,7 @@ jobs:
   
     - name: Deploy Staging
       if: github.ref == 'refs/heads/develop'
-      run: bash scripts/deploy.sh staging
+      run: bash scripts/deploy.sh staging $BUILD_NUMBER
 
     - name: Build Prod
       if: startsWith(github.ref,'ref/heads/release')
