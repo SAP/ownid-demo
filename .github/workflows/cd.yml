@@ -36,6 +36,9 @@ jobs:
     - name: Docker login
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $DOCKER_URL
     
+    - name: AWS EKS login
+      run: aws eks --region us-east-2 update-kubeconfig --name ownid-eks
+
     - name: Generate build number
       uses: einaregilsson/build-number@v3
       with:
@@ -63,9 +66,6 @@ jobs:
     - name: Build Prod
       if: startsWith(github.ref,'ref/heads/release')
       run: bash scripts/prod/build_demo.sh
-
-    - name: AWS EKS login
-      run: aws eks --region us-east-2 update-kubeconfig --name ownid-eks
     
     - name: Deploy PROD A
       if: startsWith(github.ref,'ref/heads/release')
