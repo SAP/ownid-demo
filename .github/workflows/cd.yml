@@ -43,9 +43,17 @@ jobs:
       if: github.ref == 'refs/heads/develop'
       run: bash scripts/build_demo.sh dev 3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
     
+    - name: Deploy Dev
+      if: github.ref == 'refs/heads/develop'
+      run: bash scripts/deploy.sh dev
+    
     - name: Build Staging
       if: github.ref == 'refs/heads/master'
       run: bash scripts/build_demo.sh staging 3_PB4ieNpwSS1acHt7bb9UmosWpzHgXiTNW5OHaea2b833e4WhchqkzJum3vP60EGM
+  
+    - name: Deploy Staging
+      if: github.ref == 'refs/heads/develop'
+      run: bash scripts/deploy.sh staging
 
     - name: Build Prod
       if: startsWith(github.ref,'ref/heads/release')
