@@ -60,7 +60,7 @@ jobs:
       run: bash scripts/build_demo.sh staging 3_PB4ieNpwSS1acHt7bb9UmosWpzHgXiTNW5OHaea2b833e4WhchqkzJum3vP60EGM
   
     - name: Deploy Staging
-      if: github.ref == 'refs/heads/develop'
+      if: github.ref == 'refs/heads/master'
       run: bash scripts/deploy.sh staging $BUILD_NUMBER
 
     - name: Build Prod
