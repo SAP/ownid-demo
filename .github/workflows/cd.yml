@@ -1,0 +1,78 @@
+name: Demo Deploy
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - /^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$/
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_URL: ${{ secrets.DOCKER_URL }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+
+    - name: Setup cache
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Docker login
+      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $DOCKER_URL
+
+    - name: Install Dependencies
+      run: yarn
+    
+    - name: Build Dev
+      if: github.ref == 'refs/heads/develop'
+      run: bash scripts/build_demo.sh dev 3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
+    
+    - name: Build Staging
+      if: github.ref == 'refs/heads/master'
+      run: bash scripts/build_demo.sh staging 3_PB4ieNpwSS1acHt7bb9UmosWpzHgXiTNW5OHaea2b833e4WhchqkzJum3vP60EGM
+
+    - name: Build Prod
+      if: startsWith(github.ref,'ref/heads/release')
+      run: bash scripts/prod/build_demo.sh
+
+    - name: AWS EKS login
+      run: aws eks --region us-east-2 update-kubeconfig --name ownid-eks
+    
+    - name: Deploy PROD A
+      if: startsWith(github.ref,'ref/heads/release')
+      run: aws s3 sync ./projects/demo-app/dist ${{ secrets.PROD_S3_BUCKET }} --delete
+
+    - name: Invalidate distribution
+      if: startsWith(github.ref,'ref/heads/release')
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_CF_DISTRIBUTION }} --paths "/*"
+
+    - name: Deploy PROD B
+      if: startsWith(github.ref,'ref/heads/release')
+      run: aws s3 sync ./projects/demo-app/dist ${{ secrets.PROD_B_S3_BUCKET }} --delete
+
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      if: failure()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_ICON: https://ownid.com/images/favicon.png
+        SLACK_COLOR: '#FF0000'
+        SLACK_TITLE: Merge failed
+        SLACK_FOOTER: OwnID by SAP
+        SLACK_USERNAME: SAP/ownid-demo
