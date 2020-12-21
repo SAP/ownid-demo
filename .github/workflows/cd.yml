@@ -37,7 +37,7 @@ jobs:
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $DOCKER_URL
     
     - name: AWS EKS login
-      run: aws eks --region us-east-2 update-kubeconfig --name ownid-eks
+      run: aws eks --region ${{ secrets.STAGING_AWS_REGION }} update-kubeconfig --name ownid-eks
 
     - name: Generate build number
       uses: einaregilsson/build-number@v3
