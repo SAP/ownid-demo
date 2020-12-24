@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - develop
+      - feature
       - /^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$/
 
 jobs:
@@ -48,11 +48,11 @@ jobs:
       run: yarn
     
     - name: Build Dev
-      if: github.ref == 'refs/heads/develop'
+      if: github.ref == 'refs/heads/feature'
       run: bash scripts/build_demo.sh dev 3_hOdIVleWrXNvjArcZRwHJLiGA4e6Jrcwq7RfH5nL7ZUHyI_77z43_IQrJYxLbiq_
     
     - name: Deploy Dev
-      if: github.ref == 'refs/heads/develop'
+      if: github.ref == 'refs/heads/feature'
       run: bash scripts/deploy.sh dev $BUILD_NUMBER
     
     - name: Build Staging
