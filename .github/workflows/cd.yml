@@ -64,19 +64,19 @@ jobs:
       run: bash scripts/deploy.sh staging $BUILD_NUMBER
 
     - name: Build Prod
-      if: startsWith(github.ref,'ref/heads/release')
+      if: startsWith(github.ref,'refs/heads/release')
       run: bash scripts/prod/build_demo.sh
     
     - name: Deploy PROD A
-      if: startsWith(github.ref,'ref/heads/release')
+      if: startsWith(github.ref,'refs/heads/release')
       run: aws s3 sync ./projects/demo-app/dist ${{ secrets.PROD_S3_BUCKET }} --delete
 
     - name: Invalidate distribution
-      if: startsWith(github.ref,'ref/heads/release')
+      if: startsWith(github.ref,'refs/heads/release')
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_CF_DISTRIBUTION }} --paths "/*"
 
     - name: Deploy PROD B
-      if: startsWith(github.ref,'ref/heads/release')
+      if: startsWith(github.ref,'refs/heads/release')
       run: aws s3 sync ./projects/demo-app/dist ${{ secrets.PROD_B_S3_BUCKET }} --delete
 
     - name: Slack Notification
