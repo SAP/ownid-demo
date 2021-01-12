@@ -1,0 +1,36 @@
+.container {
+  max-width: 480px;
+  width: calc(100% - 16px);
+  margin: 48px auto 0;
+}
+
+.content {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.title-home {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.subtitle-home {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.slogan-home {
+  margin-bottom: 40px;
+}
+
+.own-button-home{
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  background: #0070F2;
+  box-shadow: 0 2px 4px rgba(27,144,255,.16), 0 0 2px rgba(27,144,255,.16);
+  border-radius: 4px;
+  text-decoration: none;
+  margin-right: 10px;
+}

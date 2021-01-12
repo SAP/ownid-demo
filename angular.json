@@ -321,6 +321,201 @@
           }
         }
       }
+    },
+    "demo-screens-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/demo-screens-app",
+      "sourceRoot": "projects/demo-screens-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "projects/demo-screens-app/dist",
+            "index": "projects/demo-screens-app/src/index.html",
+            "main": "projects/demo-screens-app/src/main.ts",
+            "polyfills": "projects/demo-screens-app/src/polyfills.ts",
+            "tsConfig": "projects/demo-screens-app/tsconfig.app.json",
+            "crossOrigin": "anonymous",
+            "aot": true,
+            "assets": [
+              "projects/demo-screens-app/src/favicon.ico",
+              "projects/demo-screens-app/src/assets"
+            ],
+            "styles": [
+              "projects/demo-screens-app/src/styles.scss"
+            ],
+            "scripts": [],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "6kb",
+                "maximumError": "10kb"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.production.ts"
+                }
+              ]
+            },
+            "prod": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "staging2": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.staging2.ts"
+                }
+              ]
+            },
+            "staging3": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.staging3.ts"
+                }
+              ]
+            },
+            "staging4": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.staging4.ts"
+                }
+              ]
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "dev2": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.dev2.ts"
+                }
+              ]
+            },
+            "dev3": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.dev3.ts"
+                }
+              ]
+            },
+            "dev4": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.dev4.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demo-screens-app:build",
+            "proxyConfig": "proxy-demo-screens-app.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "demo-screens-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demo-screens-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/demo-screens-app/src/test.ts",
+            "polyfills": "projects/demo-screens-app/src/polyfills.ts",
+            "tsConfig": "projects/demo-screens-app/tsconfig.spec.json",
+            "karmaConfig": "projects/demo-screens-app/karma.conf.js",
+            "assets": [
+              "projects/demo-screens-app/src/favicon.ico",
+              "projects/demo-screens-app/src/assets"
+            ],
+            "styles": [
+              "projects/demo-screens-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/demo-screens-app/tsconfig.app.json",
+              "projects/demo-screens-app/tsconfig.spec.json",
+              "projects/demo-screens-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/demo-screens-app/e2e/protractor.conf.js",
+            "devServerTarget": "demo-screens-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demo-screens-app:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "ownid-client-app"

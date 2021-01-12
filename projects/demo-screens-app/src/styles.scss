@@ -1,0 +1,244 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #111D29;
+  background-color: #F5F6F7;
+  overflow-x: hidden;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  background: #354A5F;
+  text-indent: 999px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.logo {
+  display: block;
+  width: 105px;
+  height: 36px;
+  margin: 0 auto;
+  background-image: url('/assets/logo.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.own-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 352px;
+  margin: 0 auto;
+}
+
+.own-input {
+  background: #F5F6F7;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  height: 30px;
+  padding: 0 11px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+
+  &::placeholder {
+    color: #354A5F;
+  }
+
+  &.ng-invalid {
+    color: red;
+  }
+
+  &.ng-invalid:not(.ng-untouched) {
+    color: red;
+    border-color: red;
+  }
+}
+
+.own-check {
+  display: none;
+
+  &:checked + label {
+    background-image: url('/assets/icons/box-checked.svg');
+  }
+
+  & + label {
+    font-size: 14px;
+    line-height: 24px;
+
+    color: #354A5F;
+    cursor: pointer;
+    display: inline-block;
+    padding-left: 30px;
+    margin: 12px 0 8px 5px;
+
+    background: url('/assets/icons/box.svg') no-repeat;
+  }
+}
+
+.own-button {
+  font-size: 14px;
+  line-height: 24px;
+  padding: 4px 20px;
+
+  color: #FFFFFF;
+  border: none;
+  background: #0070F2;
+
+  box-shadow: 0 2px 4px rgba(27, 144, 255, 0.16), 0 0 2px rgba(27, 144, 255, 0.16);
+  border-radius: 6px;
+
+  margin: 16px 0;
+}
+
+.own-flat-button {
+  display: flex;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5B738B;
+  padding: 4px;
+  cursor: pointer;
+
+  margin: 16px 0;
+
+  svg {
+    margin-right: 4px;
+  }
+
+  path {
+    fill: #5B738B;
+  }
+}
+
+.own-stroked-button {
+  min-width: 100px;
+  height: 40px;
+  padding: 0 16px;
+
+  background: #FFFFFF;
+
+  border: 2px solid #EBF8FF;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 40px;
+
+  color: #0070F2;
+  cursor: pointer;
+}
+
+.own-nav-tabs {
+  padding-bottom: 6px;
+  border-bottom: 2px solid #F5F6F7;
+  width: max-content;
+
+  margin: 0 auto 41px;
+}
+
+.own-nav-link {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #5B738B;
+
+  text-decoration: none;
+
+  & + & {
+    margin-left: 16px;
+  }
+
+  &.active {
+    color: #0070F2;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: '';
+      display: block;
+      background: #0070F2;
+      height: 2px;
+      width: 100%;
+
+      bottom: -8px
+    }
+  }
+}
+
+.or {
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #5B738B;
+
+  margin: 24px 0;
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+    display: block;
+    background: #D5DADD;
+    height: 1px;
+    width: calc(50% - 24px);
+
+    bottom: 11px
+  }
+
+  &:after {
+    right: 0;
+  }
+}
+
+.own-link {
+  color: #0070F2;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.errors {
+  color: red;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 16px;
+
+  ul {
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+    padding-inline-start: 25px;
+  }
+}
+
+ownid {
+  display: block;
+  margin: 0 -20px;
+}
+
+@media (max-width: 599px) {
+  ownid {
+    margin: 0;
+
+    &:not(:empty) button  {
+      border: 2px solid #111D29 !important;
+    }
+  }
+}
+
+.ownid-inline-warn,
+.ownid-note {
+  font-size: 14px;
+  line-height: 24px;
+  color: #354A5F;
+}
+
+.ownid-note {
+  margin-bottom: 16px;
+}

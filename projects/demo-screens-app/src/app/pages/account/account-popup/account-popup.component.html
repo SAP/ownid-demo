@@ -1,0 +1,44 @@
+<div class="account-popup">
+  <div class="overlay"></div>
+  <div class="popup-content">
+    <div class="popup-title">Account</div>
+
+    <form class="own-form" [formGroup]="form">
+      <ownid *ngIf="!(isOwnidUser$ | async)" type="link" (onLink)="onLink()" (onError)="onError($event)"></ownid>
+
+      <div class="errors" *ngIf="errors$ | async as errors">{{ errors }}</div>
+
+      <input class="own-input" type="text" placeholder="First Name" formControlName="name" readonly />
+
+      <input class="own-input" type="email" placeholder="Email" formControlName="email" readonly />
+
+      <!-- <ng-container *ngIf="!(isOwnidUser$ | async) else ownidUser">
+        <input class="own-input" type="password" placeholder="Password" formControlName="password" readonly>
+      </ng-container>
+      -->
+
+      <ng-template #ownidUser>
+        <a class="pass-for-ownid" href="#" target="_blank">
+          Instant Login Enabled
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="#0070f2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M10 14l8-8" />
+            <path d="M13 6h5v5" />
+            <path d="M9.273 6H6v12h12v-3" />
+          </svg>
+        </a>
+      </ng-template>
+    </form>
+
+    <div class="row">
+      <div class="own-stroked-button close-button" (click)="onClick.emit()">Close</div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 {
-  "/netcore3/ownid": {
-    "target": "https://client.dev.ownid.com",
+  "/ownid": {
+    "target": "http://localhost:5002",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
