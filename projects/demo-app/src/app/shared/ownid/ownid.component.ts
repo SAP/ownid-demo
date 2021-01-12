@@ -79,7 +79,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
       partial: this.partial,
       tooltip: this.tooltip,
       inline,
-      language: 'en',
+      language: 'de',
       toggleElement: this.toggleElement ? window.document.querySelector(this.toggleElement) : null,
       onLogin: this.onLogin.emit.bind(this.onLogin),
       onRegister: this.onRegister.emit.bind(this.onRegister),
