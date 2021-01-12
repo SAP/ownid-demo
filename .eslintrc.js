@@ -25,12 +25,13 @@ module.exports = {
       'tsconfig.json',
       './projects/demo-app/tsconfig.app.json',
       './projects/demo-app/tsconfig.spec.json',
+      './projects/demo-screens-app/tsconfig.app.json',
+      './projects/demo-screens-app/tsconfig.spec.json',
     ],
   },
   rules: {
     'class-methods-use-this': 'off',
     'import/prefer-default-export': 'off',
-    '@typescript-eslint/no-explicit-any': 'error',
     'unicorn/prevent-abbreviations': 'off',
     'jest/no-standalone-expect': 'off',
     'no-useless-constructor': 'off',
@@ -57,7 +58,7 @@ module.exports = {
 
       // use <root>/path/to/folder/tsconfig.json
       typescript: {
-        project: ['./tsconfig.app.json', './projects/demo-app/tsconfig.app.json'],
+        project: ['./tsconfig.app.json', './projects/demo-app/tsconfig.app.json', './projects/demo-screens-app/tsconfig.app.json'],
       },
     },
   },

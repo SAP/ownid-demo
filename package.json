@@ -7,6 +7,8 @@
     "build": "ng build --prod",
     "start:demo": "ng serve demo-app --port 4202 --host 0.0.0.0",
     "build:demo": "ng build demo-app --prod",
+    "start:demo-screens": "ng serve demo-screens-app --port 4204 --host 0.0.0.0",
+    "build:demo-screens": "ng build demo-screens-app --prod",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",

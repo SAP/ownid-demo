@@ -15,6 +15,12 @@
     },
     {
       "path": "./projects/demo-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/demo-screens-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/demo-screens-app/tsconfig.spec.json"
     }
   ]
 }

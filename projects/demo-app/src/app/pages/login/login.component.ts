@@ -85,7 +85,7 @@ export class LoginComponent {
   onLogin(statusRS: any) {
     if (statusRS.sessionInfo) {
       document.cookie = `${statusRS.sessionInfo.cookieName}=${statusRS.sessionInfo.cookieValue}; path=/`;
-      this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/notes'));
+      this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/account'));
     }
   }
 }

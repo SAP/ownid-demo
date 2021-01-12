@@ -1,0 +1,156 @@
+
+.info-icon {
+  background: url('/assets/icons/info.svg');
+}
+
+.profile-arrow-icon {
+  background: url('/assets/icons/fiori-dropdown.svg');
+  width: 16px;
+  height: 16px;
+}
+
+.logout-icon {
+  background: url('/assets/icons/check-out.svg');
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.help-icon {
+  background: url('/assets/icons/help.svg');
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.profile-icon {
+  background: url('/assets/icons/profile-circle.svg');
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.feedback-icon {
+  background: url('/assets/icons/megaphone.svg');
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.empty {
+
+  ::ng-deep {
+    & > div {
+      color: #5B738B;
+      font-style: italic;
+
+      &:first-child {
+        color: #475E75;
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.profile-tooltip,
+.info-tooltip {
+  position: absolute;
+  top: 42px;
+  right: 20px;
+  width: 208px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(131, 150, 168, 0.16), 0 0 2px rgba(131, 150, 168, 0.16);
+  border-radius: 6px;
+}
+
+.tooltip-link,
+.tooltip-text {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: normal;
+  color: #354A5F;
+
+  & + & {
+    margin-top: 5px;
+  }
+
+  &.date {
+    margin-top: 0;
+  }
+}
+
+:host {
+  background: #E5E5E5;
+}
+
+.logo {
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 480px;
+  width: calc(100% - 16px);
+  margin: 48px auto 0;
+}
+
+.content {
+  margin-top: 40px;
+  padding: 24px 24px 32px;
+
+  background: #FFFFFF;
+  box-shadow: 0 8px 16px rgba(4, 172, 167, 0.16), 0 0 2px rgba(4, 172, 167, 0.16);
+  border-radius: 6px;
+}
+
+.terms {
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #5B738B;
+}
+
+.tooltip-link,
+.tooltip-link:active,
+.tooltip-link:visited, {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tooltip-link:hover {
+  background: #F5F6F7;
+  border-radius: 4px;
+}
+
+.profile {
+  text-align: center;
+  align-items: center;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: bold;
+  color: #354A5F;
+  cursor: pointer;
+  padding-bottom: 20px;
+}
+
+.profile-tooltip {
+  right: auto;
+  left: 16px;
+  padding: 12px 8px;
+}
+
+@media (max-width: 599px) {
+  .flex-grid {
+    display: block;
+  }
+}
+

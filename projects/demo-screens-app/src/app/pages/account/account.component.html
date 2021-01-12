@@ -1,0 +1,32 @@
+<demo-header></demo-header>
+<div class="container">
+  <div class="content">
+    <div class="profile"
+         *ngIf="profile$ | async as profile"
+         clickOutside
+         (clickOutside)="showProfileTooltip = false"
+         (click)="showProfileTooltip = !showProfileTooltip">
+      Welcome {{profile.name}}! You are logged in.
+    </div>
+
+    <a class="tooltip-link" href="https://airtable.com/shr7h55qHWYgiYVy3" target="_blank">
+      <div class="feedback-icon"></div>
+      Have any feedback?
+    </a>
+
+    <div class="tooltip-link" (click)="showAccount = true">
+      <div class="profile-icon"></div>
+      My Account
+    </div>
+
+    <div class="tooltip-link" (click)="onLogout()">
+      <div class="logout-icon"></div>
+      Log out
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="profile$ | async as profile">
+  <account-popup [profile]="profile" (onClick)="showAccount = false" *ngIf="showAccount"></account-popup>
+</ng-container>
+<demo-footer></demo-footer>

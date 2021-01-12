@@ -11,6 +11,7 @@ server
 assets
 src/environments
 projects/demo-app/src/environments
+projects/demo-screens-app/src/environments
 e2e
 examples/*
 
