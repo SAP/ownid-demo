@@ -36,7 +36,7 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
-    path: 'notes',
+    path: 'account',
     loadChildren: () => import('./pages/notes/notes.module').then((m) => m.NotesModule),
     canActivate: [NotesGuard],
   },
