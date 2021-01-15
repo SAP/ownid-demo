@@ -94,23 +94,17 @@ body {
 }
 
 .own-flat-button {
-  display: flex;
-  font-weight: bold;
   font-size: 14px;
   line-height: 24px;
-  color: #5B738B;
-  padding: 4px;
-  cursor: pointer;
-
+  padding: 4px 20px;
   margin: 16px 0;
 
-  svg {
-    margin-right: 4px;
-  }
-
-  path {
-    fill: #5B738B;
-  }
+  color: #0070F2;
+  background: #FFFFFF;
+  border: 1px solid #0070F2;
+  box-sizing: border-box;
+  box-shadow: 0 0 2px rgba(27, 144, 255, 0.16), 0 2px 4px rgba(27, 144, 255, 0.16);
+  border-radius: 6px;
 }
 
 .own-stroked-button {
