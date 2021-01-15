@@ -7,4 +7,5 @@ coverage
 examples
 projects/demo-app/src/environments
 projects/demo-screens-app/src/environments
+src/app/services
 
