@@ -20,8 +20,6 @@ module.exports = {
   },
   parserOptions: {
     project: [
-      './tsconfig.app.json',
-      './tsconfig.spec.json',
       'tsconfig.json',
       './projects/demo-app/tsconfig.app.json',
       './projects/demo-app/tsconfig.spec.json',
@@ -58,7 +56,7 @@ module.exports = {
 
       // use <root>/path/to/folder/tsconfig.json
       typescript: {
-        project: ['./tsconfig.app.json', './projects/demo-app/tsconfig.app.json', './projects/demo-screens-app/tsconfig.app.json'],
+        project: ['./projects/demo-app/tsconfig.app.json', './projects/demo-screens-app/tsconfig.app.json'],
       },
     },
   },

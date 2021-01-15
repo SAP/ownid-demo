@@ -24,8 +24,11 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Build
-        run: yarn ng build demo-app
+      - name: Build demo app
+        run: yarn build:demo
+
+      - name: Build demo screens app
+        run: yarn build:demo-screens
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
