@@ -2,7 +2,6 @@ import { Component, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GigyaService } from '../../services/gigya.service';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'login',
@@ -13,8 +12,6 @@ export class LoginComponent {
   form: FormGroup;
 
   errors: string | null = null;
-
-  readonly showMagic: boolean;
 
   private observer: MutationObserver;
 
@@ -37,8 +34,6 @@ export class LoginComponent {
       childList: true,
       subtree: true,
     });
-
-    this.showMagic = environment.hideMagic !== true;
   }
 
   onSubmit() {
