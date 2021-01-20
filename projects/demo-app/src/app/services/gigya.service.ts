@@ -8,7 +8,12 @@ export class GigyaService {
   constructor(private router: Router, private ngZone: NgZone, private appStore: AppStore) {
     // @ts-ignore
     window.gigya!.accounts.addEventHandlers({
-      onLogin: () => this.ngZone.run(() => this.router.navigateByUrl('/account')),
+      onLogin: () =>
+        this.ngZone.run(() => {
+          if (!this.appStore.ignoreGigyaHandlers$.getValue()) {
+            this.router.navigateByUrl('/account');
+          }
+        }),
     });
   }
 
@@ -60,14 +65,17 @@ export class GigyaService {
     });
   }
 
-  logout() {
+  logout(withCallback = true) {
     // @ts-ignore
     window.gigya!.accounts.logout({
-      callback: () =>
+      callback: () => {
+        if (!withCallback) return;
+
         this.ngZone.run(() => {
           this.appStore.profile$.next({} as IProfile);
           this.router.navigateByUrl('/login');
-        }),
+        });
+      },
     });
   }
 
@@ -131,6 +139,15 @@ export class GigyaService {
       ...params,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback: (data: any) => this.ngZone.run(() => callback(data)),
+    });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getJwt(callback: (jwtData: any) => void = () => {}) {
+    // @ts-ignore
+    window.gigya!.accounts.getJWT({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callback: (jwtData: any) => this.ngZone.run(() => callback(jwtData)),
     });
   }
 }
