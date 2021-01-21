@@ -51,7 +51,9 @@ export class AccountPopupComponent implements OnChanges {
         return !!connection.fido2CredentialId && !!connection.fido2SignatureCounter;
       });
 
-      this.enableTfaAllowed$.next(!tfaEnabled && !hasTfaConnections);
+      const hasConnections = (accountInfo.data?.ownIdConnections?.length ?? 0) > 0;
+
+      this.enableTfaAllowed$.next(!tfaEnabled && !hasTfaConnections && hasConnections);
     });
   }
 
