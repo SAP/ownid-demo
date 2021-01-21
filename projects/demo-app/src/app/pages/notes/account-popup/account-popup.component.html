@@ -35,8 +35,18 @@
           </svg>
         </a>
       </ng-template>
-    </form>
 
+      <div *ngIf="enableTfaAllowed$ | async" class="tfa-section">
+        <div *ngIf="!(showTfaEnabledText$ | async)">
+          Enable Two Factor Authentication when you use “Skip the password” at login. You can’t undo this.
+          <button (click)="onEnableTFA()">Turn Two Factor Authentication On</button>
+        </div>
+        <div *ngIf="showTfaEnabledText$ | async">
+          When you log in using “Skip the password”, your device will prompt you to authenticate yourself.
+        </div>
+      </div>
+    </form>
+    
     <div class="row">
       <div class="own-stroked-button close-button" (click)="onClick.emit()">Close</div>
     </div>

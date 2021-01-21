@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChan
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppStore, IProfile } from '../../../app.store';
+import { GigyaService } from '../../../services/gigya.service';
 
 @Component({
   selector: 'account-popup',
@@ -20,7 +21,16 @@ export class AccountPopupComponent implements OnChanges {
 
   isOwnidUser$: Observable<boolean>;
 
-  constructor(formBuilder: FormBuilder, private store: AppStore, private ngZone: NgZone) {
+  enableTfaAllowed$: BehaviorSubject<boolean>;
+
+  showTfaEnabledText$: BehaviorSubject<boolean>;
+
+  constructor(
+    formBuilder: FormBuilder,
+    private store: AppStore,
+    private ngZone: NgZone,
+    private gigyaService: GigyaService,
+  ) {
     this.isOwnidUser$ = this.store.isOwnidUser$;
 
     this.errors$ = new BehaviorSubject<string | null>(null);
@@ -29,6 +39,19 @@ export class AccountPopupComponent implements OnChanges {
       name: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['password', [Validators.required]],
+    });
+
+    this.showTfaEnabledText$ = new BehaviorSubject<boolean>(false);
+    this.enableTfaAllowed$ = new BehaviorSubject<boolean>(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.gigyaService.getProfile((accountInfo: any) => {
+      const tfaEnabled = !!accountInfo.data.userSettings?.tfaEnabled;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const hasTfaConnections = accountInfo.data?.ownIdConnections?.some((connection: any) => {
+        return !!connection.fido2CredentialId && !!connection.fido2SignatureCounter;
+      });
+
+      this.enableTfaAllowed$.next(!tfaEnabled && !hasTfaConnections);
     });
   }
 
@@ -45,5 +68,22 @@ export class AccountPopupComponent implements OnChanges {
 
   onError(errorMessage: string) {
     this.errors$.next(errorMessage);
+  }
+
+  onEnableTFA() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.gigyaService.getProfile((accountInfo: any) => {
+      accountInfo.data = {
+        ...accountInfo.data,
+        userSettings: {
+          ...accountInfo.data.userSettings,
+          tfaEnabled: true,
+        },
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.gigyaService.setData(accountInfo.data, () => {
+        this.showTfaEnabledText$.next(true);
+      });
+    });
   }
 }
