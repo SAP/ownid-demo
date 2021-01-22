@@ -61,13 +61,17 @@ export class RegistrationCommand implements IDataCommand<{ data: { [key: string]
 
       if (resp.status !== 'FAIL') {
         if (!ownidWidget.disabled) {
-          // @ts-ignore
-          // eslint-disable-next-line promise/catch-or-return,promise/always-return
-          window.ownid.addOwnIDConnectionOnServer(ownidWidget, resp.UID).then((widgetResponse) => {
-            if (widgetResponse?.error) {
-              this.appStore.formError$.next(widgetResponse.message);
-            }
-            return widgetResponse;
+          this.gigyaService.getJwt((jwtData: any) => {
+            const payload = JSON.stringify({ jwt: jwtData.id_token });
+            // @ts-ignore
+            // eslint-disable-next-line promise/catch-or-return,promise/always-return
+            window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, payload).then((widgetResponse) => {
+              if (widgetResponse?.error) {
+                this.appStore.formError$.next(widgetResponse.message);
+              }
+
+              return widgetResponse;
+            });
           });
         }
         return;
