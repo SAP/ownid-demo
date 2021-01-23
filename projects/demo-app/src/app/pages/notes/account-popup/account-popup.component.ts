@@ -21,9 +21,9 @@ export class AccountPopupComponent implements OnChanges {
 
   isOwnidUser$: Observable<boolean>;
 
-  enableTfaAllowed$: BehaviorSubject<boolean>;
+  TfaEnforceAllowed$: BehaviorSubject<boolean>;
 
-  showTfaEnabledText$: BehaviorSubject<boolean>;
+  showEnforceTfaText$: BehaviorSubject<boolean>;
 
   constructor(
     formBuilder: FormBuilder,
@@ -41,19 +41,19 @@ export class AccountPopupComponent implements OnChanges {
       password: ['password', [Validators.required]],
     });
 
-    this.showTfaEnabledText$ = new BehaviorSubject<boolean>(false);
-    this.enableTfaAllowed$ = new BehaviorSubject<boolean>(false);
+    this.showEnforceTfaText$ = new BehaviorSubject<boolean>(false);
+    this.TfaEnforceAllowed$ = new BehaviorSubject<boolean>(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.gigyaService.getProfile((accountInfo: any) => {
-      const tfaEnabled = !!accountInfo.data.userSettings?.tfaEnabled;
+      const enforceTfa = !!accountInfo.data.ownId.settings?.enforceTfa;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasTfaConnections = accountInfo.data?.ownIdConnections?.some((connection: any) => {
+      const hasTfaConnections = accountInfo.data?.ownId.connections?.some((connection: any) => {
         return !!connection.fido2CredentialId && !!connection.fido2SignatureCounter;
       });
 
-      const hasConnections = (accountInfo.data?.ownIdConnections?.length ?? 0) > 0;
+      const hasConnections = (accountInfo.data?.ownId.connections?.length ?? 0) > 0;
 
-      this.enableTfaAllowed$.next(!tfaEnabled && !hasTfaConnections && hasConnections);
+      this.TfaEnforceAllowed$.next(!enforceTfa && !hasTfaConnections && hasConnections);
     });
   }
 
@@ -72,19 +72,19 @@ export class AccountPopupComponent implements OnChanges {
     this.errors$.next(errorMessage);
   }
 
-  onEnableTFA() {
+  onTfaEnforce() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.gigyaService.getProfile((accountInfo: any) => {
       accountInfo.data = {
         ...accountInfo.data,
-        userSettings: {
-          ...accountInfo.data.userSettings,
-          tfaEnabled: true,
+        settings: {
+          ...accountInfo.data.ownId.settings,
+          enforceTfa: true,
         },
       };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.gigyaService.setData(accountInfo.data, () => {
-        this.showTfaEnabledText$.next(true);
+        this.showEnforceTfaText$.next(true);
       });
     });
   }

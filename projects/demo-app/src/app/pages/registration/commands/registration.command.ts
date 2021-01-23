@@ -8,10 +8,12 @@ interface IGigyaRequestData {
   firstName: string;
   password: string;
   data?: {
-    ownIdConnections: {
-      keyHsh: string;
-      pubKey: string;
-    }[];
+    ownId: {
+      connections: {
+        keyHsh: string;
+        pubKey: string;
+      }[];
+    };
   };
 }
 interface IGigyaResponse {

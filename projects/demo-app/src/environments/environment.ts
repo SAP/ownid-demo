@@ -5,7 +5,7 @@ import { IEnvironment, OwnIDFlow } from './i-environment';
 
 export const environment: IEnvironment = {
   production: false,
-  gigyaApiKey: '3_s5-gLs4aLp5FXluP8HXs7_JN40XWNlbvYWVCCkbNCqlhW6Sm5Z4tXGGsHcSJYD3W',
+  gigyaApiKey: '3__r2j7EysJASGU8p1UB0Jfjf6o2e6HydoySOLx8UwerPCDpG0Vm5TA3OjBL8qW-bf',
   ownidURLPrefix: '/ownid',
   flow: OwnIDFlow.classic,
 };

@@ -31,12 +31,12 @@
         </a>
       </ng-template>
 
-      <div *ngIf="enableTfaAllowed$ | async" class="tfa-section">
-        <div *ngIf="!(showTfaEnabledText$ | async)">
+      <div *ngIf="TfaEnforceAllowed$ | async" class="tfa-section">
+        <div *ngIf="!(showEnforceTfaText$ | async)">
           Enable Two Factor Authentication when you use “Skip the password” at login. You can’t undo this.
-          <button (click)="onEnableTFA()">Turn Two Factor Authentication On</button>
+          <button (click)="onTfaEnforce()">Turn Two Factor Authentication On</button>
         </div>
-        <div *ngIf="showTfaEnabledText$ | async">
+        <div *ngIf="showEnforceTfaText$ | async">
           When you log in using “Skip the password”, your device will prompt you to authenticate yourself.
         </div>
       </div>
