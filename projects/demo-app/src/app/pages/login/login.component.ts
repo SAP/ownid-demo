@@ -43,46 +43,45 @@ export class LoginComponent {
       this.appStore.ignoreGigyaHandlers$.next(true);
       this.errors = null;
 
-      setTimeout(() => this.continueSubmition());
-    }
-  }
+      this.gigyaService.login(this.form.value, async (data: any) => {
+        try {
+          if (data.status === 'FAIL') {
+            this.errors = data.errorDetails;
+          } else {
+            // @ts-ignore
+            const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
 
-  private continueSubmition() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.gigyaService.login(this.form.value, async (data: any) => {
-      try {
-        if (data.status === 'FAIL') {
-          this.errors = data.errorDetails;
-        } else {
-          // @ts-ignore
-          const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
+            if (statusRS.data) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              this.gigyaService.getJwt((jwtData: any) => {
+                const payload = JSON.stringify({ jwt: jwtData.id_token });
+                // @ts-ignore
+                // eslint-disable-next-line promise/catch-or-return,promise/always-return
+                window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, payload).then((widgetResponse) => {
+                  if (widgetResponse?.error) {
+                    this.gigyaService.logout(false);
+                    this.errors = widgetResponse!.error;
+                  } else {
+                    this.router.navigateByUrl('/account');
+                  }
 
-          if (statusRS.data) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            this.gigyaService.getJwt((jwtData: any) => {
-              const payload = JSON.stringify({ jwt: jwtData.id_token });
-              // @ts-ignore
-              // eslint-disable-next-line promise/catch-or-return,promise/always-return
-              window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, payload).then((widgetResponse) => {
-                if (widgetResponse?.error) {
-                  this.gigyaService.logout(false);
-                  this.errors = widgetResponse!.error;
-                }
-
-                return widgetResponse;
+                  return widgetResponse;
+                });
               });
-            });
+            } else {
+              await this.router.navigateByUrl('/account');
+            }
           }
+        } catch (error) {
+          this.gigyaService.logout(false);
+          throw error;
+        } finally {
+          setTimeout(() => {
+            this.appStore.ignoreGigyaHandlers$.next(false);
+          });
         }
-      } catch (error) {
-        this.gigyaService.logout(false);
-        throw error;
-      } finally {
-        setInterval(() => {
-          this.appStore.ignoreGigyaHandlers$.next(false);
-        });
-      }
-    });
+      });
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
