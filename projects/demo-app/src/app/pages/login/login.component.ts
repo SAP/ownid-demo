@@ -40,57 +40,48 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.errors = null;
       this.appStore.ignoreGigyaHandlers$.next(true);
+      this.errors = null;
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.gigyaService.login(this.form.value, async (data: any) => {
-        try {
-          if (data.status === 'FAIL') {
-            this.errors = data.errorDetails;
-          } else {
-            // @ts-ignore
-            const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
-
-            if (statusRS.data) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              this.gigyaService.getJwt((jwtData: any) => {
-                const payload = JSON.stringify({ jwt: jwtData.id_token });
-                // @ts-ignore
-                // eslint-disable-next-line promise/catch-or-return,promise/always-return
-                window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, payload).then((widgetResponse) => {
-                  if (widgetResponse?.error) {
-                    this.gigyaService.logout(false);
-                    this.errors = widgetResponse!.error;
-                  }
-
-                  return widgetResponse;
-                });
-              });
-            }
-          }
-        } catch (error) {
-          this.gigyaService.logout(false);
-          throw error;
-        } finally {
-          setInterval(() => {
-            this.appStore.ignoreGigyaHandlers$.next(false);
-          });
-        }
-      });
+      setTimeout(() => this.continueSubmition());
     }
   }
 
-  sendMagicLink() {
-    const { email } = this.form.value;
+  private continueSubmition() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.gigyaService.login(this.form.value, async (data: any) => {
+      try {
+        if (data.status === 'FAIL') {
+          this.errors = data.errorDetails;
+        } else {
+          // @ts-ignore
+          const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
 
-    if (!email) return;
+          if (statusRS.data) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            this.gigyaService.getJwt((jwtData: any) => {
+              const payload = JSON.stringify({ jwt: jwtData.id_token });
+              // @ts-ignore
+              // eslint-disable-next-line promise/catch-or-return,promise/always-return
+              window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, payload).then((widgetResponse) => {
+                if (widgetResponse?.error) {
+                  this.gigyaService.logout(false);
+                  this.errors = widgetResponse!.error;
+                }
 
-    // @ts-ignore
-    // eslint-disable-next-line promise/catch-or-return,promise/always-return
-    window.ownid!.sendMagicLink(email).then(() => {
-      // eslint-disable-next-line no-alert
-      window.alert(`Magic Link was sent to ${email}`);
+                return widgetResponse;
+              });
+            });
+          }
+        }
+      } catch (error) {
+        this.gigyaService.logout(false);
+        throw error;
+      } finally {
+        setInterval(() => {
+          this.appStore.ignoreGigyaHandlers$.next(false);
+        });
+      }
     });
   }
 
