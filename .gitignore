@@ -554,3 +554,4 @@ dist
 build
 projects/demo-app/dist
 *.trx
+.idea/.idea.ownid-demo.dir
