@@ -77,9 +77,11 @@ export class AccountPopupComponent implements OnChanges {
     this.gigyaService.getProfile((accountInfo: any) => {
       accountInfo.data = {
         ...accountInfo.data,
-        settings: {
-          ...accountInfo.data.ownId.settings,
-          enforceTfa: true,
+        ownId: {
+          settings: {
+            ...accountInfo.data.ownId.settings,
+            enforceTfa: true,
+          },
         },
       };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
