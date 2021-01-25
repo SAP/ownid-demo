@@ -4,14 +4,8 @@ node_modules
 dist
 # don't lint nyc coverage output
 coverage
-src/polyfills.ts
-src/setupJest.ts
-src/test
-server
-assets
-src/environments
+examples
 projects/demo-app/src/environments
 projects/demo-screens-app/src/environments
-e2e
-examples/*
+src/app/services
 

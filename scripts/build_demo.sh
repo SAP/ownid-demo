@@ -6,24 +6,24 @@ GIGYA_DEMO=$2
 yarn ng build demo-app --configuration=$ENV
 sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-app/dist/index.html
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-app/dist/index.html
-cd projects/demo-app && docker build -t ownid-demo-app:latest . && cd ../..
+docker build ./projects/demo-app -t ownid-demo-app:latest
 
 yarn ng build demo-app --configuration=${ENV}2
 sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-app/dist/index.html
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-app/dist/index.html
-cd projects/demo-app && docker build -t ownid-demo-app:latest2 . && cd ../..
+docker build ./projects/demo-app -t ownid-demo-app:latest2
 
 yarn ng build demo-app --configuration=${ENV}3
 sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-app/dist/index.html
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-app/dist/index.html
-cd projects/demo-app && docker build -t ownid-demo-app:latest3 . && cd ../..
+docker build ./projects/demo-app -t ownid-demo-app:latest3
 
 yarn ng build demo-app --configuration=${ENV}4
 sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-app/dist/index.html
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-app/dist/index.html
-cd projects/demo-app && docker build -t ownid-demo-app:latest4 . && cd ../..
+docker build ./projects/demo-app -t ownid-demo-app:latest4
 
 yarn ng build demo-screens-app --configuration=$ENV
 sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-screens-app/dist/index.html
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-screens-app/dist/index.html
-cd projects/demo-screens-app && docker build -t ownid-demo-screens-app:latest . && cd ../..
+docker build ./projects/demo-screens-app -t ownid-demo-screens-app:latest

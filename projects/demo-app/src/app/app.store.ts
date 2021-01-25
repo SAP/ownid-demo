@@ -26,4 +26,6 @@ export class AppStore {
   readonly formError$ = new BehaviorSubject<string | null>(null);
 
   readonly formErrorItems$ = new BehaviorSubject<string[] | null>(null);
+
+  readonly ignoreGigyaHandlers$ = new BehaviorSubject<boolean>(false);
 }

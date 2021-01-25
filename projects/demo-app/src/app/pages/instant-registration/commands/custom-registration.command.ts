@@ -10,10 +10,12 @@ interface GigyaRequestData {
   firstName: string;
   password: string;
   data?: {
-    ownIdConnections: {
-      keyHsh: string;
-      pubKey: string;
-    }[];
+    ownId: {
+      connections: {
+        keyHsh: string;
+        pubKey: string;
+      }[];
+    };
   };
 }
 
@@ -44,11 +46,13 @@ export class CustomRegistrationCommand
         // @ts-ignore
         password: window.ownid.generateOwnIDPassword(12),
         data: {
-          ownIdConnections: [
-            {
-              ...ownidResponse.data,
-            },
-          ],
+          ownId: {
+            connections: [
+              {
+                ...ownidResponse.data,
+              },
+            ],
+          },
         },
       };
     }

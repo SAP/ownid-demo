@@ -4,18 +4,13 @@
     <div class="popup-title">Account</div>
 
     <form class="own-form" [formGroup]="form">
-      <ownid *ngIf="!(isOwnidUser$ | async)" type="link" (onLink)="onLink()" (onError)="onError($event)"></ownid>
-
       <div class="errors" *ngIf="errors$ | async as errors">{{ errors }}</div>
 
       <input class="own-input" type="text" placeholder="First Name" formControlName="name" readonly />
 
       <input class="own-input" type="email" placeholder="Email" formControlName="email" readonly />
 
-      <!-- <ng-container *ngIf="!(isOwnidUser$ | async) else ownidUser">
-        <input class="own-input" type="password" placeholder="Password" formControlName="password" readonly>
-      </ng-container>
-      -->
+      <ownid type="link" [tooltip]="true" (onLink)="onLink()" (onError)="onError($event)"></ownid>
 
       <ng-template #ownidUser>
         <a class="pass-for-ownid" href="#" target="_blank">
@@ -35,8 +30,18 @@
           </svg>
         </a>
       </ng-template>
-    </form>
 
+      <div *ngIf="TfaEnforceAllowed$ | async" class="tfa-section">
+        <div *ngIf="!(showEnforceTfaText$ | async)">
+          Enable Two Factor Authentication when you use “Skip the password” at login. You can’t undo this.
+          <button (click)="onTfaEnforce()">Turn Two Factor Authentication On</button>
+        </div>
+        <div *ngIf="showEnforceTfaText$ | async">
+          When you log in using “Skip the password”, your device will prompt you to authenticate yourself.
+        </div>
+      </div>
+    </form>
+    
     <div class="row">
       <div class="own-stroked-button close-button" (click)="onClick.emit()">Close</div>
     </div>

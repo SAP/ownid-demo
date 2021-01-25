@@ -20,8 +20,6 @@ module.exports = {
   },
   parserOptions: {
     project: [
-      './tsconfig.app.json',
-      './tsconfig.spec.json',
       'tsconfig.json',
       './projects/demo-app/tsconfig.app.json',
       './projects/demo-app/tsconfig.spec.json',
@@ -44,7 +42,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'no-console': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'unicorn/consistent-destructuring': 'off'
   },
   settings: {
     'import/parsers': {
@@ -58,7 +57,7 @@ module.exports = {
 
       // use <root>/path/to/folder/tsconfig.json
       typescript: {
-        project: ['./tsconfig.app.json', './projects/demo-app/tsconfig.app.json', './projects/demo-screens-app/tsconfig.app.json'],
+        project: ['./projects/demo-app/tsconfig.app.json', './projects/demo-screens-app/tsconfig.app.json'],
       },
     },
   },
