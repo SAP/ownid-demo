@@ -3,7 +3,6 @@ export interface IEnvironment {
   gigyaApiKey: string;
   ownidURLPrefix: string;
   flow: OwnIDFlow;
-  hideMagic?: boolean;
 }
 
 
