@@ -79,7 +79,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
       partial: this.partial,
       tooltip: this.tooltip,
       inline,
-      language: 'en',
+      language: this.getURLParam('lang') || 'en',
       toggleElement: this.toggleElement ? window.document.querySelector(this.toggleElement) : null,
       onLogin: this.onLogin.emit.bind(this.onLogin),
       onRegister: this.onRegister.emit.bind(this.onRegister),
@@ -100,5 +100,18 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.ownidWidget?.destroy();
+  }
+
+  getURLParam(paramName: string): string | null {
+    const url = window.document.location.search.replace('?', '');
+    const urlParts = url.split('&');
+    const paramsList = {} as { [key: string]: string };
+
+    urlParts.forEach((urlPart) => {
+      const [name, value] = urlPart.split('=');
+      paramsList[name] = value;
+    });
+
+    return paramsList[paramName] ?? null;
   }
 }

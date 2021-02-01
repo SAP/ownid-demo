@@ -109,7 +109,7 @@ export class GigyaService {
       include: 'data',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callback: (userData: any) => {
-        const ownIdConnections = [...conData, ...(userData.data.ownId.connections ?? [])];
+        const ownIdConnections = [...conData, ...(userData.data?.ownId?.connections ?? [])];
 
         this.setData({ ownIdConnections }, callback);
       },
