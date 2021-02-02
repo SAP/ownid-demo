@@ -326,6 +326,22 @@
                   "with": "projects/demo-screens-app/src/environments/environment.dev4.ts"
                 }
               ]
+            },
+            "multi1": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.multi1.ts"
+                }
+              ]
+            },
+            "multi2": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-screens-app/src/environments/environment.ts",
+                  "with": "projects/demo-screens-app/src/environments/environment.multi2.ts"
+                }
+              ]
             }
           }
         },

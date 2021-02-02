@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class HomePageComponent {
   onLogin() {
     const params = {
-      screenSet: 'Default-RegistrationLogin',
+      screenSet: environment.screenSet,
       startScreen: 'gigya-login-screen',
     };
 
