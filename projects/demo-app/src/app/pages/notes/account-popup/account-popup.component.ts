@@ -46,9 +46,13 @@ export class AccountPopupComponent implements OnChanges {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.gigyaService.getProfile((accountInfo: any) => {
       const enforceTfa = !!accountInfo.data.ownId?.settings?.enforceTfa;
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasTfaConnections = accountInfo.data.ownId?.connections?.some((connection: any) => {
-        return !!connection.fido2CredentialId && !!connection.fido2SignatureCounter;
+      const hasTfaConnections = accountInfo.data.ownId?.connections?.every((connection: any) => {
+        return (
+          connection.authType !== 'basic' ||
+          (!connection.authType && !!connection.fido2CredentialId && !!connection.fido2SignatureCounter)
+        );
       });
 
       const hasConnections = (accountInfo.data?.ownId?.connections?.length ?? 0) > 0;
