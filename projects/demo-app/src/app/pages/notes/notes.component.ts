@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-import { AppStore, INote, IProfile } from '../../app.store';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AppStore, IProfile } from '../../app.store';
 import { AddNoteCommand } from './commands/add-note.command';
 import { DeleteNoteCommand } from './commands/delete-note.command';
 import { GigyaService } from '../../services/gigya.service';
@@ -18,10 +16,6 @@ export class NotesComponent implements OnInit {
 
   mobSidebarClosed = false;
 
-  notes$: Observable<INote[]>;
-
-  note$: Observable<INote | undefined>;
-
   profile$: Observable<IProfile>;
 
   showTooltip = false;
@@ -30,24 +24,37 @@ export class NotesComponent implements OnInit {
 
   showAccount = false;
 
+  TfaEnforceAllowed$: BehaviorSubject<boolean>;
+
+  showEnforceTfaText$: BehaviorSubject<boolean>;
+
   constructor(
-    private actRoute: ActivatedRoute,
     private appStore: AppStore,
     private addNoteCommand: AddNoteCommand,
     private deleteNoteCommand: DeleteNoteCommand,
     private gigyaService: GigyaService,
     private getNotesCommand: GetNotesCommand,
   ) {
-    const noteId$ = this.actRoute.paramMap.pipe(
-      filter((params) => !!params.get('id')),
-      map((params) => params.get('id') as string),
-    );
-    this.notes$ = this.appStore.notes$;
     this.profile$ = this.appStore.profile$;
 
-    this.note$ = combineLatest(this.notes$, noteId$).pipe(
-      map(([notes, noteId]) => notes.find(({ id }) => id === noteId)),
-    );
+    this.showEnforceTfaText$ = new BehaviorSubject<boolean>(false);
+    this.TfaEnforceAllowed$ = new BehaviorSubject<boolean>(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.gigyaService.getProfile((accountInfo: any) => {
+      const enforceTfa = !!accountInfo.data.ownId?.settings?.enforceTfa;
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const hasTfaConnections = accountInfo.data.ownId?.connections?.every((connection: any) => {
+        return (
+          connection.authType !== 'basic' ||
+          (!connection.authType && !!connection.fido2CredentialId && !!connection.fido2SignatureCounter)
+        );
+      });
+
+      const hasConnections = (accountInfo.data?.ownId?.connections?.length ?? 0) > 0;
+
+      this.TfaEnforceAllowed$.next(!enforceTfa && !hasTfaConnections && hasConnections);
+    });
   }
 
   ngOnInit(): void {
@@ -69,5 +76,24 @@ export class NotesComponent implements OnInit {
 
   onLogout() {
     this.gigyaService.logout();
+  }
+
+  onTfaEnforce() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.gigyaService.getProfile((accountInfo: any) => {
+      accountInfo.data = {
+        ...accountInfo.data,
+        ownId: {
+          settings: {
+            ...accountInfo.data.ownId.settings,
+            enforceTfa: true,
+          },
+        },
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.gigyaService.setData(accountInfo.data, () => {
+        this.showEnforceTfaText$.next(true);
+      });
+    });
   }
 }

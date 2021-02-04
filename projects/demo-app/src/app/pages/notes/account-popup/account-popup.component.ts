@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AppStore, IProfile } from '../../../app.store';
-import { GigyaService } from '../../../services/gigya.service';
+import { BehaviorSubject } from 'rxjs';
+import { IProfile } from '../../../app.store';
 
 @Component({
   selector: 'account-popup',
@@ -19,45 +18,13 @@ export class AccountPopupComponent implements OnChanges {
 
   form: FormGroup;
 
-  isOwnidUser$: Observable<boolean>;
-
-  TfaEnforceAllowed$: BehaviorSubject<boolean>;
-
-  showEnforceTfaText$: BehaviorSubject<boolean>;
-
-  constructor(
-    formBuilder: FormBuilder,
-    private store: AppStore,
-    private ngZone: NgZone,
-    private gigyaService: GigyaService,
-  ) {
-    this.isOwnidUser$ = this.store.isOwnidUser$;
-
+  constructor(formBuilder: FormBuilder, private ngZone: NgZone) {
     this.errors$ = new BehaviorSubject<string | null>(null);
 
     this.form = formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['password', [Validators.required]],
-    });
-
-    this.showEnforceTfaText$ = new BehaviorSubject<boolean>(false);
-    this.TfaEnforceAllowed$ = new BehaviorSubject<boolean>(false);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.gigyaService.getProfile((accountInfo: any) => {
-      const enforceTfa = !!accountInfo.data.ownId?.settings?.enforceTfa;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasTfaConnections = accountInfo.data.ownId?.connections?.every((connection: any) => {
-        return (
-          connection.authType !== 'basic' ||
-          (!connection.authType && !!connection.fido2CredentialId && !!connection.fido2SignatureCounter)
-        );
-      });
-
-      const hasConnections = (accountInfo.data?.ownId?.connections?.length ?? 0) > 0;
-
-      this.TfaEnforceAllowed$.next(!enforceTfa && !hasTfaConnections && hasConnections);
     });
   }
 
@@ -67,31 +34,10 @@ export class AccountPopupComponent implements OnChanges {
   }
 
   onLink() {
-    this.ngZone.run(() => {
-      this.onClick.emit();
-    });
+    this.ngZone.run(() => this.onClick.emit());
   }
 
   onError(errorMessage: string) {
     this.errors$.next(errorMessage);
-  }
-
-  onTfaEnforce() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.gigyaService.getProfile((accountInfo: any) => {
-      accountInfo.data = {
-        ...accountInfo.data,
-        ownId: {
-          settings: {
-            ...accountInfo.data.ownId.settings,
-            enforceTfa: true,
-          },
-        },
-      };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.gigyaService.setData(accountInfo.data, () => {
-        this.showEnforceTfaText$.next(true);
-      });
-    });
   }
 }
