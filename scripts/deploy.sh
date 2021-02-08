@@ -55,7 +55,7 @@ echo Push multi1-screens $IMAGE_URI to registry
 docker tag ownid-demo-screens-app:latest2 $IMAGE_URI
 docker push $IMAGE_URI
 
-if [ env == "dev"]; then
+if [ $ENV == "dev" ]; then
 
     echo Updating multi1-screens
     kubectl -n=$ENV set image deployment/ownid-multi1-screens-app-deployment ownid-multi1-screens-app=$IMAGE_URI --record
