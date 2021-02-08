@@ -27,3 +27,15 @@ yarn ng build demo-screens-app --configuration=$ENV
 sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-screens-app/dist/index.html
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-screens-app/dist/index.html
 docker build ./projects/demo-screens-app -t ownid-demo-screens-app:latest
+
+if [ $ENV == "dev" ]; then
+  yarn ng build demo-screens-app --configuration=multi1
+  sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=3_lDQBLLF5r8zMPcjIfKBHu0GIid109KK8SgmSyHvA8trqm5g4vDl4OgG1PMH-Vql1\"><\/script>/" projects/demo-screens-app/dist/index.html
+  sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-screens-app/dist/index.html
+  docker build ./projects/demo-screens-app -t ownid-demo-screens-app:latest2
+  
+  yarn ng build demo-screens-app --configuration=multi2
+  sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=3_ciJvtpB4KZm1qWhrhltQ15xnwqrZfZfg4sfci1qktljOQbg6QouY3hf5Hk4haTR5\"><\/script>/" projects/demo-screens-app/dist/index.html
+  sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-screens-app/dist/index.html
+  docker build ./projects/demo-screens-app -t ownid-demo-screens-app:latest3
+fi

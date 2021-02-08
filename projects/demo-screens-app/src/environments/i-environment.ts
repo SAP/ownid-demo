@@ -4,6 +4,7 @@ export interface IEnvironment {
   ownidURLPrefix: string;
   flow: OwnIDFlow;
   hideMagic?: boolean;
+  screenSet: string;
 }
 
 

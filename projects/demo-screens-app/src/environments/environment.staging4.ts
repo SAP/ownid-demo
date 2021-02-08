@@ -5,4 +5,5 @@ export const environment: IEnvironment = {
   gigyaApiKey: '3_PB4ieNpwSS1acHt7bb9UmosWpzHgXiTNW5OHaea2b833e4WhchqkzJum3vP60EGM',
   ownidURLPrefix: 'https://server.demo4.staging.ownid.com/ownid',
   flow: OwnIDFlow.classic,
+  screenSet: 'Default-RegistrationLogin',
 };

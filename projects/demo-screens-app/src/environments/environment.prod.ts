@@ -6,4 +6,5 @@ export const environment: IEnvironment = {
   ownidURLPrefix: 'https://passwordless.demo.ownid.com/ownid',
   flow: OwnIDFlow.classic,
   hideMagic: true,
+  screenSet: 'Default-RegistrationLogin',
 };

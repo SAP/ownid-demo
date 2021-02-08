@@ -48,3 +48,21 @@ docker push $IMAGE_URI
 
 echo Updating demo-screens
 kubectl -n=$ENV set image deployment/ownid-demo-screens-app-deployment ownid-demo-screens-app=$IMAGE_URI --record
+
+# Demo multi1-screens update
+IMAGE_URI=$DOCKER_URL/$ENV/demo/ownid-multi1-screens:${BUILD_NUMBER-}
+echo Push multi1-screens $IMAGE_URI to registry
+docker tag ownid-demo-screens-app:latest2 $IMAGE_URI
+docker push $IMAGE_URI
+
+echo Updating multi1-screens
+kubectl -n=$ENV set image deployment/ownid-multi1-screens-app-deployment ownid-multi1-screens-app=$IMAGE_URI --record
+
+# Demo multi2-screens update
+IMAGE_URI=$DOCKER_URL/$ENV/demo/ownid-multi2-screens:${BUILD_NUMBER-}
+echo Push multi2-screens $IMAGE_URI to registry
+docker tag ownid-demo-screens-app:latest3 $IMAGE_URI
+docker push $IMAGE_URI
+
+echo Updating multi2-screens
+kubectl -n=$ENV set image deployment/ownid-multi2-screens-app-deployment ownid-multi2-screens-app=$IMAGE_URI --record

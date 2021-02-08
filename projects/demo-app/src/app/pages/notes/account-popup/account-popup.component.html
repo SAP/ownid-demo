@@ -11,35 +11,6 @@
       <input class="own-input" type="email" placeholder="Email" formControlName="email" readonly />
 
       <ownid type="link" [tooltip]="true" (onLink)="onLink()" (onError)="onError($event)"></ownid>
-
-      <ng-template #ownidUser>
-        <a class="pass-for-ownid" href="#" target="_blank">
-          Instant Login Enabled
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="#0070f2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M10 14l8-8" />
-            <path d="M13 6h5v5" />
-            <path d="M9.273 6H6v12h12v-3" />
-          </svg>
-        </a>
-      </ng-template>
-
-      <div *ngIf="TfaEnforceAllowed$ | async" class="tfa-section">
-        <div *ngIf="!(showEnforceTfaText$ | async)">
-          Enable Two Factor Authentication when you use “Skip the password” at login. You can’t undo this.
-          <button (click)="onTfaEnforce()">Turn Two Factor Authentication On</button>
-        </div>
-        <div *ngIf="showEnforceTfaText$ | async">
-          When you log in using “Skip the password”, your device will prompt you to authenticate yourself.
-        </div>
-      </div>
     </form>
     
     <div class="row">
