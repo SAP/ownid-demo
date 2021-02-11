@@ -91,4 +91,8 @@ export class LoginComponent {
       this.gigyaService.setOwnidUser(true, () => this.router.navigateByUrl('/account'));
     }
   }
+
+  onMagicLinkError(errorMessage: string) {
+    this.errors = errorMessage;
+  }
 }

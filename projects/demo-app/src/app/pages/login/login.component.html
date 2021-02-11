@@ -19,6 +19,7 @@
       <ownid type="login"
              (onLogin)="onLogin($event)"
              [inline]="{ targetElement: '.inline-password', userIdElement: '.inline-email', offset: [-10, 0] }"
+             (onMagicLinkError)="onMagicLinkError($event)"
       ></ownid>
 
       <div class="text">
