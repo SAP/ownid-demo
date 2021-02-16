@@ -46,6 +46,8 @@ export class OwnidComponent implements OnInit, OnDestroy {
 
   @Output() ownidWidgetRef = new EventEmitter();
 
+  @Output() onMagicLinkError = new EventEmitter();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ownidWidget: any;
 
@@ -59,6 +61,7 @@ export class OwnidComponent implements OnInit, OnDestroy {
       logger: new ConsoleLogger(),
       logLevel: 'info',
       onMagicLinkLogin: this.onLogin.emit.bind(this.onLogin),
+      onMagicLinkError: this.onMagicLinkError.emit.bind(this.onMagicLinkError),
     });
 
     const inline = this.inline
