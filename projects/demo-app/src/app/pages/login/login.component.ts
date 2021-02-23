@@ -49,6 +49,8 @@ export class LoginComponent {
             this.errors = data.errorDetails;
           } else {
             // @ts-ignore
+            const { succeededContext } = window.ownidWidget;
+            // @ts-ignore
             const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
 
             if (statusRS.data) {
@@ -57,7 +59,7 @@ export class LoginComponent {
                 const payload = JSON.stringify({ jwt: jwtData.id_token });
                 // @ts-ignore
                 // eslint-disable-next-line promise/catch-or-return,promise/always-return
-                window.ownid.addOwnIDConnectionOnServer(window.ownidWidget, payload).then((widgetResponse) => {
+                window.ownid.addOwnIDConnectionOnServer(succeededContext, payload).then((widgetResponse) => {
                   if (widgetResponse?.error) {
                     this.gigyaService.logout(false);
                     this.errors = widgetResponse!.error;
