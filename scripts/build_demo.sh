@@ -24,7 +24,11 @@ sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV
 docker build ./projects/demo-app -t ownid-demo-app:latest4
 
 yarn ng build demo-screens-app --configuration=$ENV
-sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=${GIGYA_DEMO}\"><\/script>/" projects/demo-screens-app/dist/index.html
+if [ $ENV == "dev" ]; then
+sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=3_h6R8akoH2IWXWgIdF4H159SYevfNGX0uePEhQ29opmlkbqjCJZLslw-6Gb62brwL\"><\/script>/" projects/demo-screens-app/dist/index.html
+else
+sed -i -r -e "s/<!--gigya-->((.)*)<!--gigya-->/<script src=\"https:\/\/cdns.gigya.com\/js\/gigya.js?apikey=3_NzFVaEWHPek9shNMmndEqNdYfpUZuNdQLZRvB_TL39dCf1EFKDfhKW1EjYMqm5tB\"><\/script>/" projects/demo-screens-app/dist/index.html
+fi
 sed -i -r -e "s/<!--ownid-->((.)*)<!--ownid-->/<script src=\"https:\/\/cdn.${ENV}.ownid.com\/js\/gigya-sdk.es5.js\"><\/script>/" projects/demo-screens-app/dist/index.html
 docker build ./projects/demo-screens-app -t ownid-demo-screens-app:latest
 
