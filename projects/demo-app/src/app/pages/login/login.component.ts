@@ -49,7 +49,7 @@ export class LoginComponent {
             this.errors = data.errorDetails;
           } else {
             // @ts-ignore
-            const { succeededContext } = window.ownIDWidget;
+            const { succeededContext } = window.ownidWidget;
             // @ts-ignore
             const statusRS = await window.ownid.getOwnIDPayload(window.ownidWidget);
 
